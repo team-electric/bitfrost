@@ -1,7 +1,12 @@
 Bitfrost
 =================
 
-A ridesharing app.
+[![Staging Build Status](https://travis-ci.org/team-electric/bitfrost.svg?branch=staging)](https://travis-ci.org/team-electric/bitfrost)
+
+About
+=================
+
+A ridesharing app..
 
 Table of contents
 =================

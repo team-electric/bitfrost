@@ -55,8 +55,8 @@ export const ROUTES = {
 export const LINKS = [
   { label: 'About', path: '/about' },
   { label: 'Home', path: '/home' },
-  { label: 'Polls', path: '/polls' },
-  { label: 'Create Poll', path: '/polls/create' },
+  // { label: 'Polls', path: '/polls' },
+  // { label: 'Create Poll', path: '/polls/create' },
 ];
 
 export const rootLinks = () => {

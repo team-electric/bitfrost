@@ -27,8 +27,8 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <h1>Hay Poll</h1>
-      <h6>Get it... Hay...</h6>
+      <h1>Bitfrost</h1>
+      <h3>It's good enough for Thor</h3>
       <StyledNav>
         {LinkComponents}
       </StyledNav>

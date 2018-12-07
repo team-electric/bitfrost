@@ -8,7 +8,6 @@ module.exports = {
     filename: 'bundle.[hash].js',
     publicPath: '/'
   },
-  // mode (will eventually be cmd line arg in package.json scripts)
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
@@ -22,7 +21,7 @@ module.exports = {
     }
   },
   plugins: [
-    new CleanPlugin('./dist/bundle.*.js'),
+    // new CleanPlugin('./dist/bundle.*.js'),
     new HtmlPlugin({ template: './src/index.html' })
   ],
   module: {

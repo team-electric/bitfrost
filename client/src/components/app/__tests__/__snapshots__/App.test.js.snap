@@ -6,8 +6,8 @@ exports[`<App /> renders 1`] = `
     Object {
       "accent": "rgb(173, 38, 36)",
       "darksecondary": "rgb(107, 48, 13)",
-      "primary": "rgb(0, 153, 0)",
-      "secondary": "rgb(204, 255, 255)",
+      "primary": "rgb(0, 153, 255)",
+      "secondary": "rgb(255, 255, 0)",
     }
   }
 >
@@ -17,7 +17,7 @@ exports[`<App /> renders 1`] = `
       encodeSpecialCharacters={true}
     >
       <title>
-        Hay Poll
+        Bitfrost
       </title>
       <link
         href="/src/assets/favicon.ico"
@@ -59,13 +59,23 @@ exports[`<App /> renders 1`] = `
         component={[Function]}
         exact={true}
         key="4"
-        path="/signup"
+        path="/polls/create"
       />
       <Route
         component={[Function]}
         exact={true}
         key="5"
+        path="/signup"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="6"
         path="/login"
+      />
+      <Redirect
+        push={false}
+        to="/home/"
       />
     </Switch>
     <Footer />
