@@ -3,11 +3,11 @@
 exports[`<Header /> renders 1`] = `
 <styled.header>
   <h1>
-    Hay Poll
+    Bitfrost
   </h1>
-  <h6>
-    Get it... Hay...
-  </h6>
+  <h3>
+    It's good enough for Thor
+  </h3>
   <styled.nav>
     <LinkButton
       key="About"
@@ -18,11 +18,6 @@ exports[`<Header /> renders 1`] = `
       key="Home"
       label="Home"
       path="/home"
-    />
-    <LinkButton
-      key="Polls"
-      label="Polls"
-      path="/polls"
     />
   </styled.nav>
 </styled.header>
