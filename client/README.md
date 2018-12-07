@@ -1,1 +1,1 @@
-# bifrost client
+# bitfrost client

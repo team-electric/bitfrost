@@ -1,5 +1,5 @@
 {
-  "name": "bifrost",
+  "name": "bitfrost",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com:team-electric/bifrost.git"
+    "url": "git+https://github.com:team-electric/bitfrost.git"
   },
   "author": "Jack Toumey <jack@toumey.io>",
   "license": "ISC",

@@ -7,7 +7,7 @@ Table of contents
 =================
 
 <!--ts-->
-   * [Bitfrost](#Bifrost)
+   * [Bitfrost](#bitfrost)
    * [Table of contents](#table-of-contents)
    * [Project setup](#Project-setup)
    * [Deployment](#Deployment)
