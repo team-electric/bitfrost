@@ -1,4 +1,4 @@
-Bifrost
+Bitfrost
 =================
 
 A ridesharing app.
@@ -7,7 +7,7 @@ Table of contents
 =================
 
 <!--ts-->
-   * [Bifrost](#Bifrost)
+   * [Bitfrost](#Bifrost)
    * [Table of contents](#table-of-contents)
    * [Project setup](#Project-setup)
    * [Deployment](#Deployment)
