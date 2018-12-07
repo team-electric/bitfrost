@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> renders 1`] = `
+<Fragment>
+  <styled.label
+    htmlFor="xyz"
+  >
+    Xyz
+  </styled.label>
+  <styled.input
+    name="xyz"
+    onChange={[MockFunction]}
+    type="text"
+    value="abc"
+  />
+</Fragment>
+`;

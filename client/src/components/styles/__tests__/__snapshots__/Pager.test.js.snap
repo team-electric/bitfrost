@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pager /> renders 1`] = `
+<div>
+  <styled.button
+    onClick={[Function]}
+  >
+    Previous
+  </styled.button>
+  <span>
+    2
+     out of 
+    10
+     pages
+  </span>
+  <styled.button
+    onClick={[Function]}
+  >
+    Next
+  </styled.button>
+</div>
+`;

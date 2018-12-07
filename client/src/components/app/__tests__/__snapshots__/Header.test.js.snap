@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> renders 1`] = `
+<styled.header>
+  <h1>
+    Hay Poll
+  </h1>
+  <h6>
+    Get it... Hay...
+  </h6>
+  <styled.nav>
+    <LinkButton
+      key="About"
+      label="About"
+      path="/about"
+    />
+    <LinkButton
+      key="Home"
+      label="Home"
+      path="/home"
+    />
+    <LinkButton
+      key="Polls"
+      label="Polls"
+      path="/polls"
+    />
+  </styled.nav>
+</styled.header>
+`;

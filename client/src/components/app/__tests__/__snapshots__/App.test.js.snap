@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders 1`] = `
+<ThemeProvider
+  theme={
+    Object {
+      "accent": "rgb(173, 38, 36)",
+      "darksecondary": "rgb(107, 48, 13)",
+      "primary": "rgb(0, 153, 0)",
+      "secondary": "rgb(204, 255, 255)",
+    }
+  }
+>
+  <BrowserRouter>
+    <HelmetWrapper
+      defer={true}
+      encodeSpecialCharacters={true}
+    >
+      <title>
+        Hay Poll
+      </title>
+      <link
+        href="/src/assets/favicon.ico"
+        rel="icon"
+      />
+      <link
+        href="/src/assets/manifest.json"
+        rel="manifest"
+      />
+    </HelmetWrapper>
+    <GlobalStyleComponent />
+    <Header />
+    <Switch>
+      <Route
+        component={[Function]}
+        exact={true}
+        key="0"
+        path="/about/"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="1"
+        path="/home/"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="2"
+        path="/polls"
+      />
+      <Route
+        component={[Function]}
+        exact={false}
+        key="3"
+        path="/polls/:id"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="4"
+        path="/signup"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="5"
+        path="/login"
+      />
+    </Switch>
+    <Footer />
+  </BrowserRouter>
+</ThemeProvider>
+`;

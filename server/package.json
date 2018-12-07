@@ -1,0 +1,51 @@
+{
+  "name": "bifrost",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "jest": "jest --verbose --runInBand",
+    "test": "npm run jest",
+    "test:watch": "npm run jest -- --runInBand --watch",
+    "build:server": "babel src -d lib -s true",
+    "prestart": "npm run build",
+    "start": "node lib/index.js",
+    "start:watch": "nodemon src/index.js --exec babel-node"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/client/",
+      "<rootDir>/node_modules/"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.6",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "chance": "^1.0.17",
+    "eslint": "^5.9.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.7",
+    "supertest": "^3.3.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.14",
+    "morgan": "^1.9.1"
+  }
+}

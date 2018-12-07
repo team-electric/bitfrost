@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loader /> renders 1`] = `
+<styled.img
+  alt="loading"
+  src="https://media.giphy.com/media/l41lFw057lAJQMwg0/giphy.gif"
+/>
+`;
