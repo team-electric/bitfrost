@@ -1,5 +1,9 @@
 language: node_js
-node_js: 10.10.0
+node_js: "10.10.0"
+services:
+  - mongodb
+env:
+  MONGODB_URI: MONGODB_URI=mongodb://localhost:27017/haypoll
 deploy:
   provider: heroku
   app:
