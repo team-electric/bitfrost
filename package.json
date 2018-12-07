@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm run install:client && npm run install:server",
+    "install": "npm run install:client && npm run install:server",
     "install:client": "cd client && npm i",
     "install:server": "cd server && npm i",
     "test": "npm run test:client && npm run test:server",
@@ -13,8 +13,8 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "cd client && npm run build",
     "build:server": "cd server && npm run build",
-    "heroko-postbuild": "npm run build",
-    "start": "cd server && npm start"
+    "start:server": "cd server && npm start",
+    "start": "npm run install && npm run build && npm run start:server"
   },
   "keywords": [],
   "author": "",
