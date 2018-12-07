@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "jest": "jest --verbose --runInBand --detectOpenHandles",
+    "jest": "jest --verbose --runInBand --forceExit",
     "test": "npm run jest ",
     "test:watch": "npm run jest -- --detectOpenHandles --runInBand --watch",
     "build": "babel src -d dist -s true",
