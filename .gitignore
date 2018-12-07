@@ -2,7 +2,8 @@
 node_modules
 
 dist
-*dist
+
+
 # local env files
 .env
 .env.local
