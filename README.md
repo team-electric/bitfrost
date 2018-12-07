@@ -1,7 +1,7 @@
 Bitfrost
 =================
 
-A ridesharing app.
+A ridesharing app...
 
 Table of contents
 =================
