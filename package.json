@@ -14,6 +14,7 @@
     "build:client": "cd client && npm run build",
     "build:server": "cd server && npm run build",
     "prestart": "npm run build",
+    "heroko-postbuild": "npm run build",
     "start": "cd server && npm start"
   },
   "keywords": [],
