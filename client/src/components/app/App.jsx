@@ -9,7 +9,7 @@ import { ROUTES, routerRoutes } from '../../routes';
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: BOMBARD;
-    src: url("/src/assets/fonts/BOMBARD.ttf") format("opentype");
+    src: url("/src/assets/fonts/BOMBARD.ttf") format("truetype");
   }
   #root {
     display: flex;
@@ -36,8 +36,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const theme = {
-  primary: 'rgb(0, 153, 0)',
-  secondary: 'rgb(204, 255, 255)',
+  primary: 'rgb(0, 153, 255)',
+  secondary: 'rgb(255, 255, 0)',
   darksecondary: 'rgb(107, 48, 13)',
   accent: 'rgb(173, 38, 36)'
 };
@@ -52,7 +52,7 @@ const App = () => {
       <BrowserRouter>
         <>
           <Helmet>
-            <title>Hay Poll</title>
+            <title>Bitfrost</title>
             <link rel="icon" href="/src/assets/favicon.ico"/>
             <link rel="manifest" href="/src/assets/manifest.json"/>
           </Helmet>
@@ -60,6 +60,7 @@ const App = () => {
           <Header/>
           <Switch>
             {routerRoutes()}
+            <Redirect to={ROUTES.HOME.path} />
           </Switch>
           <Footer/>
         </>
