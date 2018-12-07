@@ -6,7 +6,7 @@ Bitfrost
 About
 =================
 
-A ridesharing app....
+A ridesharing app..
 
 Table of contents
 =================
