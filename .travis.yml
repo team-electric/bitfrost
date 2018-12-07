@@ -4,6 +4,7 @@ services:
   - mongodb
 env:
   MONGODB_URI: mongodb://localhost:27017/haypoll
+  APP_SECRET: Dummy$ecret
 deploy:
   provider: heroku
   app:
