@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install": "npm run install:client && npm run install:server",
+    "preinstall": "npm run install:client && npm run install:server",
     "install:client": "cd client && npm i",
     "install:server": "cd server && npm i",
     "test": "npm run test:client && npm run test:server",
