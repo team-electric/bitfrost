@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
 
+# don't commit your compiled tests
+# dist
+# */dist
 
 # local env files
 .env

@@ -66,8 +66,11 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "apollo-boost": "^0.1.22",
+    "graphql": "^14.0.2",
     "jest-styled-components": "^6.3.1",
     "react": "^16.7.0-alpha.0",
+    "react-apollo": "^2.3.2",
     "react-dom": "^16.7.0-alpha.0",
     "react-helmet": "^5.2.0",
     "react-redux": "^5.1.1",
