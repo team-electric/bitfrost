@@ -5,11 +5,18 @@ import cors from './middleware/cors';
 import spa from './middleware/spa';
 import { errorHandler } from './middleware/error';
 
+const graphqlHTTP = require('express-graphql');
+const schema = require('./resources/schema');
+const { Person } = require('./resources/people/model');
+
 const app = express();
 
-app.use(morgan('dev', { skip: () => process.env.NODE_ENV === 'test' }));
+app.use(morgan('dev', { skip: () => process.env.NODE_ENV === 'development' }));
 app.use(express.static('../client/dist'));
 app.use(express.json());
+
+app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
+
 app.use('/api', router);
 app.use('*', spa('../client/dist/index.html'));
 app.use(errorHandler);

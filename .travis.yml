@@ -3,7 +3,7 @@ node_js: "10.10.0"
 services:
   - mongodb
 env:
-  MONGODB_URI: mongodb://localhost:27017/haypoll
+  MONGODB_URI: mongodb://localhost:27017/bitfrost
   APP_SECRET: Dummy$ecret
 deploy:
   provider: heroku
