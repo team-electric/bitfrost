@@ -27,4 +27,6 @@ export const request = (url, method, body) => {
 
 export const get = url => request(url, 'GET');
 
+export const query = (url, body) => request(url, 'GET', body);
+
 export const post = (url, body) => request(url, 'POST', body);
