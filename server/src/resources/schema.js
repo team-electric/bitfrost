@@ -1,4 +1,4 @@
-const { Person, PersonType } = require('./');
+const { Person, PersonType } = require('./people/People');
 const { prepareMongooseDoc } = require('../lib/graphql');
 const {
   GraphQLNonNull,
@@ -7,7 +7,8 @@ const {
   GraphQLList,
   GraphQLSchema,
   GraphQLString,
-  GraphQLID
+  GraphQLID,
+  GraphQLInt
 } = require('graphql');
 
 const prepareObj = obj => {
@@ -48,10 +49,22 @@ const Mutations = new GraphQLObjectType({
       type: PersonType,
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
-        birthday: { type: GraphQLString },
-        status: { type: GraphQLString }
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        phone: { type: new GraphQLNonNull(GraphQLString) },
+        address: {
+          street: { type: GraphQLString },
+          city: { type: GraphQLString },
+          state: { type: GraphQLString },
+          zip: { type: new GraphQLNonNull(GraphQLInt) },
+          formatted: {
+            type: GraphQLString,
+            resolve(obj) {
+              return obj.street + obj.city + obj.state + obj.zip
+            }
+          }
+        },
       },
-      resolve: (_, { name, birthday, status }) => Person.create({ name, birthday, status }).then(prepare)
+      resolve: (_, { name, email, phone, address }) => Person.create({ name, email, phone, address }).then(prepare)
     }
   })
 });

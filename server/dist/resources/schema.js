@@ -1,6 +1,6 @@
 "use strict";
 
-var _require = require('./people/model'),
+var _require = require('./people/People'),
     Person = _require.Person,
     PersonType = _require.PersonType;
 
@@ -14,7 +14,8 @@ var _require3 = require('graphql'),
     GraphQLList = _require3.GraphQLList,
     GraphQLSchema = _require3.GraphQLSchema,
     GraphQLString = _require3.GraphQLString,
-    GraphQLID = _require3.GraphQLID;
+    GraphQLID = _require3.GraphQLID,
+    GraphQLInt = _require3.GraphQLInt;
 
 var prepareObj = function prepareObj(obj) {
   if (typeof obj.graphql === 'function') return obj.graphql();
@@ -66,21 +67,43 @@ var Mutations = new GraphQLObjectType({
           name: {
             type: new GraphQLNonNull(GraphQLString)
           },
-          birthday: {
-            type: GraphQLString
+          email: {
+            type: new GraphQLNonNull(GraphQLString)
           },
-          status: {
-            type: GraphQLString
+          phone: {
+            type: new GraphQLNonNull(GraphQLString)
+          },
+          address: {
+            street: {
+              type: GraphQLString
+            },
+            city: {
+              type: GraphQLString
+            },
+            state: {
+              type: GraphQLString
+            },
+            zip: {
+              type: new GraphQLNonNull(GraphQLInt)
+            },
+            formatted: {
+              type: GraphQLString,
+              resolve: function resolve(obj) {
+                return obj.street + obj.city + obj.state + obj.zip;
+              }
+            }
           }
         },
         resolve: function resolve(_, _ref2) {
           var name = _ref2.name,
-              birthday = _ref2.birthday,
-              status = _ref2.status;
+              email = _ref2.email,
+              phone = _ref2.phone,
+              address = _ref2.address;
           return Person.create({
             name: name,
-            birthday: birthday,
-            status: status
+            email: email,
+            phone: phone,
+            address: address
           }).then(prepare);
         }
       }
