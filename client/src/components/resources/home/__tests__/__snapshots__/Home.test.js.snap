@@ -5,5 +5,7 @@ exports[`<Home /> renders 1`] = `
   <h2>
     Home Page
   </h2>
+  <Connect(FirebaseConnect(AuthButton)) />
+  <Connect(FirestoreConnect(RideList)) />
 </section>
 `;
