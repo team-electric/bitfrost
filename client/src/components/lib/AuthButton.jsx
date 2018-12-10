@@ -27,7 +27,7 @@ class AuthButton extends Component {
             }
           >Log in with Google</button>
         </div>
-      )
+      );
     }
     return <button
       style={{ width: '20rem' }}
