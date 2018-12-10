@@ -20,19 +20,19 @@ import pollsReducer from './resources/polls/reducers';
 import resultsReducer from './resources/results/reducers';
 import sessionsReducer from './resources/sessions/reducers';
 
-import { reducer as eventsReducer, initialState as eventsInitial } from './resources/events/reducers';
+import { reducer as ridesReducer, initialState as ridesInitial } from './resources/rides/reducers';
 
 
 // create combined reducer
 
 const initialState = {
-  events: eventsInitial
+  rides: ridesInitial
 };
 
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
-  events: eventsReducer,
+  rides: ridesReducer,
 
 
   polls: pollsReducer,

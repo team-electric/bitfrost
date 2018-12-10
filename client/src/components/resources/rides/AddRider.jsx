@@ -8,12 +8,12 @@ import { firestoreConnect } from 'react-redux-firebase';
 class AddRider extends Component {
   static propTypes = {
     uid: PropTypes.string,
-    selectedEvent: PropTypes.string,
+    selectedRide: PropTypes.string,
     firestore: PropTypes.shape({
       add: PropTypes.func.isRequired
     }).isRequired
-  }
-  state = { description: '', cost: 0 }
+  };
+  state = { description: '', cost: 0 };
 
   addRider() {
     this.props.firestore.add(
@@ -22,15 +22,15 @@ class AddRider extends Component {
         uid: this.props.uid,
         description: this.state.description,
         cost: this.state.cost,
-        event: this.props.selectedEvent
+        ride: this.props.selectedRide
       }
-    )
-    this.setState({ cost: 0, description: '' })
+    );
+    this.setState({ cost: 0, description: '' });
   }
 
   render() {
     if(!this.props.uid) return null;
-    if(!this.props.selectedEvent) return null;
+    if(!this.props.selectedRide) return null;
 
     return (
       <div>
@@ -53,7 +53,7 @@ class AddRider extends Component {
 
 const mapStateToProps = state => ({
   uid: state.firebase.auth.uid,
-  selectedEvent: state.events.selectedEvent
+  selectedRide: state.rides.selectedRide
 });
 
 const mapDispatchToProps = {};
