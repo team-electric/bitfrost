@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/stripe.js"],"names":["module","exports","require","process","env","STRIPE_SECRET"],"mappings":";;AAAAA,MAAM,CAACC,OAAP,GAAiBC,OAAO,CAAC,QAAD,CAAP,CAAkBC,OAAO,CAACC,GAAR,CAAYC,aAA9B,CAAjB","sourcesContent":["module.exports = require('stripe')(process.env.STRIPE_SECRET);\n"],"file":"stripe.js"}

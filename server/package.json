@@ -12,8 +12,11 @@
     "test:watch": "npm run jest -- --detectOpenHandles --runInBand --watch",
     "build": "babel src -d dist -s true",
     "prestart": "npm run build",
-    "start": "node dist/index.js",
-    "start:watch": "nodemon src/index.js --exec babel-node"
+    "start": "nodemon -e js,graphql -x node dist/index.js",
+    "start:watch": "nodemon -e js,graphql -x node --inspect --exec babel-node src/index.js",
+    "playground": "graphql playground",
+    "deploy": "prisma deploy",
+    "debug": "npm-run-all --parallel start:watch playground"
   },
   "jest": {
     "testEnvironment": "node",
@@ -32,10 +35,11 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-decorators": "^7.1.6",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-env": "^7.2.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "chance": "^1.0.17",
     "eslint": "^5.9.0",
     "eslint-plugin-babel": "^5.3.0",
@@ -45,16 +49,17 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^6.1.0",
-    "express": "^4.16.4",
-    "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
     "graphql-cli": "^2.17.0",
     "graphql-yoga": "^1.16.7",
     "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.3.14",
     "morgan": "^1.9.1",
+    "nodemailer": "^4.7.0",
+    "npm-run-all": "^4.1.5",
     "prisma": "^1.22.2",
-    "prisma-binding": "^2.2.8"
+    "prisma-binding": "^2.2.8",
+    "stripe": "^6.18.1"
   }
 }
