@@ -1,5 +1,7 @@
 const request = require('superagent');
+
 // const { Person } = require('./src/resources/people/model');
+
 
 
 const query = `
@@ -21,7 +23,7 @@ fragment characterField on Character {
 	species
   gender
 }
-`
+`;
 
 const variables = JSON.stringify({
   rickId: 1,
@@ -33,7 +35,5 @@ request
   .get('https://rickandmortyapi.com/graphql/')
   .query({ query, variables })
   .send()
-  .then(res => {
-    console.log(res.body);
-  })
-  .catch(err => console.error(err.response.body))
+  .then(res => console.log(res.body))
+  .catch(err => console.error(err.response.body));

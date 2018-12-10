@@ -66,13 +66,16 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "firebase": "^5.5.5",
     "jest-styled-components": "^6.3.1",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
     "react-helmet": "^5.2.0",
     "react-redux": "^5.1.1",
+    "react-redux-firebase": "^2.2.4",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
+    "redux-firestore": "^0.6.0",
     "reselect": "^4.0.0",
     "styled-components": "^4.1.1",
     "uuid": "^3.3.2"
