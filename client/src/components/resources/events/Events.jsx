@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import firebase from '../../../services/events';
+import firebase from '../../../services/firebase';
 
 
 
