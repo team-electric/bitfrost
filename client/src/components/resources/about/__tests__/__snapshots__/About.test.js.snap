@@ -2,6 +2,9 @@
 
 exports[`<About /> renders 1`] = `
 <section>
+  <Nav
+    pageTitle="About"
+  />
   <h2>
     You found me!
   </h2>
