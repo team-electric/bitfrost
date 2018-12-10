@@ -4,6 +4,13 @@ import About from '../components/resources/about/About.jsx';
 import Home from '../components/resources/home/Home.jsx';
 import SignUp from '../components/resources/signup/SignUp.jsx';
 import RideList from '../components/resources/rides/RideList.jsx';
+import Dashboard from '../components/resources/dashboard/Dashboard.jsx';
+import Profile from '../components/resources/profile/Profile.jsx';
+import PastTrips from '../components/resources/trips/PastTrips.jsx';
+import UpcomingTrips from '../components/resources/trips/UpcomingTrips.jsx';
+import TripDetail from '../components/resources/tripDetail/TripDetail.jsx';
+import AddCar from '../components/resources/addCar/AddCar.jsx';
+import CreateTrip from '../components/resources/createTrip/CreateTrip.jsx';
 
 export const ROUTES = {
   ABOUT: {
@@ -26,12 +33,46 @@ export const ROUTES = {
     Component: RideList,
     linkTo: () => '/rides',
   },
+  DASHBOARD: {
+    path: '/dashboard',
+    Component: Dashboard,
+    linkTo: () => '/dashboard'
+  },
+  PROFILE: {
+    path: '/profile',
+    Component: Profile,
+    linkTo: () => '/profile'
+  },
+  PASTTRIPS: {
+    path: '/pasttrips',
+    Component: PastTrips,
+    linkTo: () => '/pasttrips'
+  },
+  UPCOMINGTRIPS: {
+    path: '/upcomingtrips',
+    Component: UpcomingTrips,
+    linkTo: () => '/upcomingtrips'
+  },
+  TRIPDETAIL: {
+    path: '/tripdetail',
+    Component: TripDetail,
+    linkTo: () => '/tripdetail'
+  },
+  ADDCAR: {
+    path: '/addcar',
+    Component: AddCar,
+    linkTo: () => '/addcar'
+  },
+  CREATETRIP: {
+    path: '/createtrip',
+    Component: CreateTrip,
+    linkTo: () => '/createtrip'
+  }
 };
 
 export const LINKS = [
-  { label: 'About', path: '/about' },
-  { label: 'Home', path: '/home' },
-  { label: 'Rides', path: '/rides' },
+  { label: 'Profile', path: '/profile' },
+  { label: 'Dashboard', path: '/dashboard' }
 ];
 
 export const rootLinks = () => {

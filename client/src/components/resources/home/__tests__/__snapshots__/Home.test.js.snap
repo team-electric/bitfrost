@@ -2,6 +2,9 @@
 
 exports[`<Home /> renders 1`] = `
 <section>
+  <Nav
+    pageTitle="Landing Page"
+  />
   <h2>
     Home Page
   </h2>
