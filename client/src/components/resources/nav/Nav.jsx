@@ -35,12 +35,12 @@ const Nav = ({ pageTitle }) => {
   return (
     <StyledHeader>
       <StyledLogo>
-        <Link to={ROUTES.ABOUT}>LOGO</Link>
+        <Link to={ROUTES.ABOUT.linkTo()}>LOGO</Link>
       </StyledLogo>
       <StyledTitle>{pageTitle}</StyledTitle>
       <StyledIcons>
-        <Link to={ROUTES.PROFILE}>PROF</Link>&nbsp;
-        <Link to={ROUTES.DASHBOARD}>DASH</Link>
+        <Link to={ROUTES.PROFILE.linkTo()}>PROF</Link>&nbsp;
+        <Link to={ROUTES.DASHBOARD.linkTo()}>DASH</Link>
       </StyledIcons>
     </StyledHeader>
   );
