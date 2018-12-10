@@ -6,6 +6,7 @@ var _require = require('graphql'),
     GraphQLObjectType = _require.GraphQLObjectType,
     GraphQLID = _require.GraphQLID,
     GraphQLNonNull = _require.GraphQLNonNull,
+    GraphQLInt = _require.GraphQLInt,
     GraphQLString = _require.GraphQLString;
 
 var PersonType = new GraphQLObjectType({

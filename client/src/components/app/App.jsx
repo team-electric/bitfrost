@@ -57,7 +57,6 @@ const App = () => {
             <link rel="manifest" href="/src/assets/manifest.json"/>
           </Helmet>
           <GlobalStyle/>
-          <Header/>
           <Switch>
             {routerRoutes()}
             <Redirect to={ROUTES.HOME.path} />

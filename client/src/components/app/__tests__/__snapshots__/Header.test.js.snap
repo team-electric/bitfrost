@@ -10,19 +10,14 @@ exports[`<Header /> renders 1`] = `
   </h3>
   <styled.nav>
     <LinkButton
-      key="About"
-      label="About"
-      path="/about"
+      key="Profile"
+      label="Profile"
+      path="/profile"
     />
     <LinkButton
-      key="Home"
-      label="Home"
-      path="/home"
-    />
-    <LinkButton
-      key="Rides"
-      label="Rides"
-      path="/rides"
+      key="Dashboard"
+      label="Dashboard"
+      path="/dashboard"
     />
   </styled.nav>
 </styled.header>
