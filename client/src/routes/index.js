@@ -20,11 +20,11 @@ export const ROUTES = {
     Component: Home,
     linkTo: () => '/home',
   },
-  EVENTS: {
-    path: '/events/',
-    Component: Events,
-    linkTo: () => '/events',
-  },
+  // EVENTS: {
+  //   path: '/events/',
+  //   Component: Events,
+  //   linkTo: () => '/events',
+  // },
   POLLS: {
     path: '/polls',
     Component: PollList,
@@ -61,7 +61,7 @@ export const ROUTES = {
 export const LINKS = [
   { label: 'About', path: '/about' },
   { label: 'Home', path: '/home' },
-  { label: 'Events', path: '/events' },
+  // { label: 'Events', path: '/events' },
   // { label: 'Polls', path: '/polls' },
   // { label: 'Create Poll', path: '/polls/create' },
 ];

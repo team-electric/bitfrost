@@ -10,7 +10,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
-import { config as firebaseConfig } from '../services/firebase';
+import config from '../services/firebase';
 
 
 // reducers
@@ -36,14 +36,31 @@ const rootReducer = combineReducers({
 
 // create store
 
+firebase.initializeApp(config);
+firebase.firestore().settings({ timestampsInSnapshots: true });
 
-// firebase.initializeApp(firebaseConfig);
+const enhancers = [
+  reduxFirestore(firebase),
+  reactReduxFirebase(
+    firebase,
+    { userProfile: 'users', useFirestoreForProfile: true }
+  ),
+  applyMiddleware(...middleware)
+];
 
+const reduxDevToolsExtension = window.devToolsExtension;
+if(process.env.NODE_ENV === 'development' && typeof reduxDevToolsExtension === 'function') {
+  enhancers.push(reduxDevToolsExtension());
+}
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composedEnhancers = compose(
+  ...enhancers
+);
 
-export default createStore(
+const store = createStore(
   rootReducer,
-  composeEnhancers(
-    applyMiddleware(...middleware)
-  ));
+  initialState,
+  composedEnhancers
+);
+
+export default store;
