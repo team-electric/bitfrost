@@ -8,4 +8,7 @@ const config = {
   storageBucket: 'bitfrost-e04d8.appspot.com',
   messagingSenderId: '1018294573314'
 };
+
 firebase.initializeApp(config);
+
+export default firebase;

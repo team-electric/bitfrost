@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import About from '../components/resources/about/About.jsx';
 import Home from '../components/resources/home/Home.jsx';
+import Events from '../components/resources/events/Events.jsx';
 import PollList from '../components/resources/poll/PollList.jsx';
 import PollDetail from '../components/resources/poll/PollDetail.jsx';
 import PollCreate from '../components/resources/poll/PollCreate.jsx';
@@ -18,6 +19,11 @@ export const ROUTES = {
     path: '/home/',
     Component: Home,
     linkTo: () => '/home',
+  },
+  EVENTS: {
+    path: '/events/',
+    Component: Events,
+    linkTo: () => '/events',
   },
   POLLS: {
     path: '/polls',
@@ -55,6 +61,7 @@ export const ROUTES = {
 export const LINKS = [
   { label: 'About', path: '/about' },
   { label: 'Home', path: '/home' },
+  { label: 'Events', path: '/events' },
   // { label: 'Polls', path: '/polls' },
   // { label: 'Create Poll', path: '/polls/create' },
 ];
