@@ -1,6 +1,6 @@
 "use strict";
 
-var _require = require('./people/People'),
+var _require = require('./people/model'),
     Person = _require.Person,
     PersonType = _require.PersonType;
 

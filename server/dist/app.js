@@ -9,8 +9,6 @@ var _express = _interopRequireDefault(require("express"));
 
 var _morgan = _interopRequireDefault(require("morgan"));
 
-var _resources = _interopRequireDefault(require("./resources"));
-
 var _cors = _interopRequireDefault(require("./middleware/cors"));
 
 var _spa = _interopRequireDefault(require("./middleware/spa"));
@@ -21,7 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var graphqlHTTP = require('express-graphql');
 
-var schema = require('./resources/schema'); // const { Person } = require('./resources/people/People');
+var schema = require('./resources/schema'); // const { Person } = require('./resources/people/model');
 
 
 var app = (0, _express.default)();
@@ -36,7 +34,6 @@ app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true
 }));
-app.use('/api', _resources.default);
 app.use('*', (0, _spa.default)('../client/dist/index.html'));
 app.use(_error.errorHandler);
 var _default = app;
