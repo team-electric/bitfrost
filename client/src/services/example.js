@@ -1,5 +1,5 @@
 const request = require('superagent');
-const { Person } = require('./src/resources/people/model');
+// const { Person } = require('./lib/models/Person');
 
 
 const query = `
@@ -33,7 +33,5 @@ request
   .get('https://rickandmortyapi.com/graphql/')
   .query({ query, variables })
   .send()
-  .then(res => {
-    console.log(res.body);
-  })
+  .then(res => console.log(res.body))
   .catch(err => console.error(err.response.body))
