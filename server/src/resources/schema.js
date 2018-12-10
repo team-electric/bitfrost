@@ -1,4 +1,4 @@
-const { Person, PersonType } = require('./');
+const { Person, PersonType } = require('./people/People');
 const { prepareMongooseDoc } = require('../lib/graphql');
 const {
   GraphQLNonNull,

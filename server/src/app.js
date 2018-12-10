@@ -7,7 +7,7 @@ import { errorHandler } from './middleware/error';
 
 const graphqlHTTP = require('express-graphql');
 const schema = require('./resources/schema');
-const { Person } = require('./resources/people/model');
+// const { Person } = require('./resources/people/People');
 
 const app = express();
 

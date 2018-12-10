@@ -21,10 +21,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var graphqlHTTP = require('express-graphql');
 
-var schema = require('./resources/schema');
+var schema = require('./resources/schema'); // const { Person } = require('./resources/people/People');
 
-var _require = require('./resources/people/model'),
-    Person = _require.Person;
 
 var app = (0, _express.default)();
 app.use((0, _morgan.default)('dev', {

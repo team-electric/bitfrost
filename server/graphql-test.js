@@ -1,5 +1,5 @@
 const request = require('superagent');
-const { Person } = require('./src/resources/people/model');
+// const { Person } = require('./src/resources/people/model');
 
 
 const query = `
