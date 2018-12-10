@@ -3,6 +3,8 @@ node_modules
 
 # compiled files
 */dist
+dist
+
 
 # local env files
 .env
