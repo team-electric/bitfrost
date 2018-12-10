@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 
 
 class AuthButton extends Component {

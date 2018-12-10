@@ -4,34 +4,32 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-import AddEvent from './AddEvent.jsx';
+import AddRide from './AddRide.jsx';
 
-class EventList extends Component {
+class RideList extends Component {
   static propTypes = {
     uid: PropTypes.string,
-    events: PropTypes.arrayOf(PropTypes.object),
-    selectedEvent: PropTypes.object,
-    selectEvent: PropTypes.func.isRequired,
+    rides: PropTypes.arrayOf(PropTypes.object),
+    selectedRide: PropTypes.object,
+    selectRide: PropTypes.func.isRequired,
   };
 
   render() {
-    const { events } = this.props;
-    console.log(events);
-    const eventItems = events.map(event => {
+    const { rides } = this.props;
+    const rideItems = rides.map(ride => {
       return (
         <li
-          key={event.driver}
-          onClick={() => this.props.selectEvent(event)}
-
-        >{event.driver}
+          key={ride.driver}
+          onClick={() => this.props.selectRide(ride)}
+        >driver: {ride.driver} | seats: {ride.seats}
         </li>
       );
     });
     return (
       <div>
-        <AddEvent />
+        <AddRide />
         <div>
-          {eventItems}
+          {rideItems}
         </div>
       </div>
     );
@@ -40,12 +38,12 @@ class EventList extends Component {
 
 const mapStateToProps = state => ({
   uid: state.firebase.auth.uid,
-  events: state.firestore.ordered.events || [],
-  selectedEvent: state.events.selectedEvent
+  rides: state.firestore.ordered.rides || [],
+  selectedRide: state.rides.selectedRide
 });
 
 const mapDispatchToProps = dispatch => ({
-  selectEvent: event => dispatch({ type: 'selectEvent', event })
+  selectRide: ride => dispatch({ type: 'selectRide', ride })
 });
 
 export default compose(
@@ -54,11 +52,11 @@ export default compose(
     if(!props.uid) return [];
     return [
       {
-        collection: 'events',
+        collection: 'rides',
         where: [
           ['uid', '==', props.uid]
         ]
       }
     ];
   })
-)(EventList);
+)(RideList);

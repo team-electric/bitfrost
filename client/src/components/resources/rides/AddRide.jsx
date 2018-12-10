@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-class AddEvent extends Component {
+class AddRide extends Component {
   static propTypes = {
     uid: PropTypes.string,
     firestore: PropTypes.shape({
@@ -12,17 +12,21 @@ class AddEvent extends Component {
     }).isRequired
   };
 
-  state = { driver: '' };
+  state = {
+    driver: '',
+    seats: '',
+  };
 
-  addEvent() {
+  addRide = e => {
+    e.preventDefault();
     const { uid } = this.props;
-    const { driver } = this.state;
+    const { driver, seats } = this.state;
     this.props.firestore.add(
-      { collection: 'events' },
-      { uid, driver }
+      { collection: 'rides' },
+      { uid, driver, seats }
     );
     this.setState({ driver: '' });
-  }
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -32,15 +36,21 @@ class AddEvent extends Component {
     if(!this.props.uid) return null;
 
     return (
-      <div>
+      <form onSubmit={this.addRide}>
         <input
           type="text"
           name="driver"
           value={this.state.driver}
           onChange={this.onChange}
         />
-        <button onClick={() => this.addEvent()}>Add Event</button>
-      </div>
+        <input
+          type="text"
+          name="seats"
+          value={this.state.seats}
+          onChange={this.onChange}
+        />
+        <button type="submit">Add Ride</button>
+      </form>
     );
   }
 }
@@ -55,4 +65,4 @@ const mapDispatchToProps = {};
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect(),
-)(AddEvent);
+)(AddRide);
