@@ -1,5 +1,5 @@
-import React, { PureComponent, Fragment } from 'react';
-// import PropTypes from 'prop-types';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
 
@@ -9,15 +9,33 @@ const StyledDiv = styled.div`
   }
 `;
 
-export default class TripDetail extends PureComponent {
-  // static propTypes = {
-  //   lots o props
-  // }
+const MapWrapper = styled.div`
+  width: 100vw;
+  height: 40vh;
+  overflow: hidden;
+  img {
+    width: 100vw;
+    height: auto;
+  }
+`;
+
+export default class TripDetail extends Component {
+  static propTypes = {
+    trips: PropTypes.object.isRequired,
+    totalTrips: PropTypes.number.isRequired
+  };
+
+  // tripDetail = ({ PastTrips }) => {
+  //   const { user, destination, date } = PastTrips;
+  // };
 
   render() {
     return (
       <Fragment>
         <Nav pageTitle="Trip Details" />
+        <MapWrapper>
+          <img src="https://staticmapmaker.com/img/google.png"></img>
+        </MapWrapper>
 
         <StyledDiv>
           <h1>
@@ -25,6 +43,9 @@ export default class TripDetail extends PureComponent {
             information, number, car. Available seats with button to reserve and
             button to link to paypal/venmo. Trip rating?
           </h1>
+
+
+
 
           <a href="www.paypal.com"> Pay with Paypal</a>
           <a href="www.venmo.com"> Pay with Venmo</a>
