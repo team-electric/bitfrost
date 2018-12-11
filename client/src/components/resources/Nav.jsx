@@ -1,31 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../../routes/index.js';
+import { ROUTES } from '../../routes/index.js';
 
 const StyledHeader = styled.header`
-  background-color: ${({ theme }) => theme.primary};
+border-bottom: 1px solid ${({ theme }) => theme.accentlight};
+  background-color: ${({ theme }) => theme.darksecondary};
   color: ${({ theme }) => theme.secondary};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  h1 {
-    font-family: BOMBARD, "Avenir Next", sans-serif;
-    font-weight: bolder;
-    letter-spacing: 2px;
-    font-size: 36px;
-  }
 `;
 const StyledLogo = styled.div`
-  font-weight: bolder;
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.secondary};
+  }
 `;
 
 const StyledIcons = styled.nav`
   display: flex;
-
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.secondary};
+  }
 `;
 const StyledTitle = styled.span`
-  font-weight: bolder;
+  font-size: 1em;
   flex-direction: row;
   justify-content: space-between;
 `;

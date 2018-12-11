@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import Nav from '../nav/Nav.jsx';
+import Nav from './Nav.jsx';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -9,6 +9,9 @@ const StyledDiv = styled.div`
   }
 `;
 
+const Button = styled.button`
+
+`;
 export default class Dashboard extends Component {
   // static propTypes = {
   //   lots o props

@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Nav from '../nav/Nav.jsx';
+import Nav from './Nav.jsx';
 
 const StyledForm = styled.form`
   h1 {
