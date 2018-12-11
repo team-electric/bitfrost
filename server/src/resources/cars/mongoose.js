@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-const carSchema = mongoose.Schema({
+const carSchema = Schema({
   plate: {
     type: String,
     required: true
@@ -23,4 +23,4 @@ const carSchema = mongoose.Schema({
   },
 });
 
-export const Car = mongoose.model('Car', carSchema);
+export const Car = model('Car', carSchema);

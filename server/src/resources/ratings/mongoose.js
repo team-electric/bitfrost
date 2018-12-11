@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-const ratingSchema = mongoose.Schema({
+const ratingSchema = Schema({
   rater: {
     type: String,
     required: true
@@ -23,4 +23,4 @@ const ratingSchema = mongoose.Schema({
 //   // do some graphql manipulation
 // }
 
-export const Rating = mongoose.model('Rating', ratingSchema);
+export const Rating = model('Rating', ratingSchema);

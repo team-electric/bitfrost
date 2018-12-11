@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-const userSchema = mongoose.Schema({
+const userSchema = Schema({
   name: {
     type: String,
     required: true
@@ -31,4 +31,4 @@ const userSchema = mongoose.Schema({
 //   // do some graphql manipulation
 // }
 
-export const User = mongoose.model('User', userSchema);
+export const User = model('User', userSchema);

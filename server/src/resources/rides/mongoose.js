@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-const rideSchema = mongoose.Schema({
+const rideSchema = Schema({
   driver: {
     userID: String,
     required: true,
@@ -53,4 +53,4 @@ const rideSchema = mongoose.Schema({
 //   // do some graphql manipulation
 // }
 
-export const Ride = mongoose.model('Ride', rideSchema);
+export const Ride = model('Ride', rideSchema);

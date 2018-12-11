@@ -1,6 +1,7 @@
 /* eslint-env node */
 const CleanPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: './src/index.js',
@@ -22,7 +23,8 @@ module.exports = {
   },
   plugins: [
     new CleanPlugin('./dist/bundle.*.js'),
-    new HtmlPlugin({ template: './src/index.html' })
+    new HtmlPlugin({ template: './src/index.html' }),
+    // new BundleAnalyzerPlugin()
   ],
   module: {
     rules: [
