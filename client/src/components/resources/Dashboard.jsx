@@ -16,6 +16,8 @@ const MapWrapper = styled.div`
 `;
 
 const ButtonBox = styled.div`
+  position: fixed;
+  bottom: 25px;
   width: 100vw;
   margin-top: 20px;
   display: flex;
@@ -55,7 +57,7 @@ export default class Dashboard extends Component {
       <Fragment>
         <Nav pageTitle="Your Dashboard" />
         <MapWrapper>
-          <img src="https://staticmapmaker.com/img/google.png"></img>
+          <img src="https://staticmapmaker.com/img/google.png" />
         </MapWrapper>
         <ButtonBox>
           <Link to={ROUTES.UPCOMINGTRIPS.linkTo()}>
