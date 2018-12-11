@@ -25,6 +25,10 @@ export default class TripDetail extends PureComponent {
             information, number, car. Available seats with button to reserve and
             button to link to paypal/venmo. Trip rating?
           </h1>
+
+          <a href="www.paypal.com"> Pay with Paypal</a>
+          <a href="www.venmo.com"> Pay with Venmo</a>
+
         </StyledDiv>
       </Fragment>
     );
