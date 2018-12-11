@@ -5,13 +5,19 @@ import { ROUTES } from '../../routes/index.js';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
-  font-weight: Extra-Light;
-  font-size: 2em;
+const MapWrapper = styled.div`
+  width: 100vw;
+  height: 40vh;
+  overflow: hidden;
+  img {
+    width: 100vw;
+    height: auto;
+  }
 `;
+
 const ButtonBox = styled.div`
   width: 100vw;
-  margin: auto;
+  margin-top: 20px;
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
@@ -48,6 +54,9 @@ export default class Dashboard extends Component {
     return (
       <Fragment>
         <Nav pageTitle="Your Dashboard" />
+        <MapWrapper>
+          <img src="https://staticmapmaker.com/img/google.png"></img>
+        </MapWrapper>
         <ButtonBox>
           <Link to={ROUTES.UPCOMINGTRIPS.linkTo()}>
             <Button>Upcoming Trips</Button>
@@ -62,10 +71,6 @@ export default class Dashboard extends Component {
             <Button>Favorites</Button>
           </Link>
         </ButtonBox>
-        <StyledDiv>
-          User Dashboard here, showing map of current ride markers, user icon,
-          buttons for upcoming trips, past trips, create trip and favorites.
-        </StyledDiv>
       </Fragment>
     );
   }
