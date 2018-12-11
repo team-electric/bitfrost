@@ -23,7 +23,10 @@ const DestinationType = new GraphQLObjectType({
     formatted: {
       type: GraphQLString,
       resolve(obj) {
-        return obj.street + obj.city + obj.state + obj.zip
+        return `
+          ${obj.street}
+          ${obj.city}, ${obj.state} ${obj.zip}
+        `
       }
     }
   })
@@ -40,14 +43,22 @@ const DestinationInputType = new GraphQLInputObjectType({
   })
 });
 
+const RiderType = new GraphQLObjectType({
+  name: 'Rider',
+  description: 'A rider',
+  fields: () => ({
+    _id: { type: new GraphQLNonNull(GraphQLID) },
+  })
+});
+
 const RideType = new GraphQLObjectType({
   name: 'Rides',
   description: 'Rides info',
   fields: () => ({
     _id: { type: new GraphQLNonNull(GraphQLID) },
-    driver: { type: new GraphQLNonNull(GraphQLString) },
-    riders: { type: GraphQLString },
-    seats: { type: GraphQLInt },
+    driver: { type: new GraphQLNonNull(GraphQLID) },
+    riders: { type: new GraphQLList(GraphQLID) },
+    seats: { type: new GraphQLNonNull(GraphQLInt) },
     comments: { type: GraphQLString },
     origin: { type: new GraphQLNonNull(GraphQLString) },
     destination: { type: DestinationType },
@@ -75,9 +86,9 @@ export const rideMutations = {
     description: 'Create a new ride',
     type: RideType,
     args: {
-      driver: { type: new GraphQLNonNull(GraphQLString) },
-      riders: { type: GraphQLString },
-      seats: { type: GraphQLInt },
+      driver: { type: new GraphQLNonNull(GraphQLID) },
+      riders: { type: new GraphQLList(GraphQLID) },
+      seats: { type: new GraphQLNonNull(GraphQLInt) },
       comments: { type: GraphQLString },
       origin: { type: new GraphQLNonNull(GraphQLString) },
       destination: { type: DestinationInputType },
