@@ -1,7 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
+import Nav from './Nav.jsx';
+
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Nav from '../Nav.jsx';
 
 const StyledDiv = styled.div`
   h1 {
@@ -9,20 +10,24 @@ const StyledDiv = styled.div`
   }
 `;
 
-export default class UpcomingTrips extends PureComponent {
+export default class Profile extends PureComponent {
   // static propTypes = {
   //   lots o props
   // }
+  state = {
+    // maybe user rating
+  };
 
   render() {
     return (
       <Fragment>
-        <Nav pageTitle="Upcoming Trips" />
+        <Nav pageTitle="Your Profile" />
 
         <StyledDiv>
           <h1>
-            Google map with the most recent route shown. user Icon, List of
-            upcoming trips here, linking to detail view of a trip.
+            User Profile here, showing user icon, address, number, email,
+            rating. Button links to Add Car and Edit Profile, button to favorite
+            user.
           </h1>
         </StyledDiv>
       </Fragment>

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import About from '../components/resources/about/About.jsx';
-import Home from '../components/resources/home/Home.jsx';
-import SignUp from '../components/resources/signup/SignUp.jsx';
+import About from '../components/resources/About.jsx';
+import Home from '../components/resources/Home.jsx';
+import SignUp from '../components/resources/SignUp.jsx';
 import RideList from '../components/resources/rides/RideList.jsx';
-import Dashboard from '../components/resources/dashboard/Dashboard.jsx';
-import Profile from '../components/resources/profile/Profile.jsx';
+import Dashboard from '../components/resources/Dashboard.jsx';
+import Profile from '../components/resources/Profile.jsx';
 import PastTrips from '../components/resources/trips/PastTrips.jsx';
 import UpcomingTrips from '../components/resources/trips/UpcomingTrips.jsx';
-import TripDetail from '../components/resources/tripDetail/TripDetail.jsx';
-import AddCar from '../components/resources/addCar/AddCar.jsx';
-import CreateTrip from '../components/resources/createTrip/CreateTrip.jsx';
+import TripDetail from '../components/resources/TripDetail.jsx';
+import AddCar from '../components/resources/AddCar.jsx';
+import CreateTrip from '../components/resources/CreateTrip.jsx';
 
 export const ROUTES = {
   ABOUT: {
