@@ -49,7 +49,7 @@ const enhancers = [
   applyMiddleware(...middleware)
 ];
 
-const reduxDevToolsExtension = window.devToolsExtension;
+const reduxDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
 if(process.env.NODE_ENV === 'development' && typeof reduxDevToolsExtension === 'function') {
   enhancers.push(reduxDevToolsExtension());
 }
