@@ -10,6 +10,8 @@ import {
 } from 'graphql';
 import { prepare } from '../../lib/graphql';
 import { Ride } from './mongoose';
+import ObjectID from '../../lib/graphql/resolvers/objectID';
+
 
 const DestinationType = new GraphQLObjectType({
   name: 'Destination',
@@ -56,7 +58,7 @@ const RideType = new GraphQLObjectType({
   description: 'Rides info',
   fields: () => ({
     _id: { type: new GraphQLNonNull(GraphQLID) },
-    driver: { type: new GraphQLNonNull(GraphQLID) },
+    driver: { type: ObjectID },
     riders: { type: new GraphQLList(GraphQLID) },
     seats: { type: new GraphQLNonNull(GraphQLInt) },
     comments: { type: GraphQLString },

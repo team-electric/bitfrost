@@ -9,12 +9,15 @@ import {
 import { prepare } from '../../lib/graphql';
 import { Car } from './mongoose';
 
+import ObjectID from '../../lib/graphql/resolvers/objectID';
+
+
 const CarType = new GraphQLObjectType({
   name: 'Car',
   description: 'A Car',
   fields: () => ({
     _id: { type: new GraphQLNonNull(GraphQLID) },
-    userId: { type: new GraphQLNonNull(GraphQLID) },
+    userId: { type: ObjectID },
     seats: { type: new GraphQLNonNull(GraphQLInt) },
     plate: { type: GraphQLString },
     make: { type: GraphQLString },
