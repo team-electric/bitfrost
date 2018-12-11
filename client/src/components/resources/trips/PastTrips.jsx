@@ -66,16 +66,21 @@ export default class PastTrips extends PureComponent {
           </h1>
           <TripsContainer>
             <ol>
-              <li> <Link to={ROUTES.TRIPDETAIL.linkTo()}> <Button>David  Montreal, 9.11.21 </Button>
-              </Link></li>
-              <li> <Link to={ROUTES.TRIPDETAIL.linkTo()}> <Button>Michael Corbin  Washginton DC, 11.21.19 </Button>
-              </Link></li>
-              <li> <Link to={ROUTES.TRIPDETAIL.linkTo()}> <Button>Jack from Titanic  London, 9.11.21 </Button>
-              </Link></li>
-
-
-              {/* <li><Link to={ROUTES.TRIPDETAIL.linkTo()}></Link>Jake Pikes place, 9.11.21</li>
-              <li><Link to={ROUTES.TRIPDETAIL.linkTo()}></Link>Ryan New Orleans, 9.11.21</li> */}
+              <li>
+                <Link to={ROUTES.TRIPDETAIL.linkTo()}>
+                  <Button>David Chang - Montreal - 9.11.21 </Button>
+                </Link>
+              </li>
+              <li>
+                <Link to={ROUTES.TRIPDETAIL.linkTo()}>
+                  <Button>Michael Corbin - Washginton DC - 11.21.19</Button>
+                </Link>
+              </li>
+              <li>
+                <Link to={ROUTES.TRIPDETAIL.linkTo()}>
+                  <Button>Jack Sparkling - Portlandia - 9.11.21 </Button>
+                </Link>
+              </li>
             </ol>
           </TripsContainer>
         </StyledDiv>
