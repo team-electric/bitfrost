@@ -11,8 +11,8 @@ app.use(express.static('../client/dist'));
 app.use(express.json());
 
 // graph QL stuff
-const graphqlHTTP = require('express-graphql');
-const schema = require('./resources');
+import graphqlHTTP from 'express-graphql';
+import schema from './resources';
 app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
 
 // serve the front end

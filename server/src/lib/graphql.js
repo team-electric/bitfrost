@@ -2,7 +2,7 @@ const stringifyId = doc => {
   return ({ ...doc, _id: doc._id.toString() })
 }
 
-const prepareMongooseDoc = (result, fields = []) => {
+export const prepareMongooseDoc = (result, fields = []) => {
   if (Array.isArray(result)) return result.map(item => stringifyId(item._doc));
 
   return fields
@@ -13,6 +13,12 @@ const prepareMongooseDoc = (result, fields = []) => {
     }, stringifyId(result._doc));
 }
 
-module.exports = {
-  prepareMongooseDoc
+const prepareObj = obj => {
+  if (typeof obj.graphql === 'function') return obj.graphql();
+  return prepareMongooseDoc(obj);
 }
+
+export const prepare = obj => {
+  if (Array.isArray(obj)) return obj.map(prepareObj);
+  return prepareObj(obj);
+};
