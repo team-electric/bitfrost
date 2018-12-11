@@ -9,6 +9,9 @@ const StyledDiv = styled.div`
   }
 `;
 
+const Button = styled.button`
+  
+`;
 export default class Dashboard extends Component {
   // static propTypes = {
   //   lots o props
