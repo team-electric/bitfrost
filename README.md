@@ -109,7 +109,7 @@ Chart made using LucidCharts. Ignore the attachment locations of the links. The 
 
 ##### Testing
 
-* create users
+* create users:
 
 ```
 mutation {
@@ -128,7 +128,18 @@ mutation {
 }
 ```
 
-* create cars
+* get users
+
+```
+query {
+  users {
+    _id
+    name
+  }
+}
+```
+
+* create cars:
 
 ```
 mutation {
@@ -139,6 +150,17 @@ mutation {
   {
     _id
     userId
+    seats
+  }
+}
+```
+
+* get cars:
+
+```
+query {
+  cars {
+    _id
     seats
   }
 }

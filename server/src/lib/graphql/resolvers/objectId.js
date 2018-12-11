@@ -2,7 +2,7 @@ import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
 import { ObjectID } from 'mongodb';
 
-const name = 'ObjectID';
+const name = 'ObjectId';
 
 const description = 'The `ObjectID` scalar type represents a [`BSON`](https://en.wikipedia.org/wiki/BSON) ID commonly used in `mongodb`.';
 
@@ -22,12 +22,12 @@ const parseLiteral = ast => {
   else throw new Error(`${ast.kind} not convertible to ObjectID`);
 };
 
-const ObjectID = new GraphQLScalarType({
+const ObjectId = new GraphQLScalarType({
   name,
   description,
   serialize,
   parseValue,
   parseLiteral,
-}),
+});
 
-export default ObjectID;
+export default ObjectId;
