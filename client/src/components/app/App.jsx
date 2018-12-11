@@ -5,7 +5,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { ROUTES, routerRoutes } from '../../routes';
 
 const GlobalStyle = createGlobalStyle`
- @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+ @import url('https://fonts.googleapis.com/css?family=Poiret+One|Source+Sans+Pro');
 
   #root {
     height: 100vh;

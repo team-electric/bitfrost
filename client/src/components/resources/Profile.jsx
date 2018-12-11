@@ -6,14 +6,24 @@ import { ROUTES } from '../../routes/index.js';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const UserImgDiv = styled.div`
+const UserImgWrapper = styled.div`
+position: relative;
+top: 30px;
+ width: 100vw;
+ height: 30vw;
+ display: flex;
+ justify-content: center;
+`;
+
+const UserImg = styled.div`
+  width: 30vw;
   border: 1px solid ${({ theme }) => theme.accentcolor};
-  position: fixed;
-  top: 25px;
-  left: 50%;
+  border-radius: 50%;
 `;
 
 const InfoDiv = styled.div`
+position: relative;
+top: 15px;
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
@@ -69,9 +79,9 @@ export default class Profile extends PureComponent {
     return (
       <Fragment>
         <Nav pageTitle="Your Profile" />
-        <UserImgDiv>
-          <div>USER IMG</div>
-        </UserImgDiv>
+        <UserImgWrapper>
+          <UserImg>USER IMG</UserImg>
+        </UserImgWrapper>
         <InfoDiv>
           <UserDiv>
             <h2>User Info:</h2>
