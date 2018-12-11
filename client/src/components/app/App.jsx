@@ -13,8 +13,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.secondary};
+    /* background-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.secondary}; */
     padding: 0;
     margin: 0;
     font-size: 1rem;
