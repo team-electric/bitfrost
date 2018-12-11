@@ -1,26 +1,24 @@
 import { model, Schema } from 'mongoose';
 
 const carSchema = Schema({
-  plate: {
-    type: String,
-    required: true
-  },
-  make: {
-    type: String,
-    required: true
-  },
-  model: {
-    type: String,
+userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   },
   seats: {
     type: Number,
     required: true
   },
-  userID: {
-    type: String,
-    required: true
+  plate: {
+    type: String
   },
+  make: {
+    type: String
+  },
+  model: {
+    type: String
+  }
 });
 
 export const Car = model('Car', carSchema);

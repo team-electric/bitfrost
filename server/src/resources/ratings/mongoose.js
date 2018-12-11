@@ -1,21 +1,25 @@
 import { model, Schema } from 'mongoose';
 
 const ratingSchema = Schema({
+  ride: {
+    type: Schema.Types.ObjectId,
+    ref: 'Ride',
+    required: true,
+  },
+  driver: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  rider: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   rater: {
-    type: String,
-    required: true
-  },
-  ratee: {
-    type: String,
-    required: true
-  },
-  userType: {
-    type: String,
-    enum: [true, 'Driver', 'Rider']
-  },
-  rides: {
-    type: String,
-    id: []
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   }
 });
 

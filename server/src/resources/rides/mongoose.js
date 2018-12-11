@@ -2,15 +2,17 @@ import { model, Schema } from 'mongoose';
 
 const rideSchema = Schema({
   driver: {
-    userID: String,
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
-    seats: {
-      type: Number,
-      required: true
-    }
   },
-  riders: {
-    userID: String,
+  riders: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  seats: {
+    type: Number,
+    required: true
   },
   comments: {
     type: String
@@ -39,15 +41,21 @@ const rideSchema = Schema({
     type: Date,
     required: true
   },
+  departed: {
+    type: Boolean,
+    required: true
+  },
   currentLocation: {
     type: String,
     required: true
   },
-  departed: {
-    type: String,
-    required: true
-  }
 });
+
+// Note on riders:
+
+// Ride
+//   .find()
+//   .populate('riders')
 
 // ridesSchema.methods.graphql = function() {
 //   // do some graphql manipulation
