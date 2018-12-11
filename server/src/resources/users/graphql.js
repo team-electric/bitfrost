@@ -89,5 +89,29 @@ export const userMutations = {
       phone,
       address
     }).then(prepare)
-  }
+  },
+  // updateUser: {
+  //   description: 'Update a new user',
+  //   type: UserType,
+  //   args: {
+  //     _id: { type: GraphQLString },
+  //     name: { type: new GraphQLNonNull(GraphQLString) },
+  //     email: { type: GraphQLString },
+  //     phone: { type: GraphQLString },
+  //     address: { type: AddressInputType },
+  //   },
+  //   resolve: (_, {
+  //     _id,
+  //     name,
+  //     email,
+  //     phone,
+  //     address
+  //   }) => User.update({
+  //     _id,
+  //     name,
+  //     email,
+  //     phone,
+  //     address
+  //   }).then(prepare)
+  // }
 }
