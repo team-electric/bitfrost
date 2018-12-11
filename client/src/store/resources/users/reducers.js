@@ -5,10 +5,10 @@ export const initialState = {
   loading: false
 };
 
-export default function reducer(state = initialState, { type, payload }) {
+export function reducer(state = initialState, { type, payload }) {
   switch(type) {
     case FETCH_USERS:
-      return { ...state, list: payload };
+      return { ...state, list: payload.users };
     case FETCH_USERS_START:
       return { ...state, loading: true };
     case FETCH_USERS_DONE:

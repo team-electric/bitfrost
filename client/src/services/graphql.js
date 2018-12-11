@@ -1,6 +1,6 @@
 // const fetch = require('node-fetch');
 
-const GRAPHQL_API = 'http://localhost:7890/graphql?';
+const GRAPHQL_API = '/graphql?';
 
 
 

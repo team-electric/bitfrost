@@ -11,6 +11,7 @@ import UpcomingTrips from '../components/resources/trips/UpcomingTrips.jsx';
 import TripDetail from '../components/resources/TripDetail.jsx';
 import AddCar from '../components/resources/AddCar.jsx';
 import CreateTrip from '../components/resources/CreateTrip.jsx';
+import Test from '../components/resources/Test.jsx';
 
 export const ROUTES = {
   ABOUT: {
@@ -67,7 +68,12 @@ export const ROUTES = {
     path: '/createtrip',
     Component: CreateTrip,
     linkTo: () => '/createtrip'
-  }
+  },
+  TEST: {
+    path: '/test',
+    Component: Test,
+    linkTo: () => '/test'
+  },
 };
 
 export const LINKS = [

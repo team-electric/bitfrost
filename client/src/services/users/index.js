@@ -1,4 +1,4 @@
-const request = require('../graphql');
+import request from '../graphql';
 
 import allUsers from './allUsers';
 export const getUsers = () => request(allUsers);
