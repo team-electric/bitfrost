@@ -22,7 +22,10 @@ const AddressType = new GraphQLObjectType({
     formatted: {
       type: GraphQLString,
       resolve(obj) {
-        return obj.street + obj.city + obj.state + obj.zip
+        return `
+          ${obj.street}
+          ${obj.city}, ${obj.state} ${obj.zip}
+        `
       }
     }
   })

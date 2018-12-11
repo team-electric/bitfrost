@@ -13,10 +13,10 @@ const RatingType = new GraphQLObjectType({
   description: 'Rating info',
   fields: () => ({
     _id: { type: new GraphQLNonNull(GraphQLID) },
-    ride: { type: new GraphQLNonNull(GraphQLString) },
-    driver: { type: new GraphQLNonNull(GraphQLString) },
-    rider: { type: new GraphQLNonNull(GraphQLString) },
-    rater: { type: new GraphQLNonNull(GraphQLString) },
+    ride: { type: new GraphQLNonNull(GraphQLID) },
+    driver: { type: new GraphQLNonNull(GraphQLID) },
+    rider: { type: new GraphQLNonNull(GraphQLID) },
+    rater: { type: new GraphQLNonNull(GraphQLID) },
   })
 });
 
@@ -39,10 +39,10 @@ export const ratingMutations = {
     description: 'Create a new rating',
     type: RatingType,
     args: {
-      ride: { type: new GraphQLNonNull(GraphQLString) },
-      driver: { type: new GraphQLNonNull(GraphQLString) },
-      rider: { type: new GraphQLNonNull(GraphQLString) },
-      rater: { type: new GraphQLNonNull(GraphQLString) },
+      ride: { type: new GraphQLNonNull(GraphQLID) },
+      driver: { type: new GraphQLNonNull(GraphQLID) },
+      rider: { type: new GraphQLNonNull(GraphQLID) },
+      rater: { type: new GraphQLNonNull(GraphQLID) },
     },
     resolve: (_, {
       ride,

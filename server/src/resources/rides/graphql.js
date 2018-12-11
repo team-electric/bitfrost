@@ -10,6 +10,8 @@ import {
 } from 'graphql';
 import { prepare } from '../../lib/graphql';
 import { Ride } from './mongoose';
+import ObjectId from '../../lib/graphql/resolvers/objectId';
+
 
 const DestinationType = new GraphQLObjectType({
   name: 'Destination',
@@ -23,7 +25,10 @@ const DestinationType = new GraphQLObjectType({
     formatted: {
       type: GraphQLString,
       resolve(obj) {
-        return obj.street + obj.city + obj.state + obj.zip
+        return `
+          ${obj.street}
+          ${obj.city}, ${obj.state} ${obj.zip}
+        `
       }
     }
   })
@@ -40,21 +45,27 @@ const DestinationInputType = new GraphQLInputObjectType({
   })
 });
 
+const RiderType = new GraphQLObjectType({
+  name: 'Rider',
+  description: 'A rider',
+  fields: () => ({
+    _id: { type: new GraphQLNonNull(GraphQLID) },
+  })
+});
+
 const RideType = new GraphQLObjectType({
   name: 'Rides',
   description: 'Rides info',
   fields: () => ({
     _id: { type: new GraphQLNonNull(GraphQLID) },
-    driver: { type: new GraphQLNonNull(GraphQLString) },
-    riders: { type: GraphQLString },
-    seats: { type: GraphQLInt },
+    driver: { type: ObjectId },
+    riders: { type: new GraphQLList(GraphQLID) },
+    seats: { type: new GraphQLNonNull(GraphQLInt) },
     comments: { type: GraphQLString },
     origin: { type: new GraphQLNonNull(GraphQLString) },
     destination: { type: DestinationType },
     depart: { type: new GraphQLNonNull(GraphQLString) },
     arrive: { type: new GraphQLNonNull(GraphQLString) },
-    departed: { type: new GraphQLNonNull(GraphQLBoolean) },
-    currentLocation: { type: new GraphQLNonNull(GraphQLString) },
   })
 });
 
@@ -77,16 +88,14 @@ export const rideMutations = {
     description: 'Create a new ride',
     type: RideType,
     args: {
-      driver: { type: new GraphQLNonNull(GraphQLString) },
-      riders: { type: GraphQLString },
-      seats: { type: GraphQLInt },
+      driver: { type: new GraphQLNonNull(GraphQLID) },
+      riders: { type: new GraphQLList(GraphQLID) },
+      seats: { type: new GraphQLNonNull(GraphQLInt) },
       comments: { type: GraphQLString },
       origin: { type: new GraphQLNonNull(GraphQLString) },
       destination: { type: DestinationInputType },
       depart: { type: new GraphQLNonNull(GraphQLString) },
-      arrive: { type: new GraphQLNonNull(GraphQLString) },
-      departed: { type: new GraphQLNonNull(GraphQLBoolean) },
-      currentLocation: { type: new GraphQLNonNull(GraphQLString) },
+      arrive: { type: new GraphQLNonNull(GraphQLString) }
     },
     resolve: (_, {
       driver,
@@ -97,8 +106,6 @@ export const rideMutations = {
       destination,
       depart,
       arrive,
-      departed,
-      currentLocation
     }) => Ride.create({
       driver,
       riders,
@@ -108,8 +115,6 @@ export const rideMutations = {
       destination,
       depart,
       arrive,
-      departed,
-      currentLocation
     }).then(prepare)
   }
 }
