@@ -22,7 +22,6 @@ class Test extends PureComponent {
   }
 }
 
-
 const mapStateToProps = state => ({
   data: getUsers(state)
 });

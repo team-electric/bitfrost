@@ -1,4 +1,4 @@
-import { getUsers, createUser } from '../../../services/users';
+import { getUsers, createUser } from '../../../services/mongo/users';
 
 export const FETCH_USERS = 'FETCH_USERS';
 export const FETCH_USERS_START = 'FETCH_USERS_START';
