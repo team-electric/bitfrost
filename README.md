@@ -20,6 +20,7 @@ Table of contents
       * [Full slices](#Full-slices)
       * [Notes](#Notes)
       * [VS Code folder icons](#VS-Code-folder-icons)
+   * [Data Model](#Data-Model)
 <!--te-->
 
 ## Project setup
@@ -96,3 +97,9 @@ Optionally, you can install `Material Icon Theme` and add the following to your 
         "presentational": "Views"
     },
 ```
+
+## Data Model
+
+Chart made using LucidCharts. Ignore the attachment locations of the links. The links only encode that somewhere in the particular model there exists a reference to the origin of the link (with exception to the Firestore to MongoDB link for Rides, as there will be no reference between those).
+
+![data-model-png](/data-model.png "Data Model")
