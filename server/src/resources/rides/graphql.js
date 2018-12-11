@@ -53,8 +53,6 @@ const RideType = new GraphQLObjectType({
     destination: { type: DestinationType },
     depart: { type: new GraphQLNonNull(GraphQLString) },
     arrive: { type: new GraphQLNonNull(GraphQLString) },
-    departed: { type: new GraphQLNonNull(GraphQLBoolean) },
-    currentLocation: { type: new GraphQLNonNull(GraphQLString) },
   })
 });
 
@@ -84,9 +82,7 @@ export const rideMutations = {
       origin: { type: new GraphQLNonNull(GraphQLString) },
       destination: { type: DestinationInputType },
       depart: { type: new GraphQLNonNull(GraphQLString) },
-      arrive: { type: new GraphQLNonNull(GraphQLString) },
-      departed: { type: new GraphQLNonNull(GraphQLBoolean) },
-      currentLocation: { type: new GraphQLNonNull(GraphQLString) },
+      arrive: { type: new GraphQLNonNull(GraphQLString) }
     },
     resolve: (_, {
       driver,
@@ -97,8 +93,6 @@ export const rideMutations = {
       destination,
       depart,
       arrive,
-      departed,
-      currentLocation
     }) => Ride.create({
       driver,
       riders,
@@ -108,8 +102,6 @@ export const rideMutations = {
       destination,
       depart,
       arrive,
-      departed,
-      currentLocation
     }).then(prepare)
   }
 }

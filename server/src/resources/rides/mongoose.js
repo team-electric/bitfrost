@@ -41,14 +41,6 @@ const rideSchema = Schema({
     type: Date,
     required: true
   },
-  departed: {
-    type: Boolean,
-    required: true
-  },
-  currentLocation: {
-    type: String,
-    required: true
-  },
 });
 
 // Note on riders:
