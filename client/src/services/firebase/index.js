@@ -1,5 +1,3 @@
-import firebase from 'firebase';
-
 const config = {
   apiKey: 'AIzaSyB3WX_xpDb-KK20xLbeD70evxFOj021NrU',
   authDomain: 'bitfrost-e04d8.firebaseapp.com',
