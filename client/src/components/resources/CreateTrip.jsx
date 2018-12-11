@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
-import Nav from '../nav/Nav.jsx';
+import Nav from './Nav.jsx';
 
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';

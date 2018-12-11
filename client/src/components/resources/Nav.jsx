@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../../routes/index.js';
+import { ROUTES } from '../../routes/index.js';
 
 const StyledHeader = styled.header`
 border-bottom: 1px solid ${({ theme }) => theme.accentlight};

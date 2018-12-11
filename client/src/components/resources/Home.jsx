@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import Nav from '../nav/Nav.jsx';
+import Nav from './Nav.jsx';
 import styled from 'styled-components';
-import AuthButton from '../../lib/AuthButton.jsx';
-import RideList from '../rides/RideList.jsx';
+import AuthButton from '../lib/AuthButton.jsx';
+import RideList from './rides/RideList.jsx';
 
 const Section = styled.section`
   display: flex;
