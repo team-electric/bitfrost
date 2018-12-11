@@ -75,6 +75,16 @@ export const userMutations = {
       phone: { type: GraphQLString },
       address: { type: AddressInputType },
     },
-    resolve: (_, { name, email, phone, address }) => User.create({ name, email, phone, address }).then(prepare)
+    resolve: (_, {
+      name,
+      email,
+      phone,
+      address
+    }) => User.create({
+      name,
+      email,
+      phone,
+      address
+    }).then(prepare)
   }
 }

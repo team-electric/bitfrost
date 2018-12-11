@@ -33,11 +33,11 @@ const rideSchema = Schema({
       required: [true, 'ZIP code is required'],
     },
   },
-  departure: {
+  depart: {
     type: Date,
     required: true
   },
-  arrival: {
+  arrive: {
     type: Date,
     required: true
   },

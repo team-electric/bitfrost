@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 
 const carSchema = Schema({
-userId: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
