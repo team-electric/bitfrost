@@ -3,6 +3,10 @@ import {
   GraphQLNonNull,
   GraphQLString,
   GraphQLInt,
+  GraphQLID,
+  GraphQLList,
+  GraphQLBoolean,
+  GraphQLInputObjectType,
 } from 'graphql';
 import { prepare } from '../../lib/graphql';
 import { Ride } from './mongoose';

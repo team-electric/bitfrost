@@ -3,7 +3,7 @@ import {
   GraphQLID,
   GraphQLNonNull,
   GraphQLString,
-  GraphQLEnumType
+  GraphQLList,
 } from 'graphql';
 import { prepare } from '../../lib/graphql';
 import { Rating } from './mongoose';

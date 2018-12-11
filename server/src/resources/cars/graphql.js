@@ -4,6 +4,7 @@ import {
   GraphQLNonNull,
   GraphQLString,
   GraphQLInt,
+  GraphQLList,
 } from 'graphql';
 import { prepare } from '../../lib/graphql';
 import { Car } from './mongoose';
