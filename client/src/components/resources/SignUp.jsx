@@ -43,19 +43,20 @@ export default class SignUp extends PureComponent {
   // }
 
   state = {
-    name: '',
+    firstName: '',
+    lastName: '',
     address: '',
     phone: ''
   };
 
   onSubmit = event => {
     event.preventDefault();
-    const { name, address, phone } = this.state;
+    const { firstName, lastName, address, phone } = this.state;
 
     // I added the below function so we can pass it to props
     // const { registerUser } = this.props;
     event.preventDefault();
-    // registerUser(name, address, phone);
+    // registerUser(firstName, lastName address, phone);
   };
 
   handleChange = ({ target }) => {
@@ -71,7 +72,10 @@ export default class SignUp extends PureComponent {
         </h1>
         <h1>Sign up</h1>
         <LabelInputContainer>
-          <label>Full Name <input id="name" name="name" type="text" onChange={this.handleChange}/></label>
+          <label>First Name <input id="firstName" name="firstName" type="text" onChange={this.handleChange}/></label>
+        </LabelInputContainer>
+        <LabelInputContainer>
+          <label>Last Name <input id="lastName" name="lastName" type="text" onChange={this.handleChange}/></label>
         </LabelInputContainer>
         <LabelInputContainer>
           <label>Address <input id="address" name="address" type="text" onChange={this.handleChange}/></label>
