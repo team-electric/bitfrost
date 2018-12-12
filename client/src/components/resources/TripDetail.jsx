@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Nav from './Nav.jsx';
 
 const StyledDiv = styled.div`
-  h1 {
+  h2 {
     font-weight: bolder;
   }
 `;
@@ -19,11 +19,30 @@ const MapWrapper = styled.div`
   }
 `;
 
+const CarInfoContainer = styled.div`
+  text-align: center;
+  margin: 30px;
+`;
+
+const Button = styled.button`
+  background: none;
+  color: inherit;
+  text-align: center;
+  border: 1px solid ${({ theme }) => theme.accentcolor};
+  padding: 15px;
+  font: inherit;
+  cursor: pointer;
+  /* width: 90%; */
+  /* height: 40px;
+  margin-top: 3px;
+  padding: 10px; */
+`;
+
 export default class TripDetail extends Component {
-  static propTypes = {
-    trips: PropTypes.object.isRequired,
-    totalTrips: PropTypes.number.isRequired
-  };
+  // static propTypes = {
+  //   trips: PropTypes.object.isRequired,
+  //   totalTrips: PropTypes.number.isRequired
+  // };
 
   // tripDetail = ({ PastTrips }) => {
   //   const { user, destination, date } = PastTrips;
@@ -38,25 +57,29 @@ export default class TripDetail extends Component {
         </MapWrapper>
 
         <StyledDiv>
-          <h1>
+          <h2>
             Google map with selected trip path shown. Driver Icon and personal
             information, number, car. Available seats with button to reserve and
             button to link to paypal/venmo. Trip rating?
-          </h1>
-
-          <h3>Driver info</h3>
-
-
-          <h3>Car info</h3>
-          <p>Make</p>
-          <p>Model</p>
-          <p>Plate</p>
+          </h2>
 
 
 
+          <CarInfoContainer>
+            <h3>Driver info</h3>
+            <div>Make: Lexus</div>
+            <div>Model: IS-350</div>
+            <div>Plate: 832-JXY</div>
+            <div>Seats available: 2</div>
+          </CarInfoContainer>
 
-          <a href="www.paypal.com"> Pay with Paypal</a>
-          <a href="www.venmo.com"> Pay with Venmo</a>
+
+          <div>
+            <a href="www.paypal.com"> Pay with Paypal</a>
+            <a href="www.venmo.com"> Pay with Venmo</a>
+          </div>
+
+          <Button>Reserve</Button>
 
         </StyledDiv>
       </Fragment>
