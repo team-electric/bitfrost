@@ -1,16 +1,22 @@
 /* eslint-env node */
-// const CleanPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
+// const CleanPlugin = require('clean-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
 module.exports = env => {
   const isProd = env === 'production';
 
-  return {
+  const devPlugins = isProd ? [] : [
+    // new CleanPlugin('./dist/bundle.*.js'),
+    // new BundleAnalyzerPlugin()
+    new HtmlPlugin({ template: './src/index.html' }),
+    new Dotenv({ path: path.resolve(__dirname, './.env') }),
+  ];
 
+  return {
     entry: './src/index.js',
     output: {
       filename: 'bundle.[hash].js',
@@ -28,10 +34,7 @@ module.exports = env => {
       }
     },
     plugins: [
-      // new CleanPlugin('./dist/bundle.*.js'),
-      new HtmlPlugin({ template: './src/index.html' }),
-      new Dotenv({ path: path.resolve(__dirname, './.env') }),
-      // new BundleAnalyzerPlugin()
+      ...devPlugins
     ],
     module: {
       rules: [
