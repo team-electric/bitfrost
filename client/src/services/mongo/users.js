@@ -13,6 +13,22 @@ const allUsers = JSON.stringify({
 });
 export const getUsers = () => request(allUsers);
 
+const userByEmail = email => JSON.stringify({
+  query:
+    `query {
+      userByEmail(email: "${email}"){
+        _id
+        name
+        email
+        phone
+        address {
+          zip
+        }
+      }
+    }`
+});
+export const getUser = email => request(userByEmail(email));
+
 const newUser = user => JSON.stringify({
   query:
     `mutation {
@@ -40,8 +56,6 @@ const newUser = user => JSON.stringify({
 });
 export const createUser = user => request(newUser(user));
 
-// import userById from './userById';
-// export const getUser = id => request(userById(id));
 
 // import changeUser from './changeUser';
 // export const updateUser = user => request(changeUser(user));

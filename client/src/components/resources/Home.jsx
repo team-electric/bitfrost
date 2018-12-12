@@ -1,24 +1,47 @@
 import React, { Fragment } from 'react';
-import Nav from './Nav.jsx';
 import styled from 'styled-components';
 import AuthButton from '../lib/AuthButton.jsx';
-import RideList from './rides/RideList.jsx';
+
+var background = require('../../assets/landingwallpaper.jpg');
 
 const Section = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
   text-align: center;
+  z-index: -1;
+`;
+const Title = styled.div`
+  position: relative;
+  top: 100px;
+  width: 100vw;
+  font-size: 4em;
+  font-family: "Poiret One", cursive;
+`;
+const SubTitle = styled.div`
+  position: relative;
+  top: 80px;
 `;
 
+const BackgroundWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  z-index: -3;
+  position: absolute;
+  background: url(${background}) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+`;
 const Home = () => {
   return (
     <Fragment>
-      <Nav pageTitle="Landing Page" />
+      <BackgroundWrapper />
+      <AuthButton />
       <Section>
-        <h2>Home Page</h2>
-        <AuthButton />
-        <RideList />
+        <Title>Bitfrost</Title>
+        <SubTitle>A RideSharing App</SubTitle>
       </Section>
     </Fragment>
   );
