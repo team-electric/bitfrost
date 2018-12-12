@@ -22,6 +22,9 @@ const newCar = car => JSON.stringify({
       createCar(
         userId: "${car.userId}"
         seats: "${car.seats}"
+        plate: "${car.plate}"
+        make: "${car.make}"
+        model: "${car.model}"
       )
       {
         _id
