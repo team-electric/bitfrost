@@ -58,8 +58,18 @@ export const userQueries = {
   user: {
     description: 'retrieves a user',
     type: UserType,
-    args: { id: { type: GraphQLID } },
+    args: {
+      id: { type: GraphQLID },
+    },
     resolve: (_, { id }) => User.findById(id).then(prepare)
+  },
+  userByEmail: {
+    description: 'retrieves a user',
+    type: UserType,
+    args: {
+      email: { type: GraphQLString },
+    },
+    resolve: (_, { email }) => User.findOne({ email }).then(prepare)
   },
   users: {
     description: 'retrieves a list of users',
