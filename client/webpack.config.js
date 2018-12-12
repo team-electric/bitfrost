@@ -1,5 +1,5 @@
 /* eslint-env node */
-const CleanPlugin = require('clean-webpack-plugin');
+// const CleanPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -24,7 +24,7 @@ module.exports = {
     }
   },
   plugins: [
-    new CleanPlugin('./dist/bundle.*.js'),
+    // new CleanPlugin('./dist/bundle.*.js'),
     new HtmlPlugin({ template: './src/index.html' }),
     new Dotenv(),
     // new BundleAnalyzerPlugin()
