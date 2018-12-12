@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
-
+import { getUser, getUserNewCar } from '../../store/resources/rides/selectors';
+import { fetchCar, postCar } from '../../store/resources/rides/actions';
+import { ROUTES } from '../../routes';
+import { Redirect } from 'react-router-dom';
 
 const StyledForm = styled.form`
   input {
@@ -99,4 +102,9 @@ class AddCar extends Component {
   }
 }
 
-export default AddCar;
+const mapStateToProps = state => ({
+  user: getUser(state),
+  newCar: getUserNewCar(state)
+});
+
+export default connect()

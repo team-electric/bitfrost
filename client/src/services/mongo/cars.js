@@ -17,7 +17,7 @@ const carByUserId = userId => JSON.stringify({
 export const getCar = userId => request(carByUserId(userId));
 
 const newCar = car => JSON.stringify({
-  query:
+  mutation:
     `query {
       createCar(
         userId: "${car.userId}"
