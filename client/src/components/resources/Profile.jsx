@@ -1,54 +1,70 @@
 import React, { PureComponent, Fragment } from 'react';
 import Nav from './Nav.jsx';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../../routes/index.js';
 
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const StyledForm = styled.form`
-  background: none;
-  color: inherit;
+const UserImgWrapper = styled.div`
+position: relative;
+top: 30px;
+ width: 100vw;
+ height: 30vw;
+ display: flex;
+ justify-content: center;
+`;
+
+const UserImg = styled.div`
+  width: 30vw;
+  border: 1px solid ${({ theme }) => theme.accentcolor};
+  border-radius: 50%;
+`;
+
+const InfoDiv = styled.div`
+position: relative;
+top: 15px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font: inherit;
-  outline: none;
-  cursor: pointer;
-  h2 {
-      font-weight: bolder;
-      text-align: center;
-  }
-  div {
-    left: 25vw;
-    position: relative;
-  }
-  input {
-    left: 2vw;
-    position: relative;
-  }
-  input {
-    background: none;
-    color: inherit;
-    outline: none;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    border-bottom: 1px solid ${({ theme }) => theme.accentcolor};
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 2;
+`;
+
+const UserDiv = styled.div`
+  width: 40vw;
+`;
+const CarDiv = styled.div`
+  width: 40vw;
+`;
+
+const ButtonBox = styled.div`
+  position: fixed;
+  bottom: 15px;
+  width: 100vw;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 2;
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.secondary};
   }
 `;
 
 const Button = styled.button`
   background: none;
   color: inherit;
+  text-align: center;
   border: 1px solid ${({ theme }) => theme.accentcolor};
-  padding: 3px;
+  padding: 55px;
   font: inherit;
   cursor: pointer;
-  width: 100px;
-  height: 40px;
-  left: 36vw;
-  top: 2vh;
-  position: relative;
-
+  width: 40vw;
+  height: 20vh;
+  margin-bottom: 15px;
 `;
 
 export default class Profile extends PureComponent {
@@ -78,41 +94,32 @@ export default class Profile extends PureComponent {
     return (
       <Fragment>
         <Nav pageTitle="Your Profile" />
-
-        <StyledForm onSubmit={this.onSubmit}>
-          <h2>Update Profile</h2>
-
-          <div>
-            <label>First Name</label><input id="firstName" name="firstName" type="text" onChange={this.handleChange}/>
-          </div>
-          <div>
-            <label>Last Name <input id="lastName" name="lastName" type="text" onChange={this.handleChange}/></label>
-          </div>
-          <div>
-            <label>Address <input id="address" name="address" type="text" onChange={this.handleChange}/></label>
-          </div>
-          <div>
-            <label>Phone Number<input id="phone" name="phone" type="tel" onChange={this.handleChange}/></label>
-          </div>
-          <div>
-            <label>Venmo/Paypal<input id="pay" name="pay" type="text" onChange={this.handleChange}/></label>
-          </div>
-
-          <h2>Update Car</h2>
-          <div>
-            <label>Make <input id="make" name="make" type="text" onChange={this.handleChange}/></label>
-          </div>
-          <div>
-            <label>model <input id="model" name="model" type="text" onChange={this.handleChange}/></label>
-          </div>
-          <div>
-            <label>plate <input id="plate" name="plate" type="text" onChange={this.handleChange}/></label>
-          </div>
-          <div>
-            <label>Seats<input id="seats" name="seats" type="number" onChange={this.handleChange}/></label>
-          </div>
-          <Button> Save Settings</Button>
-        </StyledForm>
+        <UserImgWrapper>
+          <UserImg>USER IMG</UserImg>
+        </UserImgWrapper>
+        <InfoDiv>
+          <UserDiv>
+            <h2>User Info:</h2>
+            <p>Name</p>
+            <p>email</p>
+            <p>phone</p>
+            <p>Pickup Address:</p>
+          </UserDiv>
+          <CarDiv>
+            <h2>Cars:</h2>
+            <p>Name</p>
+            <p>Name</p>
+            <p>Name</p>
+          </CarDiv>
+        </InfoDiv>
+        <ButtonBox>
+          <Link to={ROUTES.PROFILE.linkTo()}>
+            <Button>Edit Profile</Button>
+          </Link>
+          <Link to={ROUTES.ADDCAR.linkTo()}>
+            <Button>Add Car</Button>
+          </Link>
+        </ButtonBox>
       </Fragment>
     );
   }

@@ -3,6 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import styled from 'styled-components';
+
+const ButtonWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  width: 100vw;
+  top: 40%;
+
+`;
+const Button = styled.button`
+  color: ${({ theme }) => theme.secondary};
+  background: none;
+  text-align: center;
+  height: 30px;
+  border: 1px solid ${({ theme }) => theme.accentcolor};
+  cursor: pointer;
+`;
 
 
 class AuthButton extends Component {
@@ -20,19 +40,18 @@ class AuthButton extends Component {
     }
     if(isEmpty(this.props.auth)) {
       return (
-        <div>
-          <button
+        <ButtonWrapper>
+          <Button
             onClick={
               () => this.props.firebase.login({ provider: 'google', type: 'popup' })
             }
-          >Log in with Google</button>
-        </div>
+          >Log in with Google</Button>
+        </ButtonWrapper>
       );
     }
-    return <button
-      style={{ width: '20rem' }}
+    return <ButtonWrapper><Button
       onClick={() => this.props.firebase.logout()}
-    > Logout</button>;
+    > Logout</Button></ButtonWrapper>;
 
   }
 }
