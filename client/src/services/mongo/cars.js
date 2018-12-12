@@ -17,11 +17,11 @@ const carByUserId = userId => JSON.stringify({
 export const getCar = userId => request(carByUserId(userId));
 
 const newCar = car => JSON.stringify({
-  mutation:
-    `query {
+  query:
+    `mutation {
       createCar(
         userId: "${car.userId}"
-        seats: "${car.seats}"
+        seats: ${car.seats}
         plate: "${car.plate}"
         make: "${car.make}"
         model: "${car.model}"

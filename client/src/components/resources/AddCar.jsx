@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
-import { getUser, getUserNewCar } from '../../store/resources/rides/selectors';
-import { fetchCar, postCar } from '../../store/resources/rides/actions';
+import { getUser, getUserNewCar, getUserLoading } from '../../store/resources/cars/selectors';
+import { fetchCar, postCar } from '../../store/resources/cars/actions';
 import { ROUTES } from '../../routes';
 import { Redirect } from 'react-router-dom';
 
@@ -63,20 +63,24 @@ class AddCar extends Component {
     plate: '',
     make: '',
     model: '',
-    seats: '',
+    seats: ''
   };
 
   saveCar = (event) => {
     event.preventDefault();
     const { plate, make, model, seats } = this.state;
+    this.props.postCar({ userId: this.props.user._id, plate, make, model, seats });
   };
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
   };
 
   render() {
-    const { plate, make, model, seats } = this.props;
+
+    if(!this.props.loading && this.props.newCar)
+      return <Redirect to={ROUTES.PROFILE.linkTo()} />;
+    if(this.props.loading) return <h1> PLEASE BE PATIENT, THE INTERNET IS SLOW, NOT THE APP!! </h1>;
 
     return (
       <>
@@ -84,17 +88,35 @@ class AddCar extends Component {
           <StyledForm onSubmit={this.saveCar}>
             <legend>Register Car</legend>
 
-            <label htmlFor="plate">Plate:</label>
-            <input name="plate" type="text" value={this.state.plate} onChange={this.onChange}></input>
-
             <label htmlFor="make">Make:</label>
-            <input name="make" type="text" value={this.state.make} onChange={this.onChange}></input>
+            <input name="make"
+              type="text"
+              value={this.state.make}
+              onChange={this.handleChange}>
+            </input>
 
             <label htmlFor="model">Model:</label>
-            <input name="model" type="text" value={this.state.model} onChange={this.onChange}></input>
+            <input name="model"
+              type="text"
+              value={this.state.model}
+              onChange={this.handleChange}>
+            </input>
+
+            <label htmlFor="plate">Plate:</label>
+            <input
+              name="plate"
+              type="text"
+              value={this.state.plate}
+              onChange={this.handleChange}>
+            </input>
 
             <label htmlFor="seats">Seats:</label>
-            <input name="seats" type="number" value={this.state.seats} onChange={this.onChange}></input>
+            <input name="seats"
+              type="number"
+              value={this.state.seats}
+              onChange={this.handleChange}>
+            </input>
+
             <button type="submit">Register Car</button>
           </StyledForm>
       </>
@@ -104,7 +126,16 @@ class AddCar extends Component {
 
 const mapStateToProps = state => ({
   user: getUser(state),
-  newCar: getUserNewCar(state)
+  // newCar: getUserNewCar(state),
+  loading: getUserLoading(state)
 });
 
-export default connect()
+const mapDispatchToProps = dispatch => ({
+  fetchCar: email => dispatch(fetchCar(email)),
+  postCar: car => dispatch(postCar(car))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddCar);
