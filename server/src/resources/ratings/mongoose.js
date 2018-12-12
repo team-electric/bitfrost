@@ -20,6 +20,10 @@ const ratingSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
+  },
+  value: {
+    type: Number,
+    required: true,
   }
 });
 

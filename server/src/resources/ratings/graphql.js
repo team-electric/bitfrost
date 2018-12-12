@@ -2,21 +2,24 @@ import {
   GraphQLObjectType,
   GraphQLID,
   GraphQLNonNull,
-  GraphQLString,
+  GraphQLInt,
   GraphQLList,
 } from 'graphql';
 import { prepare } from '../../lib/graphql';
 import { Rating } from './mongoose';
+import ObjectId from '../../lib/graphql/resolvers/objectId';
+
 
 const RatingType = new GraphQLObjectType({
   name: 'Rating',
   description: 'Rating info',
   fields: () => ({
     _id: { type: new GraphQLNonNull(GraphQLID) },
-    ride: { type: new GraphQLNonNull(GraphQLID) },
-    driver: { type: new GraphQLNonNull(GraphQLID) },
-    rider: { type: new GraphQLNonNull(GraphQLID) },
-    rater: { type: new GraphQLNonNull(GraphQLID) },
+    ride: { type: new GraphQLNonNull(ObjectId) },
+    driver: { type: new GraphQLNonNull(ObjectId) },
+    rider: { type: new GraphQLNonNull(ObjectId) },
+    rater: { type: new GraphQLNonNull(ObjectId) },
+    value: { type: new GraphQLNonNull(GraphQLInt) },
   })
 });
 
@@ -39,21 +42,24 @@ export const ratingMutations = {
     description: 'Create a new rating',
     type: RatingType,
     args: {
-      ride: { type: new GraphQLNonNull(GraphQLID) },
-      driver: { type: new GraphQLNonNull(GraphQLID) },
-      rider: { type: new GraphQLNonNull(GraphQLID) },
-      rater: { type: new GraphQLNonNull(GraphQLID) },
+      ride: { type: new GraphQLNonNull(ObjectId) },
+      driver: { type: new GraphQLNonNull(ObjectId) },
+      rider: { type: new GraphQLNonNull(ObjectId) },
+      rater: { type: new GraphQLNonNull(ObjectId) },
+      value: { type: new GraphQLNonNull(GraphQLInt) },
     },
     resolve: (_, {
       ride,
       driver,
       rider,
       rater,
+      value,
     }) => Rating.create({
       ride,
       driver,
       rider,
       rater,
+      value,
     }).then(prepare)
   }
 }
