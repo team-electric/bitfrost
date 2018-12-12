@@ -1,14 +1,30 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
+var background = require('../../assets/landingwallpaper.jpg');
 
 const StyledForm = styled.form`
+  width: 100vw;
+  position: absolute;
+  top: 100px;
   h1 {
+    text-align: center;
     font-weight: bolder;
   }
 `;
 
 const LabelInputContainer = styled.div`
+
+  input {
+    background: none;
+    color: inherit;
+    outline: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid ${({ theme }) => theme.accentcolor};
+  }
+  
   background: none;
   color: inherit;
   text-align: center;
@@ -19,9 +35,14 @@ const LabelInputContainer = styled.div`
   flex-direction: row;
   left: 20vw;
   position: relative;
-  width: 400px;
+  width: 100vw;
   height: 34px;
   margin: 20px;
+`;
+const ButtonWrapper = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 `;
 
 const Button = styled.button`
@@ -35,6 +56,18 @@ const Button = styled.button`
   cursor: pointer;
   width: 100px;
   height: 40px;
+`;
+
+const BackgroundWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  z-index: -3;
+  position: absolute;
+  background: url(${background}) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 `;
 
 export default class SignUp extends PureComponent {
@@ -64,25 +97,48 @@ export default class SignUp extends PureComponent {
 
   render() {
     return (
-      <StyledForm onSubmit={this.onSubmit}>
-        <h1>
-          Signup form here, add button to update user info from o-auth and
-          redirect to dashboard
-        </h1>
-        <h1>Sign up</h1>
-        <LabelInputContainer>
-          <label>Full Name <input id="name" name="name" type="text" onChange={this.handleChange}/></label>
-        </LabelInputContainer>
-        <LabelInputContainer>
-          <label>Address <input id="address" name="address" type="text" onChange={this.handleChange}/></label>
-        </LabelInputContainer>
-        <LabelInputContainer>
-          <label>Phone Number<input id="phone" name="phone" type="tel" onChange={this.handleChange}/></label>
-        </LabelInputContainer>
-        <LabelInputContainer>
-          <Button>Register</Button>
-        </LabelInputContainer>
-      </StyledForm>
+      <Fragment>
+        <BackgroundWrapper />
+        <StyledForm onSubmit={this.onSubmit}>
+          <h1>Sign up</h1>
+          <LabelInputContainer>
+            <label>
+              Full Name{' '}
+              <input
+                id="name"
+                name="name"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </label>
+          </LabelInputContainer>
+          <LabelInputContainer>
+            <label>
+              Address{' '}
+              <input
+                id="address"
+                name="address"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </label>
+          </LabelInputContainer>
+          <LabelInputContainer>
+            <label>
+              Phone Number
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                onChange={this.handleChange}
+              />
+            </label>
+          </LabelInputContainer>
+          <ButtonWrapper>
+            <Button>Register</Button>
+          </ButtonWrapper>
+        </StyledForm>
+      </Fragment>
     );
   }
 }
