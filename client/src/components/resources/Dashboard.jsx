@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react';
 import Nav from './Nav.jsx';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../routes/index.js';
-// import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { getAuth } from '../../store/resources/users/selectors.js';
 
 const MapWrapper = styled.div`
   width: 100vw;
@@ -12,6 +13,25 @@ const MapWrapper = styled.div`
   img {
     width: 100vw;
     height: auto;
+  }
+`;
+
+const UserImgWrapper = styled.div`
+position: relative;
+margin: auto;
+top: -30px;
+ width: 80px;
+ height: 80px;
+ display: flex;
+ justify-content: center;
+`;
+const UserImg = styled.div`
+  width: 80px;
+  border: 2px solid ${({ theme }) => theme.accentcolor};
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    width: 80px;
   }
 `;
 
@@ -28,7 +48,7 @@ const ButtonBox = styled.div`
   flex-grow: 2;
   a {
     text-decoration: none;
-    color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.accentcolor};
   }
 `;
 
@@ -44,21 +64,19 @@ const Button = styled.button`
   height: 20vh;
   margin-top: 15px;
 `;
-export default class Dashboard extends Component {
-  // static propTypes = {
-  //   lots o props
-  // }
-  state = {
-    // maybe something for google api? search field?
-  };
+class Dashboard extends Component {
 
   render() {
+    const { photoURL } = this.props.auth;
     return (
       <Fragment>
         <Nav pageTitle="Your Dashboard" />
         <MapWrapper>
-          <img src="https://staticmapmaker.com/img/google.png" />
+          <img src={"https://staticmapmaker.com/img/google.png"} />
         </MapWrapper>
+        <UserImgWrapper>
+          <UserImg><img src={photoURL} /></UserImg>
+        </UserImgWrapper>
         <ButtonBox>
           <Link to={ROUTES.UPCOMINGTRIPS.linkTo()}>
             <Button>Upcoming Trips</Button>
@@ -69,11 +87,20 @@ export default class Dashboard extends Component {
           <Link to={ROUTES.CREATETRIP.linkTo()}>
             <Button>Create Trip</Button>
           </Link>
-          <Link to={ROUTES.PROFILE.linkTo()}>
-            <Button>Favorites</Button>
+          <Link to={ROUTES.HOME.linkTo()}>
+            <Button>Log Out</Button>
           </Link>
         </ButtonBox>
       </Fragment>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  auth: getAuth(state),
+});
+
+
+export default connect(
+  mapStateToProps,
+)(Dashboard);
