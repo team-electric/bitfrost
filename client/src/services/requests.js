@@ -1,3 +1,20 @@
+export const graphqlReq = apiUrl => async(body) => {
+
+  const response = await fetch(
+    apiUrl,
+    {
+      headers: { 'content-type': 'application/json' },
+      method: 'POST',
+      body: body,
+    });
+
+  const responseJson = await response.json();
+  return responseJson.data;
+};
+
+
+
+
 let token = window.localStorage.getItem('token');
 
 const setToken = newToken => {
@@ -5,7 +22,7 @@ const setToken = newToken => {
   window.localStorage.setItem('token', newToken);
 };
 
-export const request = (url, method, body) => {
+export const restReq = (url, method, body) => {
   return fetch(url, {
     method,
     headers: {
@@ -15,16 +32,17 @@ export const request = (url, method, body) => {
   })
     .then(res => [res.ok, res.headers, res.json()])
     .then(([ok, headers, json]) => {
-      if(!ok) throw new Error('Failed request');
+      if (!ok) throw new Error('Failed request');
       return [headers, json];
     })
     .then(([headers, json]) => {
       const newToken = headers.get('X-AUTH-TOKEN');
-      if(newToken && newToken !== token) setToken(newToken);
+      if (newToken && newToken !== token) setToken(newToken);
       return json;
     });
 };
 
-export const get = url => request(url, 'GET');
 
-export const post = (url, body) => request(url, 'POST', body);
+export const get = (url) => restReq(url, 'GET');
+
+export const post = (url, body) => restReq(url, 'POST', body);

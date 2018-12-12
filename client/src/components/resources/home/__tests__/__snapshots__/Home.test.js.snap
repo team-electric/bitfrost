@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<Home /> renders 1`] = `
-<section>
-  <h2>
-    Home Page
-  </h2>
-</section>
-`;

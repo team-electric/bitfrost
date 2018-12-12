@@ -14,9 +14,14 @@
     "build:client": "cd client && npm run build",
     "build:server": "cd server && npm run build",
     "prestart": "npm run build",
-    "start": "cd server && npm start"
+    "start": "cd server && npm start",
+    "deploy:functions": "cd functions && firebase deploy --only functions"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "superagent": "^4.0.0"
+  }
 }

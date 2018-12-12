@@ -3,7 +3,7 @@ node_js: "10.10.0"
 services:
   - mongodb
 env:
-  MONGODB_URI: mongodb://localhost:27017/haypoll
+  MONGODB_URI: mongodb://localhost:27017/bitfrost
   APP_SECRET: Dummy$ecret
 deploy:
   provider: heroku
@@ -12,3 +12,9 @@ deploy:
     staging: bitfrost-staging
   api_key:
     secure: kwUl/MxlFDdIsmIycPlKUkU5yCe8lGz/o1y3QDvTX6fTT3loOqMWgF2yVh15bwjLfc8Cw79C4M+tJaToMgebwOe8Nmm+n+x/m/MukFw2UVIqRPGO0kli5k3ZL+g+CL5koUeFJTFT4STby1zoPNaM2kaX095geoBocreXuVbM9pSxuAlOOsTBZ7AAZ2pJtVMRjzXbGDvG96hxYC5wWPsDyLe05flbsrdPhM4MUlftDeQUa0b3Z9dWI3toKzXiIuTVKykrPHGMDbehmT3INGS0D1lQbsQRcw7Gdaj9ODes8UM4WtGsOiNRkUpfJtJcTEZNeFBcni2Fhx7kK6ThQwqedfXLszgvkuOAekpPxGDDT0Rp/PAbqsvxpPHKu3c75dKtjpdfBj17c+dFPPwvLZsUgI1yurApKwJyErfpdNIn1XT0J+PoKtdo1JuLVk3Cb43zezdLVW3umtGZPdW1KdWvMHiDLfQTP849g+egu/EvVKY2T59qj5jLDZGN8qhWUeXvsvlzXC+O9zqdqNXdmG+bVJfku0VXpZi2tgIO/LWNU8rBXf2GEBNIFjBXVVGfnnQAB5mbya/yRC2LeqU9uPUVzuzHHAnCfa/ibjoMtBjDSpRZHVptUB2wDXbfjEVQtV6M0eY4/j+Mm1yalaNMSfh4ocf2vvEBNyMEJRJETPCQUBk=
+notifications:
+  slack: alchemycodelab:o865kL8loy6G3uN2H189qcAU
+  on:
+    branch:
+      - master
+      - staging

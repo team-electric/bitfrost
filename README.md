@@ -20,6 +20,7 @@ Table of contents
       * [Full slices](#Full-slices)
       * [Notes](#Notes)
       * [VS Code folder icons](#VS-Code-folder-icons)
+   * [Data Model](#Data-Model)
 <!--te-->
 
 ## Project setup
@@ -95,4 +96,72 @@ Optionally, you can install `Material Icon Theme` and add the following to your 
         "fixtures": "Helper",
         "presentational": "Views"
     },
+```
+
+## Data Model
+
+Chart made using LucidCharts. Ignore the attachment locations of the links. The links only encode that somewhere in the particular model there exists a reference to the origin of the link (with exception to the Firestore to MongoDB link for Rides, as there will be no reference between those).
+
+
+##### Diagram
+
+![data-model-png](/data-model.png "Data Model")
+
+##### Testing
+
+* create users:
+
+```
+mutation {
+  createUser(
+    name: "bill",
+    email:"bill@example.com",
+    phone:"911"
+    address: { zip: "97220" }
+  )
+  {
+    _id
+    name
+    email
+    phone
+  }
+}
+```
+
+* get users
+
+```
+query {
+  users {
+    _id
+    name
+  }
+}
+```
+
+* create cars:
+
+```
+mutation {
+  createCar(
+    userId: "5c0f00580140033a48401dc3",
+    seats: 4
+  )
+  {
+    _id
+    userId
+    seats
+  }
+}
+```
+
+* get cars:
+
+```
+query {
+  cars {
+    _id
+    seats
+  }
+}
 ```

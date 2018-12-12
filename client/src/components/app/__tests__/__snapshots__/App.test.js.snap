@@ -4,10 +4,11 @@ exports[`<App /> renders 1`] = `
 <ThemeProvider
   theme={
     Object {
-      "accent": "rgb(173, 38, 36)",
-      "darksecondary": "rgb(107, 48, 13)",
-      "primary": "rgb(0, 153, 255)",
-      "secondary": "rgb(255, 255, 0)",
+      "accentcolor": "rgb(116, 128, 250)",
+      "accentlight": "rgb(161, 224, 243)",
+      "darksecondary": "rgb(76, 81, 99)",
+      "primary": "rgb(29, 33, 44)",
+      "secondary": "rgb(203, 206, 208)",
     }
   }
 >
@@ -29,7 +30,6 @@ exports[`<App /> renders 1`] = `
       />
     </HelmetWrapper>
     <GlobalStyleComponent />
-    <Header />
     <Switch>
       <Route
         component={[Function]}
@@ -47,38 +47,67 @@ exports[`<App /> renders 1`] = `
         component={[Function]}
         exact={true}
         key="2"
-        path="/polls"
-      />
-      <Route
-        component={[Function]}
-        exact={false}
-        key="3"
-        path="/polls/:id"
-      />
-      <Route
-        component={[Function]}
-        exact={true}
-        key="4"
-        path="/polls/create"
-      />
-      <Route
-        component={[Function]}
-        exact={true}
-        key="5"
         path="/signup"
       />
       <Route
         component={[Function]}
         exact={true}
+        key="3"
+        path="/rides"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="4"
+        path="/dashboard"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="5"
+        path="/profile"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
         key="6"
-        path="/login"
+        path="/pasttrips"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="7"
+        path="/upcomingtrips"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="8"
+        path="/tripdetail"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="9"
+        path="/addcar"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="10"
+        path="/createtrip"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="11"
+        path="/test"
       />
       <Redirect
         push={false}
         to="/home/"
       />
     </Switch>
-    <Footer />
   </BrowserRouter>
 </ThemeProvider>
 `;
