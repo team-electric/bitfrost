@@ -12,7 +12,7 @@
     "test:watch": "npm run jest -- --detectOpenHandles --runInBand --watch",
     "build": "babel src -d dist -s true",
     "prestart": "npm run build",
-    "start": "node dist/index.js",
+    "start": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 dist/index.js",
     "start:watch": "nodemon src/index.js --exec babel-node"
   },
   "jest": {
