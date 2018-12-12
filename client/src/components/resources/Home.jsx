@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import AuthButton from '../lib/AuthButton.jsx';
+
 var background = require('../../assets/landingwallpaper.jpg');
 
 const Section = styled.section`

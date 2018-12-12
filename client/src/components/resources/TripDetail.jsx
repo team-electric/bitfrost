@@ -44,6 +44,7 @@ export default class TripDetail extends Component {
   //   totalTrips: PropTypes.number.isRequired
   // };
 
+
   // tripDetail = ({ PastTrips }) => {
   //   const { user, destination, date } = PastTrips;
   // };
@@ -74,6 +75,7 @@ export default class TripDetail extends Component {
             <a href="www.venmo.com"> Pay with Venmo</a>
           </div>
           <Button>Reserve</Button>
+
         </StyledDiv>
       </Fragment>
     );

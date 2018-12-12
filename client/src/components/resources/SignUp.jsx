@@ -8,6 +8,7 @@ import { fetchUser } from '../../store/resources/users/actions';
 import { ROUTES } from '../../routes';
 import { Redirect } from 'react-router-dom';
 
+
 const StyledForm = styled.form`
   overflow: hidden;
   width: 100vw;
@@ -21,6 +22,7 @@ const StyledForm = styled.form`
 `;
 
 const LabelInputContainer = styled.div`
+
   input {
     background: none;
     color: inherit;
@@ -73,6 +75,7 @@ const BackgroundWrapper = styled.div`
 `;
 
 class SignUp extends PureComponent {
+
   // static propTypes = {
   //   import from o-auth
   // }
@@ -104,11 +107,13 @@ class SignUp extends PureComponent {
   render() {
     if(!this.props.loading && this.props.user) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
+
     return (
       <Fragment>
         <BackgroundWrapper />
         <StyledForm onSubmit={this.onSubmit}>
           <h1>We need some more info</h1>
+
           <LabelInputContainer>
             <label>
               Full Name{' '}
@@ -165,3 +170,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SignUp);
+
