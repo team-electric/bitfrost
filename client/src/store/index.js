@@ -3,15 +3,8 @@
 // store
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { middleware } from './middleware';
-
-import { reactReduxFirebase } from 'react-redux-firebase';
-import { reduxFirestore } from 'redux-firestore';
-import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-
-import config from '../services/firebase';
-
 
 // reducers
 import { firebaseReducer } from 'react-redux-firebase';
@@ -39,9 +32,13 @@ const rootReducer = combineReducers({
 });
 
 // create store
-
+import firebase from 'firebase/app';
+import config from '../services/firebase';
 firebase.initializeApp(config);
 firebase.firestore().settings({ timestampsInSnapshots: true });
+
+import { reactReduxFirebase } from 'react-redux-firebase';
+import { reduxFirestore } from 'redux-firestore';
 
 const enhancers = [
   reduxFirestore(firebase),
