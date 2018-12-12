@@ -74,19 +74,20 @@ export default class SignUp extends PureComponent {
   // }
 
   state = {
-    name: '',
+    firstName: '',
+    lastName: '',
     address: '',
     phone: ''
   };
 
   onSubmit = event => {
     event.preventDefault();
-    const { name, address, phone } = this.state;
+    const { firstName, lastName, address, phone } = this.state;
 
     // I added the below function so we can pass it to props
     // const { registerUser } = this.props;
     event.preventDefault();
-    // registerUser(name, address, phone);
+    // registerUser(firstName, lastName address, phone);
   };
 
   handleChange = ({ target }) => {

@@ -75,6 +75,21 @@ export default class Profile extends PureComponent {
     // maybe user rating
   };
 
+
+  onSubmit = event => {
+    event.preventDefault();
+    const { firstName, lastName, address, phone, pay, make, model, plate, seats } = this.state;
+
+    // I added the below function so we can pass it to props
+    // const { updateUser } = this.props;
+    event.preventDefault();
+    // updateUser(firstName, lastName, address, phone, pay, make, model, plate, seats);
+  };
+
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
   render() {
     return (
       <Fragment>
