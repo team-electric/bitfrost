@@ -25,6 +25,15 @@ const StyledForm = styled.form`
     left: 2vw;
     position: relative;
   }
+  input {
+    background: none;
+    color: inherit;
+    outline: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid ${({ theme }) => theme.accentcolor};
+  }
 `;
 
 const Button = styled.button`
