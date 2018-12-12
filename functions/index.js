@@ -51,6 +51,7 @@ const newRide = ride => JSON.stringify({
     }`
 });
 
+// eslint-disable-next-line
 const graphqlReq = apiUrl => async(body) => {
 
   const response = await fetch(
