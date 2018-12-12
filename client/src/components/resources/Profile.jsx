@@ -6,6 +6,15 @@ import { ROUTES } from '../../routes/index.js';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import {
+  getUser,
+  getAuth,
+  getUserLoading
+} from '../../store/resources/users/selectors';
+import { fetchUser } from '../../store/resources/users/actions';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 const UserImgWrapper = styled.div`
 position: relative;
 top: 30px;
@@ -67,23 +76,29 @@ const Button = styled.button`
   margin-bottom: 15px;
 `;
 
-export default class Profile extends PureComponent {
+class Profile extends PureComponent {
   // static propTypes = {
   //   lots o props
   // }
   state = {
-    // maybe user rating
+    name: '',
+    email: '',
+    phone: '',
+    city: '',
+    state: '',
+    zip: '',
+    make: '',
+    model: '',
+    plate: '',
+    seats: ''
   };
-
 
   onSubmit = event => {
     event.preventDefault();
-    const { firstName, lastName, address, phone, pay, make, model, plate, seats } = this.state;
+    const { email } = this.props.auth;
+    const { name, phone, city, state, zip, make, model, plate, seats } = this.state;
 
-    // I added the below function so we can pass it to props
-    // const { updateUser } = this.props;
-    event.preventDefault();
-    // updateUser(firstName, lastName, address, phone, pay, make, model, plate, seats);
+
   };
 
   handleChange = ({ target }) => {
@@ -100,16 +115,19 @@ export default class Profile extends PureComponent {
         <InfoDiv>
           <UserDiv>
             <h2>User Info:</h2>
-            <p>Name</p>
-            <p>email</p>
-            <p>phone</p>
-            <p>Pickup Address:</p>
+            <p>Name: </p>
+            <p>Email: </p>
+            <p>Phone: </p>
+            <p>City: </p>
+            <p>State: </p>
+            <p>Zip: </p>
           </UserDiv>
           <CarDiv>
             <h2>Cars:</h2>
-            <p>Name</p>
-            <p>Name</p>
-            <p>Name</p>
+            <p>Make: </p>
+            <p>Model: </p>
+            <p>Plate: </p>
+            <p>Seats Available: </p>
           </CarDiv>
         </InfoDiv>
         <ButtonBox>
@@ -124,3 +142,19 @@ export default class Profile extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: getUser(state),
+  auth: getAuth(state),
+  // loading: getUserLoading(state)
+});
+
+
+const mapDispatchToProps = dispatch => ({
+  fetchUser: email => dispatch(fetchUser(email))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

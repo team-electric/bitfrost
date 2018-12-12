@@ -25,3 +25,9 @@ export const postUser = user => ({
   type: POST_USER,
   payload: createUser(user)
 });
+
+export const UPDATE_USER = 'UPDATE_USER';
+export const updateUser = user => ({
+  type: UPDATE_USER,
+  payload: updateUser(user)
+});
