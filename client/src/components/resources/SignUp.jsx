@@ -4,9 +4,11 @@ import styled from 'styled-components';
 var background = require('../../assets/landingwallpaper.jpg');
 
 const StyledForm = styled.form`
+  overflow: hidden;
   width: 100vw;
   position: absolute;
   top: 100px;
+  background: none;
   h1 {
     text-align: center;
     font-weight: bolder;
@@ -24,7 +26,7 @@ const LabelInputContainer = styled.div`
     border-top: none;
     border-bottom: 1px solid ${({ theme }) => theme.accentcolor};
   }
-  
+
   background: none;
   color: inherit;
   text-align: center;
@@ -62,11 +64,7 @@ const BackgroundWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: -3;
-  position: absolute;
-  background: url(${background}) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background: url(${background}) no-repeat center center;
   background-size: cover;
 `;
 
