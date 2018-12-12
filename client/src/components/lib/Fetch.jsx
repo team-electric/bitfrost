@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 export const Fetch = (Component, options = {}) => {
-  return class Fetch extends PureComponent {
+  return class FetchComponent extends PureComponent {
     static propTypes = {
       fetch: PropTypes.func.isRequired
     };
@@ -21,7 +21,8 @@ export const Fetch = (Component, options = {}) => {
 
     render() {
       const { dataKey = 'data', defaultValue = null } = options;
-      const { data = defaultValue } = this.state;
+      // const data = this.state.data || defaultValue;
+      const data = this.props.data || defaultValue;
       const props = { ...this.props, [dataKey]: data };
       return <Component {...props} />;
     }

@@ -28,9 +28,7 @@ class AddRide extends Component {
     this.setState({ driver: '' });
   };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     if(!this.props.uid) return null;
