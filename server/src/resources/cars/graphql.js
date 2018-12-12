@@ -9,16 +9,19 @@ import {
 import { prepare } from '../../lib/graphql';
 import { Car } from './mongoose';
 
+import ObjectId from '../../lib/graphql/resolvers/objectId';
+
+
 const CarType = new GraphQLObjectType({
   name: 'Car',
   description: 'A Car',
   fields: () => ({
     _id: { type: new GraphQLNonNull(GraphQLID) },
-    userId: { type: new GraphQLNonNull(GraphQLString) },
+    userId: { type: ObjectId },
     seats: { type: new GraphQLNonNull(GraphQLInt) },
-    plate: { type: new GraphQLNonNull(GraphQLString) },
-    make: { type: new GraphQLNonNull(GraphQLString) },
-    model: { type: new GraphQLNonNull(GraphQLString) },
+    plate: { type: GraphQLString },
+    make: { type: GraphQLString },
+    model: { type: GraphQLString },
   })
 });
 
@@ -41,11 +44,11 @@ export const carMutations = {
     description: 'Create a new car',
     type: CarType,
     args: {
-      userId: { type: new GraphQLNonNull(GraphQLString) },
+      userId: { type: new GraphQLNonNull(GraphQLID) },
       seats: { type: new GraphQLNonNull(GraphQLInt) },
-      plate: { type: new GraphQLNonNull(GraphQLString) },
-      make: { type: new GraphQLNonNull(GraphQLString) },
-      model: { type: new GraphQLNonNull(GraphQLString) },
+      plate: { type: GraphQLString },
+      make: { type: GraphQLString },
+      model: { type: GraphQLString },
     },
     resolve: (_, {
       userId,

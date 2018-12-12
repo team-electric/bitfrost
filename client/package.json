@@ -34,6 +34,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-decorators": "^7.2.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.3.1",
@@ -54,6 +55,7 @@
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
+    "node-fetch": "^2.3.0",
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^4.1.0",
     "postcss-simple-vars": "^5.0.1",
@@ -66,6 +68,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "@babel/runtime": "^7.2.0",
     "firebase": "^5.5.5",
     "jest-styled-components": "^6.3.1",
     "react": "^16.7.0-alpha.0",

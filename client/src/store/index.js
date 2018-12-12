@@ -16,28 +16,23 @@ import config from '../services/firebase';
 // reducers
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
-import pollsReducer from './resources/polls/reducers';
-import resultsReducer from './resources/results/reducers';
-import sessionsReducer from './resources/sessions/reducers';
 
 import { reducer as ridesReducer, initialState as ridesInitial } from './resources/rides/reducers';
+import { reducer as usersReducer, initialState as usersInitial } from './resources/users/reducers';
 
 
 // create combined reducer
 
 const initialState = {
-  rides: ridesInitial
+  rides: ridesInitial,
+  users: usersInitial
 };
 
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   rides: ridesReducer,
-
-
-  polls: pollsReducer,
-  results: resultsReducer,
-  session: sessionsReducer,
+  users: usersReducer
 });
 
 // create store
@@ -54,7 +49,7 @@ const enhancers = [
   applyMiddleware(...middleware)
 ];
 
-const reduxDevToolsExtension = window.devToolsExtension;
+const reduxDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
 if(process.env.NODE_ENV === 'development' && typeof reduxDevToolsExtension === 'function') {
   enhancers.push(reduxDevToolsExtension());
 }
