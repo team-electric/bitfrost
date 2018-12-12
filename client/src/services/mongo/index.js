@@ -1,5 +1,3 @@
 import { graphqlReq } from '../requests';
 
-const MONGO_API_URL = '/graphql?';
-
-export const request = graphqlReq(MONGO_API_URL);
+export const request = graphqlReq(process.env.MONGO_API_URL);
