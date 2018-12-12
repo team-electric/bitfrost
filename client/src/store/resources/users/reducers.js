@@ -25,7 +25,7 @@ export function reducer(state = initialState, { type, payload }) {
     case FETCH_USER_DONE:
       return { ...state, loadingCurrent: false };
     case POST_USER:
-      return { ...state, current: payload.}
+      return { ...state, current: payload.curent };
     default:
       return state;
   }
