@@ -1,5 +1,6 @@
 {
   "name": "functions",
+  "engines": {"node": "8"},
   "description": "Cloud Functions for Firebase",
   "scripts": {
     "lint": "eslint .",
@@ -14,8 +15,10 @@
     "firebase-functions": "^2.1.0"
   },
   "devDependencies": {
+    "ajv": "^6.6.1",
     "eslint": "^4.12.0",
-    "eslint-plugin-promise": "^3.6.0"
+    "eslint-plugin-promise": "^3.6.0",
+    "firebase-tools": "^6.1.2"
   },
   "private": true
 }
