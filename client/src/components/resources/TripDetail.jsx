@@ -44,6 +44,13 @@ export default class TripDetail extends Component {
             button to link to paypal/venmo. Trip rating?
           </h1>
 
+          <h3>Driver info</h3>
+
+
+          <h3>Car info</h3>
+          <p>Make</p>
+          <p>Model</p>
+          <p>Plate</p>
 
 
 
