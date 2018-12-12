@@ -38,6 +38,9 @@ const newUser = user => JSON.stringify({
         phone: "${user.phone}"
         address: {
           zip: "${user.address.zip}"
+          city: "${user.address.city}"
+          state: "${user.address.state}"
+          street: "${user.address.street}"
         }
       )
       {
