@@ -29,8 +29,8 @@ export const carQueries = {
   car: {
     description: 'retrieves a car',
     type: CarType,
-    args: { id: { type: GraphQLID } },
-    resolve: (_, { id }) => Car.findById(id).then(prepare)
+    args: { userId: { type: GraphQLID } },
+    resolve: (_, { userId }) => Car.findOne({ userId }).then(prepare)
   },
   cars: {
     description: 'retrieves a list of cars',

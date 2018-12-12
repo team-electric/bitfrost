@@ -19,20 +19,23 @@ import { firestoreReducer } from 'redux-firestore';
 
 import { reducer as ridesReducer, initialState as ridesInitial } from './resources/rides/reducers';
 import { reducer as usersReducer, initialState as usersInitial } from './resources/users/reducers';
+import { reducer as carsReducer, initialState as carsInitial } from './resources/cars/reducers';
 
 
 // create combined reducer
 
 const initialState = {
   rides: ridesInitial,
-  users: usersInitial
+  users: usersInitial,
+  cars: carsInitial,
 };
 
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   rides: ridesReducer,
-  users: usersReducer
+  users: usersReducer,
+  cars: carsReducer,
 });
 
 // create store
