@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
+import { ROUTES } from '../../routes';
+
 
 const ButtonWrapper = styled.div`
   position: relative;
@@ -49,9 +52,7 @@ class AuthButton extends Component {
         </ButtonWrapper>
       );
     }
-    return <ButtonWrapper><Button
-      onClick={() => this.props.firebase.logout()}
-    > Logout</Button></ButtonWrapper>;
+    return <Redirect to={ROUTES.SIGNUP.linkTo()} />;
 
   }
 }
