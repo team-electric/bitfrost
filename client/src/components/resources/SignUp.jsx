@@ -3,7 +3,11 @@ import React, { PureComponent, Fragment } from 'react';
 import styled from 'styled-components';
 var background = require('../../assets/landingwallpaper.jpg');
 import { connect } from 'react-redux';
-import { getUser, getAuth, getUserLoading } from '../../store/resources/users/selectors';
+import {
+  getUser,
+  getAuth,
+  getUserLoading
+} from '../../store/resources/users/selectors';
 import { fetchUser } from '../../store/resources/users/actions';
 import { ROUTES } from '../../routes';
 import { Redirect } from 'react-router-dom';
@@ -127,22 +131,22 @@ class SignUp extends PureComponent {
           </LabelInputContainer>
           <LabelInputContainer>
             <label>
-              Address{' '}
+              Phone Number
               <input
-                id="address"
-                name="address"
-                type="text"
+                id="phone"
+                name="phone"
+                type="tel"
                 onChange={this.handleChange}
               />
             </label>
           </LabelInputContainer>
           <LabelInputContainer>
             <label>
-              Phone Number
+              Address{' '}
               <input
-                id="phone"
-                name="phone"
-                type="tel"
+                id="address"
+                name="address"
+                type="text"
                 onChange={this.handleChange}
               />
             </label>
