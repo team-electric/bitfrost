@@ -50,13 +50,9 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect((props) => {
     if(!props.uid) return [];
-    return [
-      {
-        collection: 'rides',
-        where: [
-          ['uid', '==', props.uid]
-        ]
-      }
-    ];
+    return [{
+      collection: 'rides',
+      where: [['uid', '==', props.uid]]
+    }];
   })
 )(RideList);
