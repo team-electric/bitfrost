@@ -47,6 +47,7 @@ export default class TripDetail extends Component {
 
 
 
+
           <a href="www.paypal.com"> Pay with Paypal</a>
           <a href="www.venmo.com"> Pay with Venmo</a>
 
