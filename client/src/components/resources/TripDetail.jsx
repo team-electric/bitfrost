@@ -38,6 +38,10 @@ const Button = styled.button`
   padding: 10px; */
 `;
 
+const UserInfoContainer = styled.div`
+  text-align: center;
+`;
+
 export default class TripDetail extends Component {
   // static propTypes = {
   //   trips: PropTypes.object.isRequired,
@@ -63,16 +67,20 @@ export default class TripDetail extends Component {
             button to link to paypal/venmo. Trip rating?
           </h2>
 
-
+          <UserInfoContainer>
+            <h3>User Info</h3>
+            <div>Name: Thor Ragnarok</div>
+            <div>Phone: 971-522-1890</div>
+            <div>Email: Thor@Ragnarok.com</div>
+          </UserInfoContainer>
 
           <CarInfoContainer>
-            <h3>Driver info</h3>
+            <h3>Car Details</h3>
             <div>Make: Lexus</div>
             <div>Model: IS-350</div>
             <div>Plate: 832-JXY</div>
             <div>Seats available: 2</div>
           </CarInfoContainer>
-
 
           <div>
             <a href="www.paypal.com"> Pay with Paypal</a>
