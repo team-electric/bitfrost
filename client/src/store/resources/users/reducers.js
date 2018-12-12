@@ -1,6 +1,6 @@
 import {
   FETCH_USERS, FETCH_USERS_START, FETCH_USERS_DONE,
-  FETCH_USER, FETCH_USER_START, FETCH_USER_DONE
+  FETCH_USER, FETCH_USER_START, FETCH_USER_DONE, POST_USER
 } from './actions';
 
 export const initialState = {
@@ -24,6 +24,8 @@ export function reducer(state = initialState, { type, payload }) {
       return { ...state, loadingCurrent: true };
     case FETCH_USER_DONE:
       return { ...state, loadingCurrent: false };
+    case POST_USER:
+      return { ...state, current: payload.current };
     default:
       return state;
   }

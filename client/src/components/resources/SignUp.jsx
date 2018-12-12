@@ -2,6 +2,12 @@ import React, { PureComponent, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 var background = require('../../assets/landingwallpaper.jpg');
+import { connect } from 'react-redux';
+import { getUser, getAuth, getUserLoading } from '../../store/resources/users/selectors';
+import { fetchUser } from '../../store/resources/users/actions';
+import { ROUTES } from '../../routes';
+import { Redirect } from 'react-router-dom';
+
 
 const StyledForm = styled.form`
   overflow: hidden;
@@ -68,21 +74,25 @@ const BackgroundWrapper = styled.div`
   background-size: cover;
 `;
 
-export default class SignUp extends PureComponent {
+class SignUp extends PureComponent {
+
   // static propTypes = {
   //   import from o-auth
   // }
 
   state = {
-    firstName: '',
-    lastName: '',
+    name: '',
     address: '',
     phone: ''
   };
 
+  componentDidMount() {
+    this.props.fetchUser(this.props.auth.email);
+  }
+
   onSubmit = event => {
     event.preventDefault();
-    const { firstName, lastName, address, phone } = this.state;
+    const { name, address, phone } = this.state;
 
     // I added the below function so we can pass it to props
     // const { registerUser } = this.props;
@@ -95,11 +105,15 @@ export default class SignUp extends PureComponent {
   };
 
   render() {
+    if(!this.props.loading && this.props.user) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
+    if(this.props.loading) return <h1> LOADING </h1>;
+
     return (
       <Fragment>
         <BackgroundWrapper />
         <StyledForm onSubmit={this.onSubmit}>
-          <h1>Sign up</h1>
+          <h1>We need some more info</h1>
+
           <LabelInputContainer>
             <label>
               Full Name{' '}
@@ -141,3 +155,19 @@ export default class SignUp extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: getUser(state),
+  auth: getAuth(state),
+  loading: getUserLoading(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchUser: email => dispatch(fetchUser(email))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);
+

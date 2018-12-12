@@ -12,6 +12,8 @@ import TripDetail from '../components/resources/TripDetail.jsx';
 import AddCar from '../components/resources/AddCar.jsx';
 import CreateTrip from '../components/resources/CreateTrip.jsx';
 import Test from '../components/resources/Test.jsx';
+import EditProfile from '../components/resources/EditProfile.jsx';
+
 
 export const ROUTES = {
   ABOUT: {
@@ -43,6 +45,11 @@ export const ROUTES = {
     path: '/profile',
     Component: Profile,
     linkTo: () => '/profile'
+  },
+  EDITPROFILE: {
+    path: '/EditProfile',
+    Component: EditProfile,
+    linkTo: () => '/EditProfile'
   },
   PASTTRIPS: {
     path: '/pasttrips',
