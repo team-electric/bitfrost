@@ -37,10 +37,10 @@ const newUser = user => JSON.stringify({
         email: "${user.email}"
         phone: "${user.phone}"
         address: {
-          zip: "${user.address.zip}"
-          city: "${user.address.city}"
-          state: "${user.address.state}"
-          street: "${user.address.street}"
+          zip: "${user.zip}"
+          city: "${user.city}"
+          state: "${user.state}"
+          street: "${user.street}"
         }
       )
       {
