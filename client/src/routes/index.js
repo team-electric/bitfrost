@@ -13,6 +13,7 @@ import AddCar from '../components/resources/AddCar.jsx';
 import CreateTrip from '../components/resources/CreateTrip.jsx';
 import Test from '../components/resources/Test.jsx';
 import EditProfile from '../components/resources/EditProfile.jsx';
+import { WithUser } from '../components/lib/WithUser.jsx';
 
 
 export const ROUTES = {
@@ -43,7 +44,7 @@ export const ROUTES = {
   },
   PROFILE: {
     path: '/profile',
-    Component: Profile,
+    Component: WithUser(Profile),
     linkTo: () => '/profile'
   },
   EDITPROFILE: {

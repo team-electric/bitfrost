@@ -13,10 +13,12 @@ export const fetchUsers = () => ({
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_USER_START = 'FETCH_USER_START';
 export const FETCH_USER_DONE = 'FETCH_USER_DONE';
+export const FETCH_USER_ERROR = 'FETCH_USER_ERROR';
 export const fetchUser = email => ({
   type: FETCH_USER,
   loadStart: FETCH_USER_START,
   loadEnd: FETCH_USER_DONE,
+  errorType: FETCH_USER_ERROR,
   payload: getUser(email)
 });
 
