@@ -6,9 +6,10 @@ import styled from 'styled-components';
 import {
   getUser,
   getAuth,
-  getUserLoading
+  getUserLoading,
+  updateUser
 } from '../../store/resources/users/selectors';
-import { fetchUser } from '../../store/resources/users/actions';
+import { fetchUser, putUser } from '../../store/resources/users/actions';
 import { getUserCar } from '../../store/resources/cars/selectors';
 import { fetchCar } from '../../store/resources/cars/actions';
 import { Redirect } from 'react-router-dom';
@@ -102,6 +103,7 @@ class Profile extends PureComponent {
     phone: '',
     city: '',
     state: '',
+    street: '',
     zip: '',
     make: '',
     model: '',
@@ -109,13 +111,14 @@ class Profile extends PureComponent {
     seats: ''
   };
 
-
   onSubmit = event => {
     event.preventDefault();
     const { email } = this.props.auth;
-    const { name, phone, city, state, zip, make, model, plate, seats } = this.state;
+    console.log('hi there state', this.state);
+    const { name, phone, city, state, zip, street } = this.state;
+
     // call action that updates user, pass in data from form state to the action
-    // putUser( name, ) = this.state
+    this.props.putUser({ _id: this.props.user._id, name, email, phone, city, adresss: { state, zip, street, city } });
   };
 
   handleChange = ({ target }) => {
@@ -123,7 +126,12 @@ class Profile extends PureComponent {
   };
 
   componentDidMount() {
+    const { name, email, phone, address } = this.props.user;
     this.props.fetchCar(this.props.user._id);
+    if(this.props.user){
+      this.setState({ ...this.state, email, name, phone, city: address.city, state: address.state, zip: address.zip, street: address.street });
+    }
+    //.then to set the state to the current user
   }
 
   render() {
@@ -196,13 +204,13 @@ class Profile extends PureComponent {
           <h2>Update</h2>
 
           <div>
-            <label>Name:</label><input id="name" name="name" type="text" onChange={this.handleChange} placeholder={this.props.user.name}/>
+            <label>Name:</label><input id="name" name="name" type="text" onChange={this.handleChange} placeholder={this.props.user.name} value={this.state.name} />
           </div>
           <div>
             <label>Email:</label><input id="email" name="email" type="text" onChange={this.handleChange} placeholder={this.props.user.email}/>
           </div>
           <div>
-            <label>Phone Number:<input id="phone" name="phone" type="tel" onChange={this.handleChange} placeholder={this.props.user.phone}/></label>
+            <label>Phone Number:<input id="phone" name="phone" type="tel" onChange={this.handleChange} placeholder={this.props.user.phone} value={this.state.phone} /></label>
           </div>
           <div>
             <label>Street:<input id="street" name="street" type="text" onChange={this.handleChange} placeholder={this.props.user.address.street}/></label>
@@ -214,7 +222,7 @@ class Profile extends PureComponent {
             <label>State:<input id="state" name="state" type="text" onChange={this.handleChange} placeholder={this.props.user.address.state}/></label>
           </div>
           <div>
-            <label>Zip:<input id="zip" name="zip" type="text" onChange={this.handleChange} placeholder={this.props.user.address.zip}/></label>
+            <label>Zip:<input id="zip" name="zip" type="text" onChange={this.handleChange} placeholder={this.props.user.address.zip} value={this.state.zip} /></label>
           </div>
           <div>
             <label>Venmo/Paypal<input id="pay" name="pay" type="text" onChange={this.handleChange}/></label>
@@ -235,9 +243,11 @@ class Profile extends PureComponent {
           </div>
 
           <ButtonBox>
-            <Link to={ROUTES.PROFILE.linkTo()}>
-              <Button>Update</Button>
-            </Link>
+            <Button type='submit'>Update  </Button>
+              {/* <Link to={ROUTES.PROFILE.linkTo()}> User</Link> */}
+
+
+
             <Link to={ROUTES.ADDCAR.linkTo()}>
               <Button>Add Car</Button>
             </Link>
@@ -252,13 +262,15 @@ class Profile extends PureComponent {
 const mapStateToProps = state => ({
   user: getUser(state),
   auth: getAuth(state),
-  car: getUserCar(state)
+  car: getUserCar(state),
+  update: updateUser(state)
   // loading: getUserLoading(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: email => dispatch(fetchUser(email)),
-  fetchCar: userId => dispatch(fetchCar(userId))
+  fetchCar: userId => dispatch(fetchCar(userId)),
+  putUser: user => dispatch(putUser(user))
 });
 
 export default connect(
