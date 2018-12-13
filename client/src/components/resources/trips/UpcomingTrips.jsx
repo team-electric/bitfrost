@@ -70,11 +70,15 @@ class UpcomingTrips extends PureComponent {
   render() {
     const { photoURL } = this.props.auth;
 
+
     const rides = this.props.rides.map(ride => {
+      const { street, city, state, zip } = ride.address;
+      const time = new Date(ride.depart).toTimeString().split(' ')[0];
+      const date = new Date(ride.depart).toDateString();
       return (
         <li key={ride.id}>
-          <Link to={ROUTES.TRIPDETAIL.linkTo()}>
-            <Button>{ride.currentLocation} </Button>
+          <Link to={ROUTES.TRIPDETAIL.linkTo(ride.id)}>
+            <Button>{street}, {city}, {state} {zip} - Departing at {time} on {date}</Button>
           </Link>
         </li>
       );
@@ -94,21 +98,6 @@ class UpcomingTrips extends PureComponent {
             <h2>UPCOMING TRIPS</h2>
             <ol>
               {rides}
-              <li>
-                <Link to={ROUTES.TRIPDETAIL.linkTo()}>
-                  <Button>Jackie Chan - Seattle - 1.1.19 </Button>
-                </Link>
-              </li>
-              <li>
-                <Link to={ROUTES.TRIPDETAIL.linkTo()}>
-                  <Button>Ryan Luras - Washginton DC - 1.13.19</Button>
-                </Link>
-              </li>
-              <li>
-                <Link to={ROUTES.TRIPDETAIL.linkTo()}>
-                  <Button>Kurt Russell - Beaverton - 1.15.19 </Button>
-                </Link>
-              </li>
             </ol>
           </TripsContainer>
         </StyledDiv>

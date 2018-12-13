@@ -30,11 +30,23 @@ class SearchMap extends Component {
     });
   };
 
-  addPlace = (place) => {
+  addPlace = place => {
     this.setState({ places: [place] });
+
+    const { address_components } = place;
+    const ac = address_components;
+    const address = {
+      street: ac[0].short_name + ' ' + ac[1].short_name,
+      city: ac[3].short_name,
+      state: ac[5].short_name,
+      zip: ac[7].short_name,
+    };
+
     const { lat, lng } = place.geometry.location;
     const destination = [lat(), lng()];
+
     this.props.handlePositions({
+      address,
       destination,
       origin: this.state.position
     });
