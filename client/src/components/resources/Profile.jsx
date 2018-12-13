@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import {
   getUser,
   getAuth,
-  getUserLoading,
   updateUser
 } from '../../store/resources/users/selectors';
 import { fetchUser, putUser } from '../../store/resources/users/actions';
@@ -45,7 +44,7 @@ const StyledForm = styled.form`
   font: inherit;
   outline: none;
   cursor: pointer;
-  h2 {
+  h3 {
     font-weight: bolder;
     text-align: center;
   }
@@ -113,7 +112,6 @@ class Profile extends PureComponent {
   onSubmit = event => {
     event.preventDefault();
     const { email } = this.props.auth;
-    console.log('hi there state', this.state);
     const { name, phone, city, state, zip, street } = this.state;
 
     this.props
@@ -125,11 +123,13 @@ class Profile extends PureComponent {
         city,
         state,
         zip,
-        street
+        street,
+        redirect: false
       })
       .then(() => {
         fetchUser(email);
       });
+    this.setState({ redirect: true });
   };
 
   handleChange = ({ target }) => {
@@ -151,6 +151,7 @@ class Profile extends PureComponent {
   }
 
   render() {
+    if(this.state.redirect) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
     const { photoURL } = this.props.auth;
 
     return (
@@ -163,7 +164,7 @@ class Profile extends PureComponent {
         </UserImgWrapper>
 
         <StyledForm onSubmit={this.onSubmit}>
-          <h2>Update</h2>
+          <h3>Your Profile</h3>
 
           <div>
             <label>Name:</label>
@@ -253,7 +254,7 @@ class Profile extends PureComponent {
             </label>
           </div>
 
-          <h2>Current Car</h2>
+          <h3>Current Car</h3>
           <div>
             {this.props.car && <label>Make: {this.props.car.make} </label>}
           </div>
@@ -268,10 +269,9 @@ class Profile extends PureComponent {
           </div>
 
           <ButtonBox>
-            <Button type='submit'>Update </Button>
-
+            <Button type='submit'>Update</Button>
             <Link to={ROUTES.ADDCAR.linkTo()}>
-              <Button>Edit car</Button>
+              <Button>Edit Car</Button>
             </Link>
           </ButtonBox>
         </StyledForm>
@@ -285,7 +285,6 @@ const mapStateToProps = state => ({
   auth: getAuth(state),
   car: getUserCar(state),
   update: updateUser(state)
-  // loading: getUserLoading(state)
 });
 
 const mapDispatchToProps = dispatch => ({

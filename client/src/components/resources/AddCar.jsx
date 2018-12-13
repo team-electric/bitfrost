@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
 import { getUserCar, getUserLoading } from '../../store/resources/cars/selectors';
-import { fetchCar, postCar } from '../../store/resources/cars/actions';
+import { fetchCar, postCar, deleteCar } from '../../store/resources/cars/actions';
 import { ROUTES } from '../../routes';
 import { Redirect } from 'react-router-dom';
 
