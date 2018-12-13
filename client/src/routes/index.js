@@ -15,6 +15,9 @@ import Test from '../components/resources/Test.jsx';
 import EditProfile from '../components/resources/EditProfile.jsx';
 import { WithUser } from '../components/lib/WithUser.jsx';
 
+import MarkerMap from '../components/resources/maps/MarkerMap.jsx';
+import SearchMap from '../components/resources/maps/SearchMap.jsx';
+
 
 export const ROUTES = {
   ABOUT: {
@@ -81,6 +84,16 @@ export const ROUTES = {
     path: '/test',
     Component: Test,
     linkTo: () => '/test'
+  },
+  MARKER_MAP: {
+    path: '/map',
+    Component: MarkerMap,
+    linkTo: () => '/map'
+  },
+  SEARCH_MAP: {
+    path: '/mapsearch',
+    Component: SearchMap,
+    linkTo: () => '/mapsearch'
   },
 };
 
