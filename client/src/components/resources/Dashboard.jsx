@@ -71,13 +71,13 @@ const Button = styled.button`
   width: 20vw;
   height: 12.5vh;
 `;
-class Dashboard extends Component {
 
+class Dashboard extends Component {
   static propTypes = {
     uid: PropTypes.string,
     rides: PropTypes.arrayOf(PropTypes.object),
     selectedRide: PropTypes.string,
-    selectRide: PropTypes.func.isRequired,
+    selectRide: PropTypes.func.isRequired
   };
 
   logout = () => {
@@ -96,14 +96,11 @@ class Dashboard extends Component {
     const { photoURL } = this.props.auth;
     return (
       <Fragment>
-        <Nav pageTitle="Your Dashboard" />
+        <Nav pageTitle='Your Dashboard' />
         <MapWrapper>
           <AllRidesMap
-
             rides={this.props.rides}
-
             onRideSelect={this.props.selectRide}
-
           />
         </MapWrapper>
         <UserImgWrapper>
@@ -145,12 +142,17 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect((props) => {
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(props => {
     if(!props.uid) return [];
-    return [{
-      collection: 'rides',
-      where: [['uid', '==', props.uid]]
-    }];
+    return [
+      {
+        collection: 'rides',
+        where: [['uid', '==', props.uid]]
+      }
+    ];
   })
 )(Dashboard);

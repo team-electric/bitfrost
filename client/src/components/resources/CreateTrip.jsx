@@ -12,11 +12,7 @@ import NewRideMap from './maps/NewRideMap.jsx';
 
 import { fetchCar } from '../../store/resources/cars/actions';
 import { getUserCar } from '../../store/resources/cars/selectors';
-import {
-  getUser,
-  getAuth,
-  getUserLoading
-} from '../../store/resources/users/selectors';
+import { getUser, getAuth } from '../../store/resources/users/selectors';
 
 const StyledForm = styled.form`
   h1 {
