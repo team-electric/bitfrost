@@ -2,15 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
-import { getUserCar, getUserLoading } from '../../store/resources/cars/selectors';
-import { fetchCar, postCar, deleteCar } from '../../store/resources/cars/actions';
+import {
+  getUserCar,
+  getUserLoading
+} from '../../store/resources/cars/selectors';
+import {
+  fetchCar,
+  postCar,
+  deleteCar
+} from '../../store/resources/cars/actions';
 import { ROUTES } from '../../routes';
 import { Redirect } from 'react-router-dom';
+import { getUser } from '../../store/resources/users/selectors.js';
 
 const StyledForm = styled.form`
   overflow: hidden;
   width: 100vw;
-  position: absolute;
+  position: relative;
   top: 25px;
   background: none;
   h3 {
@@ -19,6 +27,28 @@ const StyledForm = styled.form`
     font-weight: bolder;
   }
 `;
+
+const UserImgWrapper = styled.div`
+  position: relative;
+  margin: auto;
+  margin-bottom: 10px;
+  top: 10px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+`;
+
+const UserImg = styled.div`
+  width: 80px;
+  border: 2px solid ${({ theme }) => theme.accentcolor};
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    width: 80px;
+  }
+`;
+
 const LabelInputContainer = styled.div`
   input {
     background: none;
@@ -29,7 +59,9 @@ const LabelInputContainer = styled.div`
     border-top: none;
     border-bottom: 1px solid ${({ theme }) => theme.accentcolor};
   }
-
+  label {
+    color: ${({ theme }) => theme.accentcolor};
+  }
   background: none;
   color: inherit;
   text-align: center;
@@ -55,11 +87,9 @@ const Button = styled.button`
   color: ${({ theme }) => theme.accentcolor};
   text-align: center;
   border: 1px solid ${({ theme }) => theme.accentcolor};
-  padding: 55px;
-  font: inherit;
   cursor: pointer;
   width: 40vw;
-  height: 20vh;
+  height: 15vh;
   margin-top: 50px;
 `;
 
@@ -75,30 +105,46 @@ class AddCar extends Component {
   saveCar = event => {
     event.preventDefault();
     const { plate, make, model, seats } = this.state;
-    this.props.deleteCar(this.props.user._id)
-      .then(() => {
-        this.props.postCar({
-          userId: this.props.user._id,
-          plate,
-          make,
-          model,
-          seats
-        });
+    this.props.deleteCar(this.props.user._id).then(() => {
+      this.props.postCar({
+        userId: this.props.user._id,
+        plate,
+        make,
+        model,
+        seats
       });
+    });
     this.setState({ redirect: true });
   };
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value.toUpperCase() });
   };
-
+  setCarState = () => {
+    this.setState({ plate: this.props.car.plate, make: this.props.car.make, model: this.props.car.model, seats: this.props.car.seats });
+  };
+  componentDidMount() {
+    if(!this.props.car) return this.props.fetchCar(this.props.user._id);
+    this.setCarState();
+  };
+  componentDidUpdate(previousProps) {
+    if(previousProps.car !== this.props.car) {
+      this.setCarState();
+    }
+  };
   render() {
     if(this.props.loading) return <h1> LOADING </h1>;
     if(this.state.redirect) return <Redirect to={ROUTES.PROFILE.linkTo()} />;
+    const { photoURL } = this.props.auth;
 
     return (
       <>
         <Nav pageTitle="Add A Car" />
+        <UserImgWrapper>
+          <UserImg>
+            <img src={photoURL} />
+          </UserImg>
+        </UserImgWrapper>
         <StyledForm onSubmit={this.saveCar}>
           <h3>Register Car</h3>
           <LabelInputContainer>
@@ -147,7 +193,8 @@ class AddCar extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: getUserCar(state),
+  user: getUser(state),
+  car: getUserCar(state),
   loading: getUserLoading(state)
 });
 

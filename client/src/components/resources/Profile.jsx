@@ -35,6 +35,7 @@ const UserImg = styled.div`
 `;
 
 const StyledForm = styled.form`
+  width: 100vw;
   overflow: hidden;
   background: none;
   color: inherit;
@@ -53,10 +54,7 @@ const StyledForm = styled.form`
     position: relative;
   }
   input {
-    left: 2vw;
-    position: relative;
-  }
-  input {
+    width: 175px;
     background: none;
     color: inherit;
     outline: none;
@@ -64,6 +62,12 @@ const StyledForm = styled.form`
     border-right: none;
     border-top: none;
     border-bottom: 1px solid ${({ theme }) => theme.accentcolor};
+  }
+  label {
+    color: ${({ theme }) => theme.accentcolor};
+    input {
+      color: ${({ theme }) => theme.secondary}
+    }
   }
 `;
 
@@ -167,7 +171,7 @@ class Profile extends PureComponent {
           <h3>Your Profile</h3>
 
           <div>
-            <label>Name:</label>
+            <label>Name:&nbsp;&nbsp;&nbsp;</label>
             <input
               id='name'
               name='name'
@@ -178,7 +182,7 @@ class Profile extends PureComponent {
             />
           </div>
           <div>
-            <label>Email:</label>
+            <label>Email:&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input
               id='email'
               name='email'
@@ -190,7 +194,7 @@ class Profile extends PureComponent {
           </div>
           <div>
             <label>
-              Phone Number:
+              Phone:&nbsp;&nbsp;&nbsp;
               <input
                 id='phone'
                 name='phone'
@@ -203,7 +207,7 @@ class Profile extends PureComponent {
           </div>
           <div>
             <label>
-              Street:
+              Street:&nbsp;&nbsp;&nbsp;
               <input
                 id='street'
                 name='street'
@@ -216,7 +220,7 @@ class Profile extends PureComponent {
           </div>
           <div>
             <label>
-              City:
+              City:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input
                 id='city'
                 name='city'
@@ -229,7 +233,7 @@ class Profile extends PureComponent {
           </div>
           <div>
             <label>
-              State:
+              State:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input
                 id='state'
                 name='state'
@@ -242,7 +246,7 @@ class Profile extends PureComponent {
           </div>
           <div>
             <label>
-              Zip:
+              Zip:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input
                 id='zip'
                 name='zip'
@@ -256,16 +260,16 @@ class Profile extends PureComponent {
 
           <h3>Current Car</h3>
           <div>
-            {this.props.car && <label>Make: {this.props.car.make} </label>}
+            {this.props.car && <label>Make: &nbsp;&nbsp;{this.props.car.make} </label>}
           </div>
           <div>
-            {this.props.car && <label>Model: {this.props.car.model} </label>}
+            {this.props.car && <label>Model: &nbsp;&nbsp;{this.props.car.model} </label>}
           </div>
           <div>
-            {this.props.car && <label>Plate: {this.props.car.plate} </label>}
+            {this.props.car && <label>Plate: &nbsp;&nbsp;{this.props.car.plate} </label>}
           </div>
           <div>
-            {this.props.car && <label>Seats: {this.props.car.seats}</label>}
+            {this.props.car && <label>Seats: &nbsp;&nbsp;{this.props.car.seats}</label>}
           </div>
 
           <ButtonBox>
