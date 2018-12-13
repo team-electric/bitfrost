@@ -12,7 +12,7 @@ import TripDetail from '../components/resources/TripDetail.jsx';
 import AddCar from '../components/resources/AddCar.jsx';
 import CreateTrip from '../components/resources/CreateTrip.jsx';
 import Test from '../components/resources/Test.jsx';
-import EditProfile from '../components/resources/EditProfile.jsx';
+
 import { WithUser } from '../components/lib/WithUser.jsx';
 
 import MarkerMap from '../components/resources/maps/MarkerMap.jsx';
@@ -49,11 +49,6 @@ export const ROUTES = {
     path: '/profile',
     Component: WithUser(Profile),
     linkTo: () => '/profile'
-  },
-  EDITPROFILE: {
-    path: '/EditProfile',
-    Component: WithUser(EditProfile),
-    linkTo: () => '/EditProfile'
   },
   PASTTRIPS: {
     path: '/pasttrips',
