@@ -2,9 +2,16 @@ import React, { PureComponent, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
+
 import Nav from './Nav.jsx';
 import NewRideMap from './maps/NewRideMap.jsx';
 
+import { fetchCar } from '../../store/resources/cars/actions';
+import { getCar } from '../../store/resources/cars/selectors';
+import { getUser, getAuth, getUserLoading } from '../../store/resources/users/selectors';
 
 const StyledForm = styled.form`
   h1 {
@@ -12,39 +19,52 @@ const StyledForm = styled.form`
   }
 `;
 
-export default class CreateTrip extends PureComponent {
+class CreateTrip extends PureComponent {
   // static propTypes = {
   //   lots o props
   // }
   state = {
     origin: '',
     destination: '',
-    depart: null,
-    arrive: null,
+    departDTL: '',
+    arriveDTL: '',
   };
 
   onChange = e => {
     console.log(this.state);
+    console.log(e.target.value);
+    // this.setState({ [e.target.name]: e.target.value });
     this.setState({ [e.target.name]: e.target.value });
   };
 
   createRide = e => {
     e.preventDefault();
     const { uid } = this.props;
-
     const {
-      origin, destination, depart, arrive
+      origin, destination, departDTL, arriveDTL
     } = this.state;
+
+    const convertDate = date => new Date(date).valueOf();
+    const depart = convertDate(departDTL);
+    const arrive = convertDate(arriveDTL);
+
+    const seats = this.props.car.seats;
+
+    console.log(this.props.firestore);
 
     this.props.firestore.add(
       { collection: 'rides' },
-      { uid, driver, seats }
+      { uid, depart, arrive, seats }
     );
     this.setState({
-      origin: '', destination: '', depart: '', arrive: '',
+      origin: '', destination: '', departDTL: '', arriveDTL: '',
     });
   };
 
+  componentDidMount() {
+    console.log('loaded', this.state);
+    this.props.fetchCar(this.props.user._id);
+  }
 
   render() {
 
@@ -54,7 +74,7 @@ export default class CreateTrip extends PureComponent {
     // currentlocation is currentlocation
     // seats from current car
     // destination from chosen spot
-    const { depart, arrive } = this.state;
+    const { departDTL, arriveDTL } = this.state;
 
     return (
       <Fragment>
@@ -64,16 +84,16 @@ export default class CreateTrip extends PureComponent {
 
         <StyledForm onSubmit={this.createRide}>
 
-          <label htmlFor="depart">Estimated Depart Time</label>
+          <label htmlFor="departDTL">Estimated Depart Time</label>
           <input
             type="datetime-local"
-            name="depart" value={depart}
+            name="departDTL" value={departDTL}
             onChange={this.onChange}
           ></input>
-          <label htmlFor="arrive">Estimated Arrival Time</label>
+          <label htmlFor="arriveDTL">Estimated Arrival Time</label>
           <input
             type="datetime-local"
-            name="arrive" value={arrive}
+            name="arriveDTL" value={arriveDTL}
             onChange={this.onChange}
           ></input>
 
@@ -83,3 +103,21 @@ export default class CreateTrip extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  uid: state.firebase.auth.uid,
+  user: getUser(state),
+  auth: getAuth(state),
+  car: getCar(state)
+});
+
+
+const mapDispatchToProps = dispatch => ({
+  // fetchUser: email => dispatch(fetchUser(email)),
+  fetchCar: userId => dispatch(fetchCar(userId)),
+});
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect(),
+)(CreateTrip);

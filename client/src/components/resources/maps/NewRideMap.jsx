@@ -25,12 +25,14 @@ class SearchMap extends Component {
   };
 
   addPlace = (place) => {
+    console.log(place);
     this.setState({ places: [place] });
   };
 
   componentDidMount() {
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
+        console.log(pos);
         const { latitude, longitude } = pos.coords;
         this.setState({ position: [latitude, longitude] });
       });
