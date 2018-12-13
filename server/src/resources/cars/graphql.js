@@ -62,5 +62,17 @@ export const carMutations = {
       make,
       model,
     }).then(prepare)
+  },
+  deleteCar: {
+    description: 'Delete a Car',
+    type: CarType,
+    args: {
+      userId: { type: new GraphQLNonNull(ObjectId) }
+    },
+    resolve: (_, {
+      userId
+    }) => Car.findOneAndDelete({
+      userId
+    }).then(prepare)
   }
 }

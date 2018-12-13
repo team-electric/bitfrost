@@ -200,7 +200,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: email => dispatch(fetchUser(email)),
-  postUser: user => dispatch(postUser(user))
+  postUser: user => dispatch(postUser(user)),
+  
 });
 
 export default connect(
