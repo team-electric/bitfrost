@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
-import { getUser, getUserLoading } from '../../store/resources/cars/selectors';
+import { getUserCar, getUserLoading } from '../../store/resources/cars/selectors';
 import { fetchCar, postCar } from '../../store/resources/cars/actions';
 import { ROUTES } from '../../routes';
 import { Redirect } from 'react-router-dom';
@@ -143,7 +143,7 @@ class AddCar extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: getUser(state),
+  user: getUserCar(state),
   loading: getUserLoading(state)
 });
 

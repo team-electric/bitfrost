@@ -1,4 +1,4 @@
-export const getUser = state => state.users.current;
+export const getUserCar = state => state.cars.current;
 
 export const getUserLoading = state => state.cars.loadingCurrent;
 

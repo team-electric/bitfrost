@@ -10,6 +10,8 @@ import {
   getUserLoading
 } from '../../store/resources/users/selectors';
 import { fetchUser } from '../../store/resources/users/actions';
+import { getUserCar } from '../../store/resources/cars/selectors';
+import { fetchCar } from '../../store/resources/cars/actions';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -119,6 +121,10 @@ class Profile extends PureComponent {
     this.setState({ [target.name]: target.value });
   };
 
+  componentDidMount() {
+    this.props.fetchCar(this.props.user._id);
+  }
+
   render() {
     const { photoURL } = this.props.auth;
 
@@ -138,6 +144,12 @@ class Profile extends PureComponent {
             <label>Name: {this.props.user.name}</label>
           </div>
           <div>
+            <label>Email: {this.props.user.email}</label>
+          </div>
+          <div>
+            <label>Phone Number: {this.props.user.phone}</label>
+          </div>
+          <div>
             <label>Street: {this.props.user.address.street}</label>
           </div>
           <div>
@@ -150,15 +162,12 @@ class Profile extends PureComponent {
             <label>Zip: {this.props.user.address.zip}</label>
           </div>
           <div>
-            <label>Phone Number: {this.props.user.phone}</label>
-          </div>
-          <div>
             <label>Venmo/Paypal</label>
           </div>
 
           <h2>Update Car</h2>
           <div>
-            {/* <label>Make: {this.props.cars.make}</label> */}
+            {/* <label>Make: {this.props.car.make}</label> */}
           </div>
           <div>
             <label>model </label>
@@ -231,11 +240,13 @@ class Profile extends PureComponent {
 const mapStateToProps = state => ({
   user: getUser(state),
   auth: getAuth(state),
+  car: getUserCar(state)
   // loading: getUserLoading(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchUser: email => dispatch(fetchUser(email))
+  fetchUser: email => dispatch(fetchUser(email)),
+  fetchCar: userId => dispatch(fetchCar(userId))
 });
 
 export default connect(

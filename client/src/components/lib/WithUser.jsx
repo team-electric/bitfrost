@@ -15,6 +15,8 @@ export const WithUser = Component => {
       if(isEmpty(this.props.auth)) return <Redirect to={ROUTES.HOME.linkTo()} />;
       if(!this.props.user && !this.props.loading){
         this.props.fetchUser(this.props.auth.email);
+
+
         return null;
       }
       if(this.props.error) return <Redirect to={ROUTES.HOME.linkTo()} />;
