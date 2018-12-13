@@ -38,16 +38,10 @@ const UserInfoContainer = styled.div`
   text-align: center;
 `;
 
-export default class TripDetail extends Component {
-  // static propTypes = {
-  //   trips: PropTypes.object.isRequired,
-  //   totalTrips: PropTypes.number.isRequired
-  // };
-
-
-  // tripDetail = ({ PastTrips }) => {
-  //   const { user, destination, date } = PastTrips;
-  // };
+class TripDetail extends Component {
+  static propTypes = {
+    selectedRide: PropTypes.object.isRequired
+  };
 
   render() {
     return (
@@ -81,3 +75,16 @@ export default class TripDetail extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  selectedRide: state.rides.selectedRide,
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+
+export default connect(
+  mapStateToProps, mapDispatchToProps
+)(TripDetail);
