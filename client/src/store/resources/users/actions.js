@@ -25,3 +25,8 @@ export const postUser = user => ({
   type: POST_USER,
   payload: createUser(user)
 });
+
+export const LOGOUT = 'LOGOUT';
+export const logoutUser = () => ({
+  type: LOGOUT
+});

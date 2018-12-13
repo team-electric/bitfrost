@@ -4,9 +4,13 @@ import { Link, Redirect } from 'react-router-dom';
 import { ROUTES } from '../../routes/index.js';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getAuth, getUserLoading } from '../../store/resources/users/selectors.js';
+import {
+  getAuth,
+  getUserLoading
+} from '../../store/resources/users/selectors.js';
 import { firebaseConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { logoutUser } from '../../store/resources/users/actions.js';
 
 const MapWrapper = styled.div`
   width: 100vw;
@@ -67,8 +71,14 @@ const Button = styled.button`
   margin-top: 15px;
 `;
 class Dashboard extends Component {
+  logout = () => {
+    this.props.logout();
+    this.props.firebase.logout();
+  };
+
   render() {
-    if(!this.props.loading && !this.props.auth.email) return <Redirect to={ROUTES.HOME.linkTo()} />;
+    if(!this.props.loading && !this.props.auth.email)
+      return <Redirect to={ROUTES.HOME.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
     const { photoURL } = this.props.auth;
     return (
@@ -92,7 +102,7 @@ class Dashboard extends Component {
           <Link to={ROUTES.CREATETRIP.linkTo()}>
             <Button>Create Trip</Button>
           </Link>
-          <Button onClick={() => this.props.firebase.logout()}>Log Out</Button>
+          <Button onClick={this.logout}>Log Out</Button>
         </ButtonBox>
       </Fragment>
     );
@@ -104,11 +114,14 @@ const mapStateToProps = state => ({
   loading: getUserLoading(state)
 });
 
-const mapDispatchToProps = state => ({
-
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logoutUser())
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   firebaseConnect()
 )(Dashboard);
