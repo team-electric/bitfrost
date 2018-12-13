@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
 import { getUser, getUserLoading } from '../../store/resources/cars/selectors';
-import { fetchCar, postCar } from '../../store/resources/cars/actions';
+import { fetchCar, postCar, deleteCar } from '../../store/resources/cars/actions';
 import { ROUTES } from '../../routes';
 import { Redirect } from 'react-router-dom';
 
@@ -68,29 +68,33 @@ class AddCar extends Component {
     plate: '',
     make: '',
     model: '',
-    seats: ''
+    seats: '',
+    redirect: false
   };
 
   saveCar = event => {
     event.preventDefault();
     const { plate, make, model, seats } = this.state;
-    this.props.postCar({
-      userId: this.props.user._id,
-      plate,
-      make,
-      model,
-      seats
-    });
+    this.props.deleteCar(this.props.user._id)
+      .then(() => {
+        this.props.postCar({
+          userId: this.props.user._id,
+          plate,
+          make,
+          model,
+          seats
+        });
+      });
+    this.setState({ redirect: true });
   };
 
   handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
+    this.setState({ [target.name]: target.value.toUpperCase() });
   };
 
   render() {
-    if(!this.props.loading && this.props.newCar)
-      return <Redirect to={ROUTES.PROFILE.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
+    if(this.state.redirect) return <Redirect to={ROUTES.PROFILE.linkTo()} />;
 
     return (
       <>
@@ -149,7 +153,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchCar: email => dispatch(fetchCar(email)),
-  postCar: car => dispatch(postCar(car))
+  postCar: car => dispatch(postCar(car)),
+  deleteCar: userId => dispatch(deleteCar(userId))
 });
 
 export default connect(
