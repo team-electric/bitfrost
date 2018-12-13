@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { v4 as uuid } from 'uuid';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -61,6 +62,7 @@ class CreateTrip extends PureComponent {
     this.props.firestore.add(
       { collection: 'rides' },
       {
+        id: uuid(),
         uid, driver, seats, riders: [],
         depart, arrive, departed: false,
         origin, destination, currentLocation: origin

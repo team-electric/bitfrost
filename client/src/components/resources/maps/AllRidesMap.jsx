@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import Marker from './Marker.jsx';
 import BasicMap from './BasicMap.jsx';
 
-import placesJSON from './places.json';
-
-
 class AllRidesMap extends Component {
 
   static propTypes = {
@@ -13,24 +10,24 @@ class AllRidesMap extends Component {
   };
 
   state = {
-    places: [],
+    rides: [],
     defaultCenter: [34.0522, -118.2437],
     position: [45.5221418, -122.67768079999999]
   };
 
-  apiIsLoaded = (map, maps, places) => {
-    // Get bounds by our places
-    const bounds = this.getMapBounds(map, maps, places);
+  apiIsLoaded = (map, maps, rides) => {
+    // Get bounds by our rides
+    const bounds = this.getMapBounds(map, maps, rides);
     // Fit map to bounds
     map.fitBounds(bounds);
     // Bind the resize listener
     this.bindResizeListener(map, maps, bounds);
   };
 
-  getMapBounds = (map, maps, places) => {
+  getMapBounds = (map, maps, rides) => {
     const bounds = new maps.LatLngBounds();
 
-    places.forEach(place => {
+    rides.forEach(place => {
       bounds.extend(new maps.LatLng(
         place.destination[0],
         place.destination[1]
@@ -55,16 +52,12 @@ class AllRidesMap extends Component {
         this.setState({ position: [latitude, longitude] });
       });
     }
-
-    console.log('JSON PLACES!!!', this.state.places);
-
-
   }
 
 
   render() {
     const { defaultCenter, position } = this.state;
-    const { places } = this.props;
+    const { rides } = this.props;
     return (
       <Fragment>
 
@@ -73,15 +66,15 @@ class AllRidesMap extends Component {
           center={position}
           // defaultCenter={defaultCenter}
           yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps, places)}
+          onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps, rides)}
         >
-          {!!places && places.map(place => (
+          {!!rides && rides.map(ride => (
             <Marker
               onClick={this.props.onRideSelect}
-              key={place.uid}
-              seats={place.seats}
-              lat={place.destination[0]}
-              lng={place.destination[1]}
+              key={ride.id}
+              seats={ride.seats}
+              lat={ride.destination[0]}
+              lng={ride.destination[1]}
             />
           ))}
         </BasicMap>

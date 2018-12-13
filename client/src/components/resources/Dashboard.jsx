@@ -100,7 +100,7 @@ class Dashboard extends Component {
         <MapWrapper>
           <AllRidesMap
 
-            places={this.props.rides}
+            rides={this.props.rides}
 
             onRideSelect={this.props.selectRide}
 
