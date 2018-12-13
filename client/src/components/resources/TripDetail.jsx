@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
+import { getSelectedRide } from '../../store/resources/rides/selectors.js';
 
 const StyledDiv = styled.div`
   h2 {
@@ -45,6 +46,9 @@ class TripDetail extends Component {
   };
 
   render() {
+
+    const { street, city, state, zip } = this.props.selectedRide.address;
+
     return (
       <Fragment>
         <Nav pageTitle="Trip Details" />
@@ -52,6 +56,11 @@ class TripDetail extends Component {
           <img src="https://staticmapmaker.com/img/google.png"></img>
         </MapWrapper>
         <StyledDiv>
+          <div>
+            <h3>Address:</h3>
+            <p>{street}</p>
+            <p>{city}, {state} {zip}</p>
+          </div>
           <UserInfoContainer>
             <h3>User Info</h3>
             <div>Name: Thor Ragnarok</div>
@@ -78,7 +87,7 @@ class TripDetail extends Component {
 }
 
 const mapStateToProps = state => ({
-  selectedRide: state.rides.selectedRide,
+  selectedRide: getSelectedRide(state)
 });
 
 const mapDispatchToProps = dispatch => ({
