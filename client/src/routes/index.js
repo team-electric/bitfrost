@@ -61,9 +61,9 @@ export const ROUTES = {
     linkTo: () => '/upcomingtrips'
   },
   TRIPDETAIL: {
-    path: '/tripdetail',
+    path: '/trip/:id',
     Component: WithUser(TripDetail),
-    linkTo: () => '/tripdetail'
+    linkTo: id => `/trip/${id}`
   },
   ADDCAR: {
     path: '/addcar',

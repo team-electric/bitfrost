@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { v4 as uuid } from 'uuid';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -16,6 +17,16 @@ import { getUser, getAuth, getUserLoading } from '../../store/resources/users/se
 const StyledForm = styled.form`
   h1 {
     font-weight: bolder;
+  }
+`;
+
+const MapWrapper = styled.div`
+  width: 100vw;
+  height: 80vh;
+  overflow: hidden;
+  img {
+    height: 100vh;
+    width: auto;
   }
 `;
 
@@ -51,6 +62,7 @@ class CreateTrip extends PureComponent {
     this.props.firestore.add(
       { collection: 'rides' },
       {
+        id: uuid(),
         uid, driver, seats, riders: [],
         depart, arrive, departed: false,
         origin, destination, currentLocation: origin
@@ -77,10 +89,11 @@ class CreateTrip extends PureComponent {
     return (
       <Fragment>
         <Nav pageTitle="Create A Trip" />
-
-        <NewRideMap
-          handlePositions={this.handlePositions}
-        />
+        <MapWrapper>
+          <NewRideMap
+            handlePositions={this.handlePositions}
+          />
+        </MapWrapper>
 
         <StyledForm onSubmit={this.createRide}>
 
