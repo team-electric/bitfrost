@@ -37,3 +37,13 @@ const newCar = car => JSON.stringify({
     }`
 });
 export const createCar = car => request(newCar(car));
+
+const deleteCarByUserId = userId => JSON.stringify({
+  query:
+    `mutation {
+      deleteCar(userId: "${userId}") {
+        userId
+      }
+    }`
+});
+export const findAndDeleteCar = userId => request(deleteCarByUserId(userId));
