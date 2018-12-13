@@ -69,12 +69,12 @@ class UpcomingTrips extends PureComponent {
 
   render() {
     const { photoURL } = this.props.auth;
-    console.log(this.props.rides);
+
     const rides = this.props.rides.map(ride => {
       return (
-        <li>
+        <li key={ride.id}>
           <Link to={ROUTES.TRIPDETAIL.linkTo()}>
-            <Button>{ride.id} </Button>
+            <Button>{ride.currentLocation} </Button>
           </Link>
         </li>
       );
