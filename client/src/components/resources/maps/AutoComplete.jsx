@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const StyledDiv = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
@@ -55,7 +55,7 @@ class AutoComplete extends Component {
 
   render() {
     return (
-      <Wrapper>
+      <StyledDiv>
         <input
           ref={(ref) => {
             this.searchInput = ref;
@@ -64,7 +64,7 @@ class AutoComplete extends Component {
           onFocus={this.clearSearchBox}
           placeholder="Enter a location"
         />
-      </Wrapper>
+      </StyledDiv>
     );
   }
 }

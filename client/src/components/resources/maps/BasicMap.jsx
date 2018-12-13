@@ -3,22 +3,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GoogleMapReact from 'google-map-react';
 
-const Wrapper = styled.main`
+const StyledDiv = styled.main`
   width: 100%;
   height: 100%;
 `;
 
 const BasicMap = ({ children, ...props }) => (
-  <Wrapper>
+  <StyledDiv>
     <GoogleMapReact
-      bootstrapURLKeys={{
-        key: process.env.GOOGLE_MAPS_KEY
-      }}
+      bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_KEY }}
       {...props}
     >
-      {children}
+      {!!children && children}
     </GoogleMapReact>
-  </Wrapper>
+  </StyledDiv>
 );
 
 BasicMap.propTypes = {

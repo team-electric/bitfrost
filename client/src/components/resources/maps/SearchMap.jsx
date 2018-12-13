@@ -4,19 +4,17 @@ import Marker from './Marker.jsx';
 import BasicMap from './BasicMap.jsx';
 import AutoComplete from './AutoComplete.jsx';
 
-const MAP_CENTER_DEFAULT = [34.0522, -118.2437];
 
 class SearchMap extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      mapApiLoaded: false,
-      mapInstance: null,
-      mapApi: null,
-      places: [],
-    };
-  }
+  state = {
+    mapApiLoaded: false,
+    mapInstance: null,
+    mapApi: null,
+    places: [],
+    defaultCenter: [34.0522, -118.2437],
+    position: []
+  };
 
   apiHasLoaded = (map, maps) => {
     this.setState({
@@ -30,8 +28,17 @@ class SearchMap extends Component {
     this.setState({ places: [place] });
   };
 
+  componentDidMount() {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const { latitude, longitude } = pos.coords;
+        this.setState({ position: [latitude, longitude] });
+      });
+    }
+  }
+
   render() {
-    const { places, mapApiLoaded, mapInstance, mapApi } = this.state;
+    const { places, mapApiLoaded, mapInstance, mapApi, defaultCenter, position } = this.state;
     return (
       <Fragment>
         {mapApiLoaded && (
@@ -39,7 +46,8 @@ class SearchMap extends Component {
         )}
         <BasicMap
           defaultZoom={10}
-          defaultCenter={MAP_CENTER_DEFAULT}
+          center={position}
+          defaultCenter={defaultCenter}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAPS_KEY,
             libraries: ['places', 'geometry'],
