@@ -8,24 +8,31 @@ const StyledDiv = styled.div`
   left: 50%;
   width: 18px;
   height: 18px;
-  background-color: limegreen;
+  background-color: rgb(116, 128, 250);
   border: 2px solid #fff;
   border-radius: 100%;
   user-select: none;
   transform: translate(-50%, -50%);
-  cursor: ${props => (props.onClick ? 'pointer' : 'default')};
+  cursor: pointer;
+  /* cursor: ${props => (props.onClick ? 'pointer' : 'default')}; */
   &:hover {
     opacity: 50%;
     z-index: 1;
   }
 `;
 
-const Marker = props => (
-  <StyledDiv
-    alt={props.text}
-    {...props.onClick ? { onClick: props.onClick } : {}}
-  />
-);
+const Marker = props => {
+
+  // console.log(props);
+
+  return (
+    <StyledDiv
+      alt={`seats: ${props.seats}`}
+      {...props.onClick ? { onClick: props.onClick } : {}}
+    />
+  );
+}
+
 
 Marker.defaultProps = {
   onClick: null,
@@ -33,7 +40,7 @@ Marker.defaultProps = {
 
 Marker.propTypes = {
   onClick: PropTypes.func,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 };
 
 export default Marker;

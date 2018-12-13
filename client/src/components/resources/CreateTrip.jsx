@@ -19,6 +19,16 @@ const StyledForm = styled.form`
   }
 `;
 
+const MapWrapper = styled.div`
+  width: 100vw;
+  height: 80vh;
+  overflow: hidden;
+  img {
+    height: 100vh;
+    width: auto;
+  }
+`;
+
 class CreateTrip extends PureComponent {
   // static propTypes = {
   //   lots o props
@@ -77,10 +87,11 @@ class CreateTrip extends PureComponent {
     return (
       <Fragment>
         <Nav pageTitle="Create A Trip" />
-
-        <NewRideMap
-          handlePositions={this.handlePositions}
-        />
+        <MapWrapper>
+          <NewRideMap
+            handlePositions={this.handlePositions}
+          />
+        </MapWrapper>
 
         <StyledForm onSubmit={this.createRide}>
 
