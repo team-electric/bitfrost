@@ -69,6 +69,16 @@ class UpcomingTrips extends PureComponent {
 
   render() {
     const { photoURL } = this.props.auth;
+    console.log(this.props.rides);
+    const rides = this.props.rides.map(ride => {
+      return (
+        <li>
+          <Link to={ROUTES.TRIPDETAIL.linkTo()}>
+            <Button>{ride.id} </Button>
+          </Link>
+        </li>
+      );
+    });
     return (
       <Fragment>
         <Nav pageTitle='Upcoming Trips' />
@@ -83,6 +93,7 @@ class UpcomingTrips extends PureComponent {
           <TripsContainer>
             <h2>UPCOMING TRIPS</h2>
             <ol>
+              {rides}
               <li>
                 <Link to={ROUTES.TRIPDETAIL.linkTo()}>
                   <Button>Jackie Chan - Seattle - 1.1.19 </Button>
