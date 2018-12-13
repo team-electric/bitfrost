@@ -15,14 +15,14 @@ class AllRidesMap extends Component {
     position: [45.5221418, -122.67768079999999]
   };
 
-  // apiIsLoaded = (map, maps, rides) => {
+  apiIsLoaded = (map, maps, rides) => {
   //   // Get bounds by our rides
   //   const bounds = this.getMapBounds(map, maps, rides);
   //   // Fit map to bounds
   //   map.fitBounds(bounds);
   //   // Bind the resize listener
   //   this.bindResizeListener(map, maps, bounds);
-  // };
+  };
 
   getMapBounds = (map, maps, rides) => {
     const bounds = new maps.LatLngBounds();
@@ -73,6 +73,8 @@ class AllRidesMap extends Component {
               onClick={this.props.onRideSelect}
               key={ride.id}
               seats={ride.seats}
+              ride={ride.id}
+              text={ride.id}
               lat={ride.destination[0]}
               lng={ride.destination[1]}
             />
