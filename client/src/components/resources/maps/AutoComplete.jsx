@@ -16,15 +16,9 @@ class AutoComplete extends Component {
   }
 
   componentDidMount({ map, mapApi } = this.props) {
-    const options = {
-      // restrict your search to a specific type of result
-      // types: ['geocode', 'address', 'establishment', '(regions)', '(cities)'],
-      // restrict your search to a specific country, or an array of countries
-      // componentRestrictions: { country: ['gb', 'us'] },
-    };
     this.autoComplete = new mapApi.places.Autocomplete(
       this.searchInput,
-      options,
+      { country: ['gb', 'us'] }
     );
     this.autoComplete.addListener('place_changed', this.onPlaceChanged);
     this.autoComplete.bindTo('bounds', map);
@@ -38,9 +32,12 @@ class AutoComplete extends Component {
     const place = this.autoComplete.getPlace();
 
     if(!place.geometry) return;
+    // console.log(place.geometry.location.lat());
+    // console.log(place.geometry.location.lng());
     if(place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
-    } else {
+    }
+    else {
       map.setCenter(place.geometry.location);
       map.setZoom(17);
     }
@@ -54,12 +51,15 @@ class AutoComplete extends Component {
   }
 
   render() {
+
+    const StyledInput = styled.input`
+      width: 400px;
+    `;
+
     return (
       <StyledDiv>
-        <input
-          ref={(ref) => {
-            this.searchInput = ref;
-          }}
+        <StyledInput
+          ref={ref => this.searchInput = ref}
           type="text"
           onFocus={this.clearSearchBox}
           placeholder="Enter a location"
