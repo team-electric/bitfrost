@@ -76,7 +76,7 @@ class Dashboard extends Component {
   static propTypes = {
     uid: PropTypes.string,
     rides: PropTypes.arrayOf(PropTypes.object),
-    selectedRide: PropTypes.string,
+    selectedRide: PropTypes.object,
     selectRide: PropTypes.func.isRequired,
   };
 
@@ -138,10 +138,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logoutUser()),
-  selectRide: ({ target }) => {
-    console.log(target.value);
-    dispatch({ type: 'selectRide', ride: target.value });
-  }
+  selectRide: ride => dispatch({ type: 'selectRide', ride })
 });
 
 export default compose(
