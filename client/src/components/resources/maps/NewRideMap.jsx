@@ -34,7 +34,6 @@ class SearchMap extends Component {
     this.setState({ places: [place] });
     const { lat, lng } = place.geometry.location;
     const destination = [lat(), lng()];
-    console.log(destination);
     this.props.handlePositions({
       destination,
       origin: this.state.position
