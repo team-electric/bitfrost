@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import Nav from './Nav.jsx';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { ROUTES } from '../../routes/index.js';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getAuth } from '../../store/resources/users/selectors.js';
+import { firebaseConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 const MapWrapper = styled.div`
   width: 100vw;
@@ -17,13 +19,13 @@ const MapWrapper = styled.div`
 `;
 
 const UserImgWrapper = styled.div`
-position: relative;
-margin: auto;
-top: -30px;
- width: 80px;
- height: 80px;
- display: flex;
- justify-content: center;
+  position: relative;
+  margin: auto;
+  top: -30px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
 `;
 const UserImg = styled.div`
   width: 80px;
@@ -54,7 +56,7 @@ const ButtonBox = styled.div`
 
 const Button = styled.button`
   background: none;
-  color: inherit;
+  color: ${({ theme }) => theme.accentcolor};
   text-align: center;
   border: 1px solid ${({ theme }) => theme.accentcolor};
   padding: 55px;
@@ -65,17 +67,19 @@ const Button = styled.button`
   margin-top: 15px;
 `;
 class Dashboard extends Component {
-
   render() {
+    if(!this.props.user) return <Redirect to={ROUTES.HOME.linkTo()} />;
     const { photoURL } = this.props.auth;
     return (
       <Fragment>
         <Nav pageTitle="Your Dashboard" />
         <MapWrapper>
-          <img src={"https://staticmapmaker.com/img/google.png"} />
+          <img src={'https://staticmapmaker.com/img/google.png'} />
         </MapWrapper>
         <UserImgWrapper>
-          <UserImg><img src={photoURL} /></UserImg>
+          <UserImg>
+            <img src={photoURL} />
+          </UserImg>
         </UserImgWrapper>
         <ButtonBox>
           <Link to={ROUTES.UPCOMINGTRIPS.linkTo()}>
@@ -87,9 +91,7 @@ class Dashboard extends Component {
           <Link to={ROUTES.CREATETRIP.linkTo()}>
             <Button>Create Trip</Button>
           </Link>
-          <Link to={ROUTES.HOME.linkTo()}>
-            <Button>Log Out</Button>
-          </Link>
+          <Button onClick={() => this.props.firebase.logout()}>Log Out</Button>
         </ButtonBox>
       </Fragment>
     );
@@ -97,10 +99,10 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: getAuth(state),
+  auth: getAuth(state)
 });
 
-
-export default connect(
-  mapStateToProps,
+export default compose(
+  connect(mapStateToProps),
+  firebaseConnect()
 )(Dashboard);

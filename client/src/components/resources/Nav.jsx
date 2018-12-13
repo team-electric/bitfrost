@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '../../routes/index.js';
 
 const StyledHeader = styled.header`
-border-bottom: 1px solid ${({ theme }) => theme.accentlight};
+border-bottom: 1px solid ${({ theme }) => theme.accentcolor};
   background-color: ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.secondary};
   display: flex;

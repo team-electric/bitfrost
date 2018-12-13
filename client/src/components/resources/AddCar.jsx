@@ -1,64 +1,69 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
-import { getUser, getUserNewCar, getUserLoading } from '../../store/resources/cars/selectors';
+import { getUser, getUserLoading } from '../../store/resources/cars/selectors';
 import { fetchCar, postCar } from '../../store/resources/cars/actions';
 import { ROUTES } from '../../routes';
 import { Redirect } from 'react-router-dom';
 
 const StyledForm = styled.form`
+  overflow: hidden;
+  width: 100vw;
+  position: absolute;
+  top: 25px;
+  background: none;
+  h3 {
+    color: ${({ theme }) => theme.secondary};
+    text-align: center;
+    font-weight: bolder;
+  }
+`;
+const LabelInputContainer = styled.div`
   input {
-    border: none;
-    border-bottom: 1px solid ${({ theme }) => theme.accentcolor};
     background: none;
-    font: inherit;
+    color: inherit;
     outline: none;
-    * {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-    form > div {
-    clear: both;
-    overflow: hidden;
-    padding: 1px;
-    margin: 0 0 10px 0;
-  }
-   /* label {
-    display: inline-block;
-    margin-bottom: 10px;
-  }, */
-  /* legend {
-    margin-bottom: 10px;
-    padding-right: 10px;
-  } */
-
-  /* input[type="text"],
-  @media (max-width: 840px) {
-    form {
-      width: 70%;
-    }
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid ${({ theme }) => theme.accentcolor};
   }
 
-  @media (max-width: 490px) {
-    form {
-      width: 100%;
-    }
-    button {
-      width: 50%;
-    }
-  } */
-  }`;
+  background: none;
+  color: inherit;
+  text-align: center;
+  font: inherit;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  left: 20vw;
+  position: relative;
+  width: 100vw;
+  height: 34px;
+  margin: 20px;
+`;
 
+const ButtonWrapper = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+`;
+const Button = styled.button`
+  background: none;
+  color: ${({ theme }) => theme.accentcolor};
+  text-align: center;
+  border: 1px solid ${({ theme }) => theme.accentcolor};
+  padding: 55px;
+  font: inherit;
+  cursor: pointer;
+  width: 40vw;
+  height: 20vh;
+  margin-top: 50px;
+`;
 
 class AddCar extends Component {
-  static propTypes = {
-    // car: PropTypes.object.isRequired,
-    // handleSubmit: PropTypes.func.isRequired
-  };
-
   state = {
     plate: '',
     make: '',
@@ -66,10 +71,16 @@ class AddCar extends Component {
     seats: ''
   };
 
-  saveCar = (event) => {
+  saveCar = event => {
     event.preventDefault();
     const { plate, make, model, seats } = this.state;
-    this.props.postCar({ userId: this.props.user._id, plate, make, model, seats });
+    this.props.postCar({
+      userId: this.props.user._id,
+      plate,
+      make,
+      model,
+      seats
+    });
   };
 
   handleChange = ({ target }) => {
@@ -77,48 +88,55 @@ class AddCar extends Component {
   };
 
   render() {
-
     if(!this.props.loading && this.props.newCar)
       return <Redirect to={ROUTES.PROFILE.linkTo()} />;
-    if(this.props.loading) return <h1> PLEASE BE PATIENT, THE INTERNET IS SLOW, NOT THE APP!! </h1>;
+    if(this.props.loading) return <h1> LOADING </h1>;
 
     return (
       <>
-        <Nav pageTitle="Add A Car"></Nav>
-          <StyledForm onSubmit={this.saveCar}>
-            <legend>Register Car</legend>
-
-            <label htmlFor="make">Make:</label>
-            <input name="make"
+        <Nav pageTitle="Add A Car" />
+        <StyledForm onSubmit={this.saveCar}>
+          <h3>Register Car</h3>
+          <LabelInputContainer>
+            <label htmlFor="make">Make:&nbsp;&nbsp;</label>
+            <input
+              name="make"
               type="text"
               value={this.state.make}
-              onChange={this.handleChange}>
-            </input>
-
-            <label htmlFor="model">Model:</label>
-            <input name="model"
+              onChange={this.handleChange}
+            />
+          </LabelInputContainer>
+          <LabelInputContainer>
+            <label htmlFor="model">Model:&nbsp;&nbsp;</label>
+            <input
+              name="model"
               type="text"
               value={this.state.model}
-              onChange={this.handleChange}>
-            </input>
-
-            <label htmlFor="plate">Plate:</label>
+              onChange={this.handleChange}
+            />
+          </LabelInputContainer>
+          <LabelInputContainer>
+            <label htmlFor="plate">Plate:&nbsp;&nbsp;</label>
             <input
               name="plate"
               type="text"
               value={this.state.plate}
-              onChange={this.handleChange}>
-            </input>
-
-            <label htmlFor="seats">Seats:</label>
-            <input name="seats"
+              onChange={this.handleChange}
+            />
+          </LabelInputContainer>
+          <LabelInputContainer>
+            <label htmlFor="seats">Seats:&nbsp;&nbsp;</label>
+            <input
+              name="seats"
               type="number"
               value={this.state.seats}
-              onChange={this.handleChange}>
-            </input>
-
-            <button type="submit">Register Car</button>
-          </StyledForm>
+              onChange={this.handleChange}
+            />
+          </LabelInputContainer>
+          <ButtonWrapper>
+            <Button type="submit">Register</Button>
+          </ButtonWrapper>
+        </StyledForm>
       </>
     );
   }
@@ -126,7 +144,6 @@ class AddCar extends Component {
 
 const mapStateToProps = state => ({
   user: getUser(state),
-  // newCar: getUserNewCar(state),
   loading: getUserLoading(state)
 });
 
