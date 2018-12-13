@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import Marker from './Marker.jsx';
 import BasicMap from './BasicMap.jsx';
 
@@ -73,8 +74,10 @@ class AllRidesMap extends Component {
               onClick={this.props.onRideSelect}
               key={ride.id}
               seats={ride.seats}
-              ride={ride.id}
+              ride={ride}
               text={ride.id}
+              history={this.props.history}
+              id={ride.id}
               lat={ride.destination[0]}
               lng={ride.destination[1]}
             />
@@ -85,4 +88,4 @@ class AllRidesMap extends Component {
   }
 }
 
-export default AllRidesMap;
+export default withRouter(AllRidesMap);
