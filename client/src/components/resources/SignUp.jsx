@@ -56,13 +56,14 @@ const ButtonWrapper = styled.div`
   width: 100vw;
   display: flex;
   justify-content: center;
+  margin-top: 125px;
 `;
 
 const Button = styled.button`
   display: flex;
   justify-content: center;
   background: none;
-  color: inherit;
+  color: ${({ theme }) => theme.accentcolor};
   border: 1px solid ${({ theme }) => theme.accentcolor};
   padding: 3px;
   font: inherit;
@@ -117,7 +118,7 @@ class SignUp extends PureComponent {
 
           <LabelInputContainer>
             <label>
-              Full Name{' '}
+              Name:&nbsp;&nbsp;
               <input
                 id="name"
                 name="name"
@@ -128,7 +129,7 @@ class SignUp extends PureComponent {
           </LabelInputContainer>
           <LabelInputContainer>
             <label>
-              Phone Number
+              Phone:&nbsp;&nbsp;
               <input
                 id="phone"
                 name="phone"
@@ -140,7 +141,7 @@ class SignUp extends PureComponent {
           <h3>Current Pickup Address:</h3>
           <LabelInputContainer>
             <label>
-              street:
+              Street:&nbsp;&nbsp;
               <input
                 id="street"
                 name="street"
@@ -151,7 +152,7 @@ class SignUp extends PureComponent {
           </LabelInputContainer>
           <LabelInputContainer>
             <label>
-              city:
+              City:&nbsp;&nbsp;
               <input
                 id="city"
                 name="city"
@@ -162,7 +163,7 @@ class SignUp extends PureComponent {
           </LabelInputContainer>
           <LabelInputContainer>
             <label>
-              state:
+              State:&nbsp;&nbsp;
               <input
                 id="state"
                 name="state"
@@ -173,7 +174,7 @@ class SignUp extends PureComponent {
           </LabelInputContainer>
           <LabelInputContainer>
             <label>
-              zip:
+              Zip:&nbsp;&nbsp;
               <input
                 id="zip"
                 name="zip"
