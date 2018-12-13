@@ -9,12 +9,13 @@ import {
 } from 'graphql';
 import { prepare } from '../../lib/graphql';
 import { User } from './mongoose';
+import ObjectId from '../../lib/graphql/resolvers/objectId';
 
 const AddressType = new GraphQLObjectType({
   name: 'Address',
   description: 'An address',
   fields: () => ({
-    _id: { type: new GraphQLNonNull(GraphQLID) },
+    _id: { type: new GraphQLNonNull(ObjectId) },
     street: { type: GraphQLString },
     city: { type: GraphQLString },
     state: { type: GraphQLString },
@@ -46,7 +47,7 @@ const UserType = new GraphQLObjectType({
   name: 'User',
   description: 'A user',
   fields: () => ({
-    _id: { type: new GraphQLNonNull(GraphQLID) },
+    _id: { type: new GraphQLNonNull(ObjectId) },
     name: { type: new GraphQLNonNull(GraphQLString) },
     email: { type: new GraphQLNonNull(GraphQLString) },
     phone: { type: new GraphQLNonNull(GraphQLString) },
@@ -100,28 +101,30 @@ export const userMutations = {
       address
     }).then(prepare)
   },
-  // updateUser: {
-  //   description: 'Update a new user',
-  //   type: UserType,
-  //   args: {
-  //     _id: { type: GraphQLString },
-  //     name: { type: new GraphQLNonNull(GraphQLString) },
-  //     email: { type: GraphQLString },
-  //     phone: { type: GraphQLString },
-  //     address: { type: AddressInputType },
-  //   },
-  //   resolve: (_, {
-  //     _id,
-  //     name,
-  //     email,
-  //     phone,
-  //     address
-  //   }) => User.update({
-  //     _id,
-  //     name,
-  //     email,
-  //     phone,
-  //     address
-  //   }).then(prepare)
-  // }
+  updateUser: {
+    description: 'Update a new user',
+    type: UserType,
+    args: {
+      _id: { type: ObjectId },
+      name: { type: new GraphQLNonNull(GraphQLString) },
+      email: { type: GraphQLString },
+      phone: { type: GraphQLString },
+      address: { type: AddressInputType },
+    },
+    resolve: (_, {
+      _id,
+      name,
+      email,
+      phone,
+      address
+    }) => User.findOneAndUpdate({
+      _id
+    },
+    {
+      name,
+      email,
+      phone,
+      address
+    }).then(prepare)
+  }
 }

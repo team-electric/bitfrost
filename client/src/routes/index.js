@@ -13,6 +13,7 @@ import AddCar from '../components/resources/AddCar.jsx';
 import CreateTrip from '../components/resources/CreateTrip.jsx';
 import Test from '../components/resources/Test.jsx';
 import EditProfile from '../components/resources/EditProfile.jsx';
+import { WithUser } from '../components/lib/WithUser.jsx';
 
 
 export const ROUTES = {
@@ -33,47 +34,47 @@ export const ROUTES = {
   },
   RIDE_LIST: {
     path: '/rides',
-    Component: RideList,
+    Component: WithUser(RideList),
     linkTo: () => '/rides',
   },
   DASHBOARD: {
     path: '/dashboard',
-    Component: Dashboard,
+    Component: WithUser(Dashboard),
     linkTo: () => '/dashboard'
   },
   PROFILE: {
     path: '/profile',
-    Component: Profile,
+    Component: WithUser(Profile),
     linkTo: () => '/profile'
   },
   EDITPROFILE: {
     path: '/EditProfile',
-    Component: EditProfile,
+    Component: WithUser(EditProfile),
     linkTo: () => '/EditProfile'
   },
   PASTTRIPS: {
     path: '/pasttrips',
-    Component: PastTrips,
+    Component: WithUser(PastTrips),
     linkTo: () => '/pasttrips'
   },
   UPCOMINGTRIPS: {
     path: '/upcomingtrips',
-    Component: UpcomingTrips,
+    Component: WithUser(UpcomingTrips),
     linkTo: () => '/upcomingtrips'
   },
   TRIPDETAIL: {
     path: '/tripdetail',
-    Component: TripDetail,
+    Component: WithUser(TripDetail),
     linkTo: () => '/tripdetail'
   },
   ADDCAR: {
     path: '/addcar',
-    Component: AddCar,
+    Component: WithUser(AddCar),
     linkTo: () => '/addcar'
   },
   CREATETRIP: {
     path: '/createtrip',
-    Component: CreateTrip,
+    Component: WithUser(CreateTrip),
     linkTo: () => '/createtrip'
   },
   TEST: {
