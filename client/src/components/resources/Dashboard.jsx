@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Nav from './Nav.jsx';
 import { Link, Redirect } from 'react-router-dom';
 import { ROUTES } from '../../routes/index.js';
@@ -8,9 +9,11 @@ import {
   getAuth,
   getUserLoading
 } from '../../store/resources/users/selectors.js';
-import { firebaseConnect } from 'react-redux-firebase';
+// import { firebaseConnect } from 'react-redux-firebase';
+import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { logoutUser } from '../../store/resources/users/actions.js';
+import AllRidesMap from '../resources/maps/AllRidesMap.jsx';
 
 const MapWrapper = styled.div`
   width: 100vw;
@@ -69,10 +72,22 @@ const Button = styled.button`
   height: 12.5vh;
 `;
 class Dashboard extends Component {
+
+  static propTypes = {
+    uid: PropTypes.string,
+    rides: PropTypes.arrayOf(PropTypes.object),
+    selectedRide: PropTypes.string,
+    selectRide: PropTypes.func.isRequired,
+  };
+
   logout = () => {
     this.props.logout();
     this.props.firebase.logout();
   };
+
+  componentDidMount() {
+    console.log('RIDES!!!!', this.props.rides);
+  }
 
   render() {
     if(!this.props.loading && !this.props.auth.email)
@@ -83,10 +98,12 @@ class Dashboard extends Component {
       <Fragment>
         <Nav pageTitle="Your Dashboard" />
         <MapWrapper>
-          <img
-            src={
-              'https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg'
-            }
+          <AllRidesMap
+
+            rides={this.props.rides}
+
+            onRideSelect={this.props.selectRide}
+
           />
         </MapWrapper>
         <UserImgWrapper>
@@ -112,18 +129,28 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
+  uid: state.firebase.auth.uid,
+  rides: state.firestore.ordered.rides || [],
+  selectedRide: state.rides.selectedRide,
   auth: getAuth(state),
   loading: getUserLoading(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logoutUser())
+  logout: () => dispatch(logoutUser()),
+  selectRide: ({ target }) => {
+    console.log(target.value);
+    dispatch({ type: 'selectRide', ride: target.value });
+  }
 });
 
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  firebaseConnect()
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect((props) => {
+    if(!props.uid) return [];
+    return [{
+      collection: 'rides',
+      where: [['uid', '==', props.uid]]
+    }];
+  })
 )(Dashboard);
