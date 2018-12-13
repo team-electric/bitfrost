@@ -81,9 +81,9 @@ exports[`<App /> renders 1`] = `
       />
       <Route
         component={[Function]}
-        exact={true}
+        exact={false}
         key="8"
-        path="/tripdetail"
+        path="/trip/:id"
       />
       <Route
         component={[Function]}
