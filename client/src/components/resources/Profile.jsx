@@ -234,7 +234,6 @@ const mapStateToProps = state => ({
   // loading: getUserLoading(state)
 });
 
-
 const mapDispatchToProps = dispatch => ({
   fetchUser: email => dispatch(fetchUser(email))
 });
