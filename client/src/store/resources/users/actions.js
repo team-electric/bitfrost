@@ -1,4 +1,4 @@
-import { getUsers, getUser, createUser } from '../../../services/mongo/users';
+import { getUsers, getUser, createUser, updateUser } from '../../../services/mongo/users';
 
 export const FETCH_USERS = 'FETCH_USERS';
 export const FETCH_USERS_START = 'FETCH_USERS_START';
@@ -27,7 +27,7 @@ export const postUser = user => ({
 });
 
 export const UPDATE_USER = 'UPDATE_USER';
-export const updateUser = user => ({
+export const UpdatedUser = user => ({
   type: UPDATE_USER,
   payload: updateUser(user)
 });

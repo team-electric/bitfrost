@@ -6,3 +6,4 @@ export const getAuth = state => state.firebase.auth;
 
 export const getUserLoading = state => state.users.loadingCurrent;
 
+// export const updateUser = state => state.users.current

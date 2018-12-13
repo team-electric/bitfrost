@@ -115,12 +115,13 @@ class Profile extends PureComponent {
         <InfoDiv>
           <UserDiv>
             <h2>User Info:</h2>
-            <p>Name: </p>
-            <p>Email: </p>
-            <p>Phone: </p>
-            <p>City: </p>
-            <p>State: </p>
-            <p>Zip: </p>
+            <p>Name: {this.props.user.name} </p>
+            <p>Email: {this.props.user.email} </p>
+            <p>Phone: {this.props.user.phone} </p>
+            <p>Street: {this.props.user.address.street} </p>
+            <p>City: {this.props.user.address.city} </p>
+            <p>State: {this.props.user.address.state} </p>
+            <p>Zip: {this.props.user.address.zip} </p>
           </UserDiv>
           <CarDiv>
             <h2>Cars:</h2>

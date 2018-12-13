@@ -23,6 +23,9 @@ const userByEmail = email => JSON.stringify({
         phone
         address {
           zip
+          state
+          city
+          street
         }
       }
     }`
