@@ -11,7 +11,7 @@ import Nav from './Nav.jsx';
 import NewRideMap from './maps/NewRideMap.jsx';
 
 import { fetchCar } from '../../store/resources/cars/actions';
-import { getCar } from '../../store/resources/cars/selectors';
+import { getUserCar } from '../../store/resources/cars/selectors';
 import { getUser, getAuth, getUserLoading } from '../../store/resources/users/selectors';
 
 const StyledForm = styled.form`
@@ -121,7 +121,7 @@ const mapStateToProps = state => ({
   uid: state.firebase.auth.uid,
   user: getUser(state),
   auth: getAuth(state),
-  car: getCar(state)
+  car: getUserCar(state)
 });
 
 
