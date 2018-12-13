@@ -31,9 +31,6 @@ class CreateTrip extends PureComponent {
   };
 
   onChange = e => {
-    console.log(this.state);
-    console.log(e.target.value);
-    // this.setState({ [e.target.name]: e.target.value });
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -44,22 +41,12 @@ class CreateTrip extends PureComponent {
       departDTL, arriveDTL, origin, destination
     } = this.state;
 
-    console.log(origin, destination);
-
     const convertDate = date => new Date(date).valueOf();
     const depart = convertDate(departDTL);
     const arrive = convertDate(arriveDTL);
 
     const seats = this.props.car.seats;
     const driver = this.props.user._id;
-
-    // const origin =
-    // const destination =
-    // const currentLocation =
-
-    // save current location as lat,long and send destination as lat,long too
-    // currentlocation is currentlocation
-    // destination from chosen spot
 
     this.props.firestore.add(
       { collection: 'rides' },
@@ -81,7 +68,6 @@ class CreateTrip extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('loaded', this.state);
     this.props.fetchCar(this.props.user._id);
   }
 
