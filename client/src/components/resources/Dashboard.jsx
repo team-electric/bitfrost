@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { ROUTES } from '../../routes/index.js';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getAuth } from '../../store/resources/users/selectors.js';
+import { getAuth, getUserLoading } from '../../store/resources/users/selectors.js';
 import { firebaseConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
@@ -68,7 +68,8 @@ const Button = styled.button`
 `;
 class Dashboard extends Component {
   render() {
-    if(!this.props.user) return <Redirect to={ROUTES.HOME.linkTo()} />;
+    if(!this.props.loading && !this.props.auth.email) return <Redirect to={ROUTES.HOME.linkTo()} />;
+    if(this.props.loading) return <h1> LOADING </h1>;
     const { photoURL } = this.props.auth;
     return (
       <Fragment>
@@ -99,10 +100,15 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: getAuth(state)
+  auth: getAuth(state),
+  loading: getUserLoading(state)
+});
+
+const mapDispatchToProps = state => ({
+
 });
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firebaseConnect()
 )(Dashboard);
