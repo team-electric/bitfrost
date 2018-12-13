@@ -31,8 +31,7 @@ class AutoComplete extends Component {
     const place = this.autoComplete.getPlace();
 
     if(!place.geometry) return;
-    // console.log(place.geometry.location.lat());
-    console.log(place);
+
     if(place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
     } else {

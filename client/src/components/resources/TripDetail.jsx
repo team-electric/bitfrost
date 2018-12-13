@@ -13,6 +13,7 @@ import {
 import { fetchCar } from '../../store/resources/cars/actions';
 import { fetchUser } from '../../store/resources/users/actions';
 import { getUserCar } from '../../store/resources/cars/selectors';
+import { getSelectedRide } from '../../store/resources/rides/selectors.js';
 
 const StyledDiv = styled.div`
   h2 {
@@ -95,6 +96,8 @@ class TripDetail extends Component {
 
   render() {
     const { photoURL } = this.props.auth;
+    const { street, city, state, zip } = this.props.selectedRide.address;
+
     return (
       <Fragment>
         <Nav pageTitle='Trip Details' />
@@ -108,6 +111,13 @@ class TripDetail extends Component {
         </UserImgWrapper>
 
         <StyledDiv>
+          <div>
+            <h3>Address:</h3>
+            <p>{street}</p>
+            <p>
+              {city}, {state} {zip}
+            </p>
+          </div>
           <UserInfoContainer>
             <h3>User Info</h3>
             <div>Name: {this.state.name}</div>

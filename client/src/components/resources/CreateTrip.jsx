@@ -38,7 +38,8 @@ class CreateTrip extends PureComponent {
     origin: [],
     destination: [],
     departDTL: '',
-    arriveDTL: ''
+    arriveDTL: '',
+    address: {},
   };
 
   onChange = e => {
@@ -48,7 +49,7 @@ class CreateTrip extends PureComponent {
   createRide = e => {
     e.preventDefault();
     const { uid } = this.props;
-    const { departDTL, arriveDTL, origin, destination } = this.state;
+    const { departDTL, arriveDTL, origin, destination, address } = this.state;
 
     const convertDate = date => new Date(date).valueOf();
     const depart = convertDate(departDTL);
@@ -70,7 +71,9 @@ class CreateTrip extends PureComponent {
         departed: false,
         origin,
         destination,
-        currentLocation: origin
+        currentLocation: origin,
+        address
+
       }
     );
     this.setState({
@@ -82,9 +85,10 @@ class CreateTrip extends PureComponent {
   };
 
   handlePositions = positions => {
-    const { origin, destination } = positions;
+    const { origin, destination, address } = positions;
     this.setState({ origin });
     this.setState({ destination });
+    this.setState({ address });
   };
 
   componentDidMount() {
