@@ -89,7 +89,7 @@ class AddCar extends Component {
   };
 
   handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
+    this.setState({ [target.name]: target.value.toUpperCase() });
   };
 
   render() {
