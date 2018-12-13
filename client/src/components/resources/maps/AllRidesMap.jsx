@@ -15,14 +15,14 @@ class AllRidesMap extends Component {
     position: [45.5221418, -122.67768079999999]
   };
 
-  apiIsLoaded = (map, maps, rides) => {
-    // Get bounds by our rides
-    const bounds = this.getMapBounds(map, maps, rides);
-    // Fit map to bounds
-    map.fitBounds(bounds);
-    // Bind the resize listener
-    this.bindResizeListener(map, maps, bounds);
-  };
+  // apiIsLoaded = (map, maps, rides) => {
+  //   // Get bounds by our rides
+  //   const bounds = this.getMapBounds(map, maps, rides);
+  //   // Fit map to bounds
+  //   map.fitBounds(bounds);
+  //   // Bind the resize listener
+  //   this.bindResizeListener(map, maps, bounds);
+  // };
 
   getMapBounds = (map, maps, rides) => {
     const bounds = new maps.LatLngBounds();
