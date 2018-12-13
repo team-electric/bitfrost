@@ -34,12 +34,12 @@ export const ROUTES = {
   },
   RIDE_LIST: {
     path: '/rides',
-    Component: RideList,
+    Component: WithUser(RideList),
     linkTo: () => '/rides',
   },
   DASHBOARD: {
     path: '/dashboard',
-    Component: Dashboard,
+    Component: WithUser(Dashboard),
     linkTo: () => '/dashboard'
   },
   PROFILE: {
@@ -49,32 +49,32 @@ export const ROUTES = {
   },
   EDITPROFILE: {
     path: '/EditProfile',
-    Component: EditProfile,
+    Component: WithUser(EditProfile),
     linkTo: () => '/EditProfile'
   },
   PASTTRIPS: {
     path: '/pasttrips',
-    Component: PastTrips,
+    Component: WithUser(PastTrips),
     linkTo: () => '/pasttrips'
   },
   UPCOMINGTRIPS: {
     path: '/upcomingtrips',
-    Component: UpcomingTrips,
+    Component: WithUser(UpcomingTrips),
     linkTo: () => '/upcomingtrips'
   },
   TRIPDETAIL: {
     path: '/tripdetail',
-    Component: TripDetail,
+    Component: WithUser(TripDetail),
     linkTo: () => '/tripdetail'
   },
   ADDCAR: {
     path: '/addcar',
-    Component: AddCar,
+    Component: WithUser(AddCar),
     linkTo: () => '/addcar'
   },
   CREATETRIP: {
     path: '/createtrip',
-    Component: CreateTrip,
+    Component: WithUser(CreateTrip),
     linkTo: () => '/createtrip'
   },
   TEST: {
