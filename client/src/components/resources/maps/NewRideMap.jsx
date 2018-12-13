@@ -55,7 +55,7 @@ class SearchMap extends Component {
     const { places, mapApiLoaded, mapInstance, mapApi, defaultCenter, position } = this.state;
     return (
       <Fragment>
-        {mapApiLoaded && (
+        {!!mapApiLoaded && (
           <AutoComplete map={mapInstance} mapApi={mapApi} addplace={this.addPlace} />
         )}
         <BasicMap
