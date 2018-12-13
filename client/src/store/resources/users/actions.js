@@ -33,9 +33,9 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const UpdatedUser = user => ({
   type: UPDATE_USER,
   payload: updateUser(user)
+});
 
 export const LOGOUT = 'LOGOUT';
 export const logoutUser = () => ({
   type: LOGOUT
-
 });
