@@ -123,6 +123,7 @@ class Profile extends PureComponent {
 
   componentDidMount() {
     this.props.fetchCar(this.props.user._id);
+    // this.props.fetchCar(this.props.user.seats);
   }
 
   render() {
@@ -167,7 +168,7 @@ class Profile extends PureComponent {
 
           <h2>Update Car</h2>
           <div>
-            {/* <label>Make: {this.props.car.make}</label> */}
+            <label>Make: </label>
           </div>
           <div>
             <label>model </label>
