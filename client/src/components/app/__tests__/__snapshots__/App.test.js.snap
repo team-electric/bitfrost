@@ -109,6 +109,18 @@ exports[`<App /> renders 1`] = `
         key="12"
         path="/test"
       />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="13"
+        path="/map"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        key="14"
+        path="/mapsearch"
+      />
       <Redirect
         push={false}
         to="/home/"

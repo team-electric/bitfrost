@@ -14,22 +14,24 @@ import { logoutUser } from '../../store/resources/users/actions.js';
 
 const MapWrapper = styled.div`
   width: 100vw;
-  height: 40vh;
+  height: 80vh;
   overflow: hidden;
   img {
-    width: 100vw;
-    height: auto;
+    height: 100vh;
+    width: auto;
   }
 `;
 
 const UserImgWrapper = styled.div`
-  position: relative;
+  position: fixed;
+  bottom: 10vh;
   margin: auto;
-  top: -30px;
-  width: 80px;
+  align-self: center;
+  width: 100vw;
   height: 80px;
   display: flex;
   justify-content: center;
+  z-index: 3;
 `;
 const UserImg = styled.div`
   width: 80px;
@@ -37,21 +39,20 @@ const UserImg = styled.div`
   border-radius: 50%;
   overflow: hidden;
   img {
+    height: 100%;
     width: 80px;
   }
 `;
 
 const ButtonBox = styled.div`
   position: fixed;
-  bottom: 25px;
+  bottom: 10px;
   width: 100vw;
   margin-top: 20px;
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
   align-items: center;
-  flex-wrap: wrap;
-  flex-grow: 2;
   a {
     text-decoration: none;
     color: ${({ theme }) => theme.accentcolor};
@@ -63,12 +64,9 @@ const Button = styled.button`
   color: ${({ theme }) => theme.accentcolor};
   text-align: center;
   border: 1px solid ${({ theme }) => theme.accentcolor};
-  padding: 55px;
-  font: inherit;
   cursor: pointer;
-  width: 40vw;
-  height: 20vh;
-  margin-top: 15px;
+  width: 20vw;
+  height: 12.5vh;
 `;
 class Dashboard extends Component {
   logout = () => {
@@ -85,7 +83,11 @@ class Dashboard extends Component {
       <Fragment>
         <Nav pageTitle="Your Dashboard" />
         <MapWrapper>
-          <img src={'https://staticmapmaker.com/img/google.png'} />
+          <img
+            src={
+              'https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg'
+            }
+          />
         </MapWrapper>
         <UserImgWrapper>
           <UserImg>

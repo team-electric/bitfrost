@@ -94,6 +94,7 @@ const Button = styled.button`
 `;
 
 class Profile extends PureComponent {
+
   state = {
     name: '',
     email: '',
@@ -111,6 +112,7 @@ class Profile extends PureComponent {
     event.preventDefault();
     const { email } = this.props.auth;
     const { name, phone, city, state, zip, make, model, plate, seats } = this.state;
+
   };
 
   handleChange = ({ target }) => {
