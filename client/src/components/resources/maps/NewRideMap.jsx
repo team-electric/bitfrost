@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import Marker from './Marker.jsx';
 import BasicMap from './BasicMap.jsx';
@@ -6,6 +7,11 @@ import AutoComplete from './AutoComplete.jsx';
 
 
 class SearchMap extends Component {
+
+  static propTypes = {
+    handlePositions: PropTypes.func.isRequired
+
+  };
 
   state = {
     mapApiLoaded: false,
@@ -25,14 +31,19 @@ class SearchMap extends Component {
   };
 
   addPlace = (place) => {
-    console.log(place);
     this.setState({ places: [place] });
+    const { lat, lng } = place.geometry.location;
+    const destination = [lat(), lng()];
+    console.log(destination);
+    this.props.handlePositions({
+      destination,
+      origin: this.state.position
+    });
   };
 
   componentDidMount() {
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        console.log(pos);
         const { latitude, longitude } = pos.coords;
         this.setState({ position: [latitude, longitude] });
       });

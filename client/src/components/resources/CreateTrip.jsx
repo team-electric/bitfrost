@@ -24,8 +24,8 @@ class CreateTrip extends PureComponent {
   //   lots o props
   // }
   state = {
-    origin: '',
-    destination: '',
+    origin: [],
+    destination: [],
     departDTL: '',
     arriveDTL: '',
   };
@@ -41,25 +41,44 @@ class CreateTrip extends PureComponent {
     e.preventDefault();
     const { uid } = this.props;
     const {
-      origin, destination, departDTL, arriveDTL
+      departDTL, arriveDTL, origin, destination
     } = this.state;
+
+    console.log(origin, destination);
 
     const convertDate = date => new Date(date).valueOf();
     const depart = convertDate(departDTL);
     const arrive = convertDate(arriveDTL);
 
     const seats = this.props.car.seats;
+    const driver = this.props.user._id;
 
-    console.log(this.props.firestore);
+    // const origin =
+    // const destination =
+    // const currentLocation =
+
+    // save current location as lat,long and send destination as lat,long too
+    // currentlocation is currentlocation
+    // destination from chosen spot
 
     this.props.firestore.add(
       { collection: 'rides' },
-      { uid, depart, arrive, seats }
+      {
+        uid, driver, seats, riders: [],
+        depart, arrive, departed: false,
+        origin, destination, currentLocation: origin
+      }
     );
     this.setState({
       origin: '', destination: '', departDTL: '', arriveDTL: '',
     });
   };
+
+  handlePositions = (positions) => {
+    const { origin, destination } = positions;
+    this.setState({ origin });
+    this.setState({ destination });
+  }
 
   componentDidMount() {
     console.log('loaded', this.state);
@@ -67,20 +86,15 @@ class CreateTrip extends PureComponent {
   }
 
   render() {
-
-    // save current location as lat,long and send destination as lat,long too
-    // get driver from current user
-    // departed is false
-    // currentlocation is currentlocation
-    // seats from current car
-    // destination from chosen spot
     const { departDTL, arriveDTL } = this.state;
 
     return (
       <Fragment>
         <Nav pageTitle="Create A Trip" />
 
-        <NewRideMap/>
+        <NewRideMap
+          handlePositions={this.handlePositions}
+        />
 
         <StyledForm onSubmit={this.createRide}>
 
