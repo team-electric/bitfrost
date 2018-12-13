@@ -258,7 +258,7 @@ class Profile extends PureComponent {
             </label>
           </div>
 
-          <h3>Current Car</h3>
+          <h3>{this.props.car && <span>Current Car</span> }</h3>
           <div>
             {this.props.car && <label>Make: &nbsp;&nbsp;{this.props.car.make} </label>}
           </div>

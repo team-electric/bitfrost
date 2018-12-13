@@ -1,18 +1,18 @@
 import React, { PureComponent, Fragment } from 'react';
-// import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { v4 as uuid } from 'uuid';
-
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-
-import Nav from './Nav.jsx';
-import NewRideMap from './maps/NewRideMap.jsx';
-
 import { fetchCar } from '../../store/resources/cars/actions';
 import { getUserCar } from '../../store/resources/cars/selectors';
-import { getUser, getAuth, getUserLoading } from '../../store/resources/users/selectors';
+import Nav from './Nav.jsx';
+import { getUser, getAuth } from '../../store/resources/users/selectors';
+import NewRideMap from './maps/NewRideMap.jsx';
+import { v4 as uuid } from 'uuid';
+import { ROUTES } from '../../routes/index.js';
+
+
+import styled from 'styled-components';
 
 const StyledForm = styled.form`
   h1 {
@@ -31,9 +31,7 @@ const MapWrapper = styled.div`
 `;
 
 class CreateTrip extends PureComponent {
-  // static propTypes = {
-  //   lots o props
-  // }
+
   state = {
     origin: [],
     destination: [],
@@ -49,11 +47,9 @@ class CreateTrip extends PureComponent {
     e.preventDefault();
     const { uid } = this.props;
     const { departDTL, arriveDTL, origin, destination } = this.state;
-
     const convertDate = date => new Date(date).valueOf();
     const depart = convertDate(departDTL);
     const arrive = convertDate(arriveDTL);
-
     const seats = this.props.car.seats;
     const driver = this.props.user._id;
 
@@ -93,7 +89,8 @@ class CreateTrip extends PureComponent {
 
   render() {
     const { departDTL, arriveDTL } = this.state;
-
+    if(this.props.loading)
+    if(!this.props.loading && !this.props.car) return <Redirect to={ROUTES.ADDCAR.linkTo()} />;
     return (
       <Fragment>
         <Nav pageTitle='Create A Trip' />
