@@ -38,7 +38,7 @@ class CreateTrip extends PureComponent {
     origin: [],
     destination: [],
     departDTL: '',
-    arriveDTL: '',
+    arriveDTL: ''
   };
 
   onChange = e => {
@@ -48,9 +48,7 @@ class CreateTrip extends PureComponent {
   createRide = e => {
     e.preventDefault();
     const { uid } = this.props;
-    const {
-      departDTL, arriveDTL, origin, destination
-    } = this.state;
+    const { departDTL, arriveDTL, origin, destination } = this.state;
 
     const convertDate = date => new Date(date).valueOf();
     const depart = convertDate(departDTL);
@@ -63,21 +61,31 @@ class CreateTrip extends PureComponent {
       { collection: 'rides' },
       {
         id: uuid(),
-        uid, driver, seats, riders: [],
-        depart, arrive, departed: false,
-        origin, destination, currentLocation: origin
+        uid,
+        driver,
+        seats,
+        riders: [],
+        depart,
+        arrive,
+        departed: false,
+        origin,
+        destination,
+        currentLocation: origin
       }
     );
     this.setState({
-      origin: '', destination: '', departDTL: '', arriveDTL: '',
+      origin: '',
+      destination: '',
+      departDTL: '',
+      arriveDTL: ''
     });
   };
 
-  handlePositions = (positions) => {
+  handlePositions = positions => {
     const { origin, destination } = positions;
     this.setState({ origin });
     this.setState({ destination });
-  }
+  };
 
   componentDidMount() {
     this.props.fetchCar(this.props.user._id);
@@ -88,29 +96,28 @@ class CreateTrip extends PureComponent {
 
     return (
       <Fragment>
-        <Nav pageTitle="Create A Trip" />
+        <Nav pageTitle='Create A Trip' />
         <MapWrapper>
-          <NewRideMap
-            handlePositions={this.handlePositions}
-          />
+          <NewRideMap handlePositions={this.handlePositions} />
         </MapWrapper>
 
         <StyledForm onSubmit={this.createRide}>
-
-          <label htmlFor="departDTL">Estimated Depart Time</label>
+          <label htmlFor='departDTL'>Estimated Depart Time</label>
           <input
-            type="datetime-local"
-            name="departDTL" value={departDTL}
+            type='datetime-local'
+            name='departDTL'
+            value={departDTL}
             onChange={this.onChange}
-          ></input>
-          <label htmlFor="arriveDTL">Estimated Arrival Time</label>
+          />
+          <label htmlFor='arriveDTL'>Estimated Arrival Time</label>
           <input
-            type="datetime-local"
-            name="arriveDTL" value={arriveDTL}
+            type='datetime-local'
+            name='arriveDTL'
+            value={arriveDTL}
             onChange={this.onChange}
-          ></input>
+          />
 
-          <button type="submit">Create new trip</button>
+          <button type='submit'>Create new trip</button>
         </StyledForm>
       </Fragment>
     );
@@ -124,13 +131,15 @@ const mapStateToProps = state => ({
   car: getUserCar(state)
 });
 
-
 const mapDispatchToProps = dispatch => ({
   // fetchUser: email => dispatch(fetchUser(email)),
-  fetchCar: userId => dispatch(fetchCar(userId)),
+  fetchCar: userId => dispatch(fetchCar(userId))
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect()
 )(CreateTrip);

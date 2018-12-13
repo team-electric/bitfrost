@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import Nav from '../Nav.jsx';
 import { ROUTES } from '../../../routes/index.js';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 const StyledDiv = styled.div`
   h1 {
@@ -11,16 +14,38 @@ const StyledDiv = styled.div`
   }
 `;
 
+const UserImgWrapper = styled.div`
+  position: fixed;
+  bottom: 10vh;
+  margin: auto;
+  align-self: center;
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  z-index: 3;
+`;
+const UserImg = styled.div`
+  width: 80px;
+  border: 2px solid ${({ theme }) => theme.accentcolor};
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    height: 100%;
+    width: 80px;
+  }
+`;
+
 const TripsContainer = styled.div`
-    text-align: center;
-    li {
-      list-style: none;
-    }
-    a {
+  text-align: center;
+  li {
+    list-style: none;
+  }
+  a {
     text-decoration: none;
     color: ${({ theme }) => theme.secondary};
-    }
-    width: 90vw;
+  }
+  width: 90vw;
 `;
 
 const Button = styled.button`
@@ -37,28 +62,41 @@ const Button = styled.button`
   padding: 15px;
 `;
 
-export default class UpcomingTrips extends PureComponent {
+class UpcomingTrips extends PureComponent {
   // static propTypes = {
   //   lots o props
   // }
 
   render() {
+    const { photoURL } = this.props.auth;
+
+    const rides = this.props.rides.map(ride => {
+      return (
+        <li key={ride.id}>
+          <Link to={ROUTES.TRIPDETAIL.linkTo()}>
+            <Button>{ride.currentLocation} </Button>
+          </Link>
+        </li>
+      );
+    });
     return (
       <Fragment>
-        <Nav pageTitle="Upcoming Trips" />
+        <Nav pageTitle='Upcoming Trips' />
 
         <StyledDiv>
-          <h1>
-            Google map with the most recent route shown. user Icon, List of
-            upcoming trips here, linking to detail view of a trip.
-          </h1>
+          <UserImgWrapper>
+            <UserImg>
+              <img src={photoURL} />
+            </UserImg>
+          </UserImgWrapper>
 
           <TripsContainer>
             <h2>UPCOMING TRIPS</h2>
             <ol>
+              {rides}
               <li>
                 <Link to={ROUTES.TRIPDETAIL.linkTo()}>
-                  <Button>Jackie Chan - Seattle - 1.1.19  </Button>
+                  <Button>Jackie Chan - Seattle - 1.1.19 </Button>
                 </Link>
               </li>
               <li>
@@ -78,3 +116,31 @@ export default class UpcomingTrips extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  uid: state.firebase.auth.uid,
+  rides: state.firestore.ordered.rides || [],
+  selectedRide: state.rides.selectedRide
+});
+
+const mapDispatchToProps = dispatch => ({
+  selectRide: ({ target }) => {
+    dispatch({ type: 'selectRide', ride: target.value });
+  }
+});
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(props => {
+    if(!props.uid) return [];
+    return [
+      {
+        collection: 'rides',
+        where: [['uid', '==', props.uid]]
+      }
+    ];
+  })
+)(UpcomingTrips);
