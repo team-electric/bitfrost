@@ -38,5 +38,4 @@ export const WithUser = Component => {
     connect(mapStateToProps, mapDispatchToProps),
     firebaseConnect()
   )(WithUserComponent);
-
 };
