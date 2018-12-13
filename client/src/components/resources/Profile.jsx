@@ -158,7 +158,7 @@ class Profile extends PureComponent {
 
           <h2>Update Car</h2>
           <div>
-            <label>Make: </label>
+            {/* <label>Make: {this.props.cars.make}</label> */}
           </div>
           <div>
             <label>model </label>
