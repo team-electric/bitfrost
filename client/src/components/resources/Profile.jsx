@@ -46,8 +46,8 @@ const StyledForm = styled.form`
   outline: none;
   cursor: pointer;
   h2 {
-      font-weight: bolder;
-      text-align: center;
+    font-weight: bolder;
+    text-align: center;
   }
   div {
     left: 25vw;
@@ -96,7 +96,6 @@ const Button = styled.button`
 `;
 
 class Profile extends PureComponent {
-
   state = {
     name: '',
     email: '',
@@ -117,8 +116,20 @@ class Profile extends PureComponent {
     console.log('hi there state', this.state);
     const { name, phone, city, state, zip, street } = this.state;
 
-    // call action that updates user, pass in data from form state to the action
-    this.props.putUser({ _id: this.props.user._id, name, email, phone, city, adresss: { state, zip, street, city } });
+    this.props
+      .putUser({
+        _id: this.props.user._id,
+        name,
+        email,
+        phone,
+        city,
+        state,
+        zip,
+        street
+      })
+      .then(() => {
+        fetchUser(email);
+      });
   };
 
   handleChange = ({ target }) => {
@@ -128,10 +139,15 @@ class Profile extends PureComponent {
   componentDidMount() {
     const { name, email, phone, address } = this.props.user;
     this.props.fetchCar(this.props.user._id);
-    if(this.props.user){
-      this.setState({ ...this.state, email, name, phone, city: address.city, state: address.state, zip: address.zip, street: address.street });
+    if(this.props.user) {
+      this.setState({
+        ...this.state,
+        email,
+        name,
+        phone,
+        ...address
+      });
     }
-    //.then to set the state to the current user
   }
 
   render() {
@@ -139,43 +155,105 @@ class Profile extends PureComponent {
 
     return (
       <Fragment>
-        <Nav pageTitle="Your Profile" />
+        <Nav pageTitle='Your Profile' />
         <UserImgWrapper>
           <UserImg>
             <img src={photoURL} />
           </UserImg>
         </UserImgWrapper>
 
-        {/* BELOW IS SHOWN WHEN AT NORMAL PROFILE PAGE */}
+        <StyledForm onSubmit={this.onSubmit}>
+          <h2>Update</h2>
 
-        {/* <StyledForm onSubmit={this.onSubmit}>
-          <h2>Your Info</h2>
           <div>
-            <label>Name: {this.props.user.name}</label>
+            <label>Name:</label>
+            <input
+              id='name'
+              name='name'
+              type='text'
+              onChange={this.handleChange}
+              placeholder={this.props.user.name}
+              value={this.state.name}
+            />
           </div>
           <div>
-            <label>Email: {this.props.user.email}</label>
+            <label>Email:</label>
+            <input
+              id='email'
+              name='email'
+              type='text'
+              onChange={this.handleChange}
+              placeholder={this.props.user.email}
+              value={this.state.email}
+            />
           </div>
           <div>
-            <label>Phone Number: {this.props.user.phone}</label>
+            <label>
+              Phone Number:
+              <input
+                id='phone'
+                name='phone'
+                type='tel'
+                onChange={this.handleChange}
+                placeholder={this.props.user.phone}
+                value={this.state.phone}
+              />
+            </label>
           </div>
           <div>
-            <label>Street: {this.props.user.address.street}</label>
+            <label>
+              Street:
+              <input
+                id='street'
+                name='street'
+                type='text'
+                onChange={this.handleChange}
+                placeholder={this.props.user.address.street}
+                value={this.state.street}
+              />
+            </label>
           </div>
           <div>
-            <label>City: {this.props.user.address.city}</label>
+            <label>
+              City:
+              <input
+                id='city'
+                name='city'
+                type='text'
+                onChange={this.handleChange}
+                placeholder={this.props.user.address.city}
+                value={this.state.city}
+              />
+            </label>
           </div>
           <div>
-            <label>State: {this.props.user.address.state}</label>
+            <label>
+              State:
+              <input
+                id='state'
+                name='state'
+                type='text'
+                onChange={this.handleChange}
+                placeholder={this.props.user.address.state}
+                value={this.state.state}
+              />
+            </label>
           </div>
           <div>
-            <label>Zip: {this.props.user.address.zip}</label>
-          </div>
-          <div>
-            <label>Venmo/Paypal</label>
+            <label>
+              Zip:
+              <input
+                id='zip'
+                name='zip'
+                type='text'
+                onChange={this.handleChange}
+                placeholder={this.props.user.address.zip}
+                value={this.state.zip}
+              />
+            </label>
           </div>
 
-          <h2>Update Car</h2>
+          <h2>Current Car</h2>
           <div>
             {this.props.car && <label>Make: {this.props.car.make} </label>}
           </div>
@@ -188,72 +266,15 @@ class Profile extends PureComponent {
           <div>
             {this.props.car && <label>Seats: {this.props.car.seats}</label>}
           </div>
-          <ButtonBox>
-            <Link to={ROUTES.PROFILE.linkTo()}>
-              <Button>Edit</Button>
-            </Link>
-            <Link to={ROUTES.ADDCAR.linkTo()}>
-              <Button>Add Car</Button>
-            </Link>
-          </ButtonBox>
-        </StyledForm> */}
-
-        {/* BELOW IS SHOWN WHEN EDITING */}
-
-        <StyledForm onSubmit={this.onSubmit}>
-          <h2>Update</h2>
-
-          <div>
-            <label>Name:</label><input id="name" name="name" type="text" onChange={this.handleChange} placeholder={this.props.user.name} value={this.state.name} />
-          </div>
-          <div>
-            <label>Email:</label><input id="email" name="email" type="text" onChange={this.handleChange} placeholder={this.props.user.email}/>
-          </div>
-          <div>
-            <label>Phone Number:<input id="phone" name="phone" type="tel" onChange={this.handleChange} placeholder={this.props.user.phone} value={this.state.phone} /></label>
-          </div>
-          <div>
-            <label>Street:<input id="street" name="street" type="text" onChange={this.handleChange} placeholder={this.props.user.address.street}/></label>
-          </div>
-          <div>
-            <label>City:<input id="city" name="city" type="text" onChange={this.handleChange} placeholder={this.props.user.address.city}/></label>
-          </div>
-          <div>
-            <label>State:<input id="state" name="state" type="text" onChange={this.handleChange} placeholder={this.props.user.address.state}/></label>
-          </div>
-          <div>
-            <label>Zip:<input id="zip" name="zip" type="text" onChange={this.handleChange} placeholder={this.props.user.address.zip} value={this.state.zip} /></label>
-          </div>
-          <div>
-            <label>Venmo/Paypal<input id="pay" name="pay" type="text" onChange={this.handleChange}/></label>
-          </div>
-
-          <h2>Current Car</h2>
-          <div>
-            {this.props.car && <label>Make <input id="make" name="make" type="text" onChange={this.handleChange} placeholder={this.props.car.make}/></label>}
-          </div>
-          <div>
-            {this.props.car && <label>model <input id="model" name="model" type="text" onChange={this.handleChange} placeholder={this.props.car.model}/></label>}
-          </div>
-          <div>
-            {this.props.car && <label>plate <input id="plate" name="plate" type="text" onChange={this.handleChange} placeholder={this.props.car.plate}/></label>}
-          </div>
-          <div>
-            {this.props.car && <label>Seats<input id="seats" name="seats" type="number" onChange={this.handleChange} placeholder={this.props.car.seats}/></label>}
-          </div>
 
           <ButtonBox>
-            <Button type='submit'>Update  </Button>
-              {/* <Link to={ROUTES.PROFILE.linkTo()}> User</Link> */}
-
-
+            <Button type='submit'>Update </Button>
 
             <Link to={ROUTES.ADDCAR.linkTo()}>
-              <Button>Add Car</Button>
+              <Button>Edit car</Button>
             </Link>
           </ButtonBox>
         </StyledForm>
-
       </Fragment>
     );
   }
