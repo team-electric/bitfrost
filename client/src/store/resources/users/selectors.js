@@ -8,4 +8,4 @@ export const getUserLoading = state => state.users.loadingCurrent;
 
 export const getUserError = state => state.users.errorCurrent;
 
-// export const updateUser = state => state.users.current
+export const updateUser = state => state.users.current

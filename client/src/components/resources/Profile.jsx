@@ -3,7 +3,6 @@ import Nav from './Nav.jsx';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../routes/index.js';
 import styled from 'styled-components';
-
 import {
   getUser,
   getAuth,
@@ -110,11 +109,13 @@ class Profile extends PureComponent {
     seats: ''
   };
 
+
   onSubmit = event => {
     event.preventDefault();
     const { email } = this.props.auth;
     const { name, phone, city, state, zip, make, model, plate, seats } = this.state;
-
+    // call action that updates user, pass in data from form state to the action
+    // putUser( name, ) = this.state
   };
 
   handleChange = ({ target }) => {
@@ -123,7 +124,6 @@ class Profile extends PureComponent {
 
   componentDidMount() {
     this.props.fetchCar(this.props.user._id);
-    // this.props.fetchCar(this.props.user.seats);
   }
 
   render() {
@@ -140,7 +140,8 @@ class Profile extends PureComponent {
 
         {/* BELOW IS SHOWN WHEN AT NORMAL PROFILE PAGE */}
 
-        <StyledForm onSubmit={this.onSubmit}>
+        {/* <StyledForm onSubmit={this.onSubmit}>
+          <h2>Your Info</h2>
           <div>
             <label>Name: {this.props.user.name}</label>
           </div>
@@ -168,16 +169,16 @@ class Profile extends PureComponent {
 
           <h2>Update Car</h2>
           <div>
-            <label>Make: </label>
+            {this.props.car && <label>Make: {this.props.car.make} </label>}
           </div>
           <div>
-            <label>model </label>
+            {this.props.car && <label>Model: {this.props.car.model} </label>}
           </div>
           <div>
-            <label>plate </label>
+            {this.props.car && <label>Plate: {this.props.car.plate} </label>}
           </div>
           <div>
-            <label>Seats</label>
+            {this.props.car && <label>Seats: {this.props.car.seats}</label>}
           </div>
           <ButtonBox>
             <Link to={ROUTES.PROFILE.linkTo()}>
@@ -187,42 +188,52 @@ class Profile extends PureComponent {
               <Button>Add Car</Button>
             </Link>
           </ButtonBox>
-        </StyledForm>
+        </StyledForm> */}
 
         {/* BELOW IS SHOWN WHEN EDITING */}
 
-        {/* <StyledForm onSubmit={this.onSubmit}>
+        <StyledForm onSubmit={this.onSubmit}>
           <h2>Update</h2>
 
           <div>
-            <label>First Name</label><input id="firstName" name="firstName" type="text" onChange={this.handleChange}/>
+            <label>Name:</label><input id="name" name="name" type="text" onChange={this.handleChange} placeholder={this.props.user.name}/>
           </div>
           <div>
-            <label>Last Name <input id="lastName" name="lastName" type="text" onChange={this.handleChange}/></label>
+            <label>Email:</label><input id="email" name="email" type="text" onChange={this.handleChange} placeholder={this.props.user.email}/>
           </div>
           <div>
-            <label>Address <input id="address" name="address" type="text" onChange={this.handleChange}/></label>
+            <label>Phone Number:<input id="phone" name="phone" type="tel" onChange={this.handleChange} placeholder={this.props.user.phone}/></label>
           </div>
           <div>
-            <label>Phone Number<input id="phone" name="phone" type="tel" onChange={this.handleChange}/></label>
+            <label>Street:<input id="street" name="street" type="text" onChange={this.handleChange} placeholder={this.props.user.address.street}/></label>
+          </div>
+          <div>
+            <label>City:<input id="city" name="city" type="text" onChange={this.handleChange} placeholder={this.props.user.address.city}/></label>
+          </div>
+          <div>
+            <label>State:<input id="state" name="state" type="text" onChange={this.handleChange} placeholder={this.props.user.address.state}/></label>
+          </div>
+          <div>
+            <label>Zip:<input id="zip" name="zip" type="text" onChange={this.handleChange} placeholder={this.props.user.address.zip}/></label>
           </div>
           <div>
             <label>Venmo/Paypal<input id="pay" name="pay" type="text" onChange={this.handleChange}/></label>
           </div>
 
-          <h2>Update Car</h2>
+          <h2>Current Car</h2>
           <div>
-            <label>Make <input id="make" name="make" type="text" onChange={this.handleChange}/></label>
+            {this.props.car && <label>Make <input id="make" name="make" type="text" onChange={this.handleChange} placeholder={this.props.car.make}/></label>}
           </div>
           <div>
-            <label>model <input id="model" name="model" type="text" onChange={this.handleChange}/></label>
+            {this.props.car && <label>model <input id="model" name="model" type="text" onChange={this.handleChange} placeholder={this.props.car.model}/></label>}
           </div>
           <div>
-            <label>plate <input id="plate" name="plate" type="text" onChange={this.handleChange}/></label>
+            {this.props.car && <label>plate <input id="plate" name="plate" type="text" onChange={this.handleChange} placeholder={this.props.car.plate}/></label>}
           </div>
           <div>
-            <label>Seats<input id="seats" name="seats" type="number" onChange={this.handleChange}/></label>
+            {this.props.car && <label>Seats<input id="seats" name="seats" type="number" onChange={this.handleChange} placeholder={this.props.car.seats}/></label>}
           </div>
+
           <ButtonBox>
             <Link to={ROUTES.PROFILE.linkTo()}>
               <Button>Update</Button>
@@ -231,7 +242,7 @@ class Profile extends PureComponent {
               <Button>Add Car</Button>
             </Link>
           </ButtonBox>
-        </StyledForm> */}
+        </StyledForm>
 
       </Fragment>
     );
