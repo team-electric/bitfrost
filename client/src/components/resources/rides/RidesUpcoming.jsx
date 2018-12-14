@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
+import { getUserRides } from '../../../store/resources/rides/selectors';
+
 const StyledDiv = styled.div`
   overflow: hidden;
 `;
@@ -134,7 +136,7 @@ class UpcomingTrips extends PureComponent {
 
 const mapStateToProps = state => ({
   uid: state.firebase.auth.uid,
-  rides: state.firestore.ordered.rides || [],
+  rides: getUserRides(state, state.firebase.auth.uid, state.users.current._id),
   selectedRide: state.rides.selectedRide
 });
 
