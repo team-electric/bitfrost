@@ -13,6 +13,13 @@ const StyledForm = styled.form`
     font-weight: bolder;
   }
 `;
+const Button = styled.button`
+:hover {
+    background-image: linear-gradient(to bottom right, rgb(58, 64, 125), rgb(9, 12, 15));
+    color: ${({ theme }) => theme.secondary};
+    box-shadow: 5px 5px 2px rgb(40, 45, 60);
+  }
+`;
 
 class AddRide extends Component {
   static propTypes = {
@@ -28,7 +35,6 @@ class AddRide extends Component {
     depart: null,
     arrive: null,
   };
-
   addRide = e => {
     e.preventDefault();
     const { uid } = this.props;
@@ -68,7 +74,7 @@ class AddRide extends Component {
             onChange={this.onChange}
           ></input>
 
-          <button type="submit">Create new trip</button>
+          <Button type="submit">Create new trip</Button>
         </StyledForm>
       </Fragment>
     );
