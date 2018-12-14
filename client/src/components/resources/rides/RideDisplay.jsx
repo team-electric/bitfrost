@@ -15,6 +15,12 @@ import AllRidesMap from '../../resources/maps/AllRidesMap.jsx';
 
 import { getRides } from '../../../store/resources/rides/selectors';
 
+const PageDiv = styled.div`
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+`;
+
 const MapWrapper = styled.div`
   width: 100vw;
   height: 80vh;
@@ -49,7 +55,7 @@ const UserImg = styled.div`
 
 const ButtonBox = styled.div`
   position: relative;
-  top: -7.5vh;
+  top: -70px;
   width: 100vw;
   display: flex;
   justify-content: space-evenly;
@@ -69,7 +75,7 @@ const Button = styled.button`
   cursor: pointer;
   font-size: 1.2em;
   width: 45vw;
-  height: 12vh;
+  height: 10vh;
 `;
 
 class Dashboard extends Component {
@@ -80,7 +86,6 @@ class Dashboard extends Component {
     selectRide: PropTypes.func.isRequired
   };
 
-
   render() {
     if(!this.props.loading && !this.props.auth.email)
       return <Redirect to={ROUTES.HOME.linkTo()} />;
@@ -88,11 +93,9 @@ class Dashboard extends Component {
 
     const { photoURL } = this.props.auth;
 
-    console.log(this.props.rides);
-
     return (
-      <Fragment>
-        <Nav pageTitle='Your Dashboard' />
+      <PageDiv>
+        <Nav pageTitle="Your Dashboard" />
         <MapWrapper>
           <AllRidesMap
             rides={this.props.rides}
@@ -114,7 +117,7 @@ class Dashboard extends Component {
             <Button>Create Trip</Button>
           </Link>
         </ButtonBox>
-      </Fragment>
+      </PageDiv>
     );
   }
 }

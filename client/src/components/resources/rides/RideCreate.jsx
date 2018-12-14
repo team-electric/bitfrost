@@ -15,8 +15,15 @@ import { ROUTES } from '../../../routes/index.js';
 
 import styled from 'styled-components';
 
+const PageDiv = styled.div`
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+`;
+
 const StyledForm = styled.form`
   display: flex;
+
   flex-direction: column;
   align-items: center;
   border-top: 2px solid ${({ theme }) => theme.accentcolor};
@@ -31,12 +38,19 @@ const InputDiv = styled.div`
     color: ${({ theme }) => theme.accentcolor};
   }
   input {
+    background-color: ${({ theme }) => theme.secondary};
     width: 45vw;
   }
 `;
+const ButtonDiv = styled.div`
+  position: relative;
+  top: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+`;
 
 const Button = styled.button`
-  position: relative;
   font-size: 1em;
   background: none;
   color: ${({ theme }) => theme.accentcolor};
@@ -45,14 +59,13 @@ const Button = styled.button`
   cursor: pointer;
   width: 40vw;
   height: 1.5em;
-  top: 5px;
 `;
 
 const MapWrapper = styled.div`
   position: relative;
   top: -1px;
   width: 100vw;
-  height: 80vh;
+  height: 75vh;
   overflow: hidden;
   img {
     height: 100vh;
@@ -121,12 +134,13 @@ class CreateTrip extends PureComponent {
   }
 
   render() {
-    if(this.state.redirect) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
+    if(this.state.redirect)
+      return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
     const { departDTL, arriveDTL } = this.state;
     // if(!this.props.loading && !this.props.car)
     //   return <Redirect to={ROUTES.CAR_ADD.linkTo()} />;
     return (
-      <Fragment>
+      <PageDiv>
         <Nav pageTitle="Create A Trip" />
         <MapWrapper>
           <NewRideMap handlePositions={this.handlePositions} />
@@ -151,9 +165,11 @@ class CreateTrip extends PureComponent {
               onChange={this.onChange}
             />
           </InputDiv>
-          <Button type="submit">Create new trip</Button>
+          <ButtonDiv>
+            <Button type="submit">Create new trip</Button>
+          </ButtonDiv>
         </StyledForm>
-      </Fragment>
+      </PageDiv>
     );
   }
 }
