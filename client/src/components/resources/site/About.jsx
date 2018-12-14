@@ -74,8 +74,7 @@ const About = () => {
               </a>
             </h3>
             <p>
-              some info some info some info some info some info some info some
-              info some info some info
+              Jack is energetic member of the Bitfrost team. He brings good country music tunes and knowledge of the entire software stack. When not programming, he likes lifting weights and playing board games.
             </p>
           </InfoDiv>
         </Profile>
