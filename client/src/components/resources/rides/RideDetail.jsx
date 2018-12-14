@@ -7,7 +7,6 @@ import { firestoreConnect } from 'react-redux-firebase';
 import {
   getUser,
   getAuth,
-  updateUser,
   getRideUser,
   getRideData
 } from '../../../store/resources/users/selectors';
