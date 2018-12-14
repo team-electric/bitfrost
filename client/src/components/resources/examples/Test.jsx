@@ -2,9 +2,9 @@ import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Fetch } from '../lib/Fetch.jsx';
-import { getUsers, getUser, getAuth } from '../../store/resources/users/selectors';
-import { fetchUsers, fetchUser, postUser } from '../../store/resources/users/actions';
+import { Fetch } from '../../lib/Fetch.jsx';
+import { getUsers, getUser, getAuth } from '../../../store/resources/users/selectors';
+import { fetchUsers, fetchUser, postUser } from '../../../store/resources/users/actions';
 
 
 class Test extends PureComponent {

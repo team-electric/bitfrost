@@ -24,7 +24,7 @@ const Marker = props => {
 
   const selectRide = () => {
     props.onClick(props.ride);
-    props.history.push(`/trip/${props.id}`);
+    props.history.push(`/ride/${props.id}`);
   };
 
   return (

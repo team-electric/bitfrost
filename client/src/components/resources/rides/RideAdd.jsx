@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import styled from 'styled-components';
 
-import Nav from '../Nav.jsx';
+import Nav from '../../lib/Nav.jsx';
 import NewRideMap from '../maps/NewRideMap.jsx';
 
 const StyledForm = styled.form`

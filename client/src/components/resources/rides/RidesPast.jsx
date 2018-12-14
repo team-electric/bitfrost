@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Nav from '../Nav.jsx';
+import Nav from '../../lib/Nav.jsx';
 import { ROUTES } from '../../../routes/index.js';
 import { Link } from 'react-router-dom';
 
@@ -67,17 +67,17 @@ export default class PastTrips extends PureComponent {
           <TripsContainer>
             <ol>
               <li>
-                <Link to={ROUTES.TRIPDETAIL.linkTo()}>
+                <Link to={ROUTES.RIDE_DETAIL.linkTo()}>
                   <Button>David Chang - Montreal - 9.11.21 </Button>
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.TRIPDETAIL.linkTo()}>
+                <Link to={ROUTES.RIDE_DETAIL.linkTo()}>
                   <Button>Michael Corbin - Washginton DC - 11.21.19</Button>
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.TRIPDETAIL.linkTo()}>
+                <Link to={ROUTES.RIDE_DETAIL.linkTo()}>
                   <Button>Jack Sparkling - Portlandia - 9.11.21 </Button>
                 </Link>
               </li>

@@ -1,16 +1,16 @@
 import React, { PureComponent, Fragment } from 'react';
-import Nav from './Nav.jsx';
+import Nav from '../../lib/Nav.jsx';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../routes/index.js';
+import { ROUTES } from '../../../routes/index.js';
 import styled from 'styled-components';
 import {
   getUser,
   getAuth,
   updateUser
-} from '../../store/resources/users/selectors';
-import { fetchUser, putUser, logoutUser } from '../../store/resources/users/actions';
-import { getUserCar } from '../../store/resources/cars/selectors';
-import { fetchCar } from '../../store/resources/cars/actions';
+} from '../../../store/resources/users/selectors';
+import { fetchUser, putUser, logoutUser } from '../../../store/resources/users/actions';
+import { getUserCar } from '../../../store/resources/cars/selectors';
+import { fetchCar } from '../../../store/resources/cars/actions';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -162,7 +162,7 @@ class Profile extends PureComponent {
   }
 
   render() {
-    if(this.state.redirect) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
+    if(this.state.redirect) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
     const { photoURL } = this.props.auth;
 
     return (
@@ -281,7 +281,7 @@ class Profile extends PureComponent {
 
           <ButtonBox>
             <Button type='submit'>Update</Button>
-            <Link to={ROUTES.ADDCAR.linkTo()}>
+            <Link to={ROUTES.CAR_ADD.linkTo()}>
               <Button>Edit Car</Button>
             </Link>
             <Button onClick={this.logout}>Log Out</Button>

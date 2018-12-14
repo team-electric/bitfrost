@@ -1,15 +1,15 @@
 import React, { PureComponent, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
-var background = require('../../assets/landingwallpaper.jpg');
+var background = require('../../../assets/landingwallpaper.jpg');
 import { connect } from 'react-redux';
 import {
   getUser,
   getAuth,
   getUserLoading
-} from '../../store/resources/users/selectors';
-import { fetchUser, postUser } from '../../store/resources/users/actions';
-import { ROUTES } from '../../routes';
+} from '../../../store/resources/users/selectors';
+import { fetchUser, postUser } from '../../../store/resources/users/actions';
+import { ROUTES } from '../../../routes';
 import { Redirect } from 'react-router-dom';
 
 const StyledForm = styled.form`
@@ -111,7 +111,7 @@ class SignUp extends PureComponent {
 
   render() {
     console.log(this.props.user);
-    if(this.props.user) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
+    if(this.props.user) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
 
     return (

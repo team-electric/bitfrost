@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Nav from '../Nav.jsx';
+import Nav from '../../lib/Nav.jsx';
 import { ROUTES } from '../../../routes/index.js';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -89,7 +89,7 @@ class UpcomingTrips extends PureComponent {
       const date = new Date(ride.depart).toDateString();
       return (
         <li key={ride.id}>
-          <Link to={ROUTES.TRIPDETAIL.linkTo(ride.id)}>
+          <Link to={ROUTES.RIDE_DETAIL.linkTo(ride.id)}>
             <Button>
               <div>
                 <span>
@@ -112,7 +112,7 @@ class UpcomingTrips extends PureComponent {
         <StyledDiv>
           <UserImgWrapper>
             <UserImg>
-              <Link to={ROUTES.PROFILE.linkTo()}>
+              <Link to={ROUTES.USER_EDIT.linkTo()}>
                 <img src={photoURL} />
               </Link>
             </UserImg>
