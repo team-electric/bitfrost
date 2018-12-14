@@ -110,7 +110,6 @@ class SignUp extends PureComponent {
   };
 
   render() {
-    console.log(this.props.user);
     if(this.props.user) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
 
