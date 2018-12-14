@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import Nav from './Nav.jsx';
 import { getSelectedRide } from '../../store/resources/rides/selectors.js';
 
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
+
 const StyledDiv = styled.div`
   h2 {
     font-weight: bolder;
@@ -42,7 +45,7 @@ const UserInfoContainer = styled.div`
 
 class TripDetail extends Component {
   static propTypes = {
-    selectedRide: PropTypes.object.isRequired
+    selectedRide: PropTypes.object
   };
 
   render() {
@@ -86,15 +89,24 @@ class TripDetail extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  selectedRide: getSelectedRide(state)
+const mapStateToProps = (state, props) => ({
+  uid: state.firebase.auth.uid,
+  rides: state.firestore.ordered.rides || [],
+  selectedRide: getSelectedRide(state, props.match.params.id)
 });
 
 const mapDispatchToProps = dispatch => ({
 
 });
 
-
-export default connect(
-  mapStateToProps, mapDispatchToProps
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect(props => {
+    console.log(props);
+    if(!props.uid) return [];
+    return [{
+      collection: 'rides',
+      where: [['uid', '==', props.uid]]
+    }];
+  })
 )(TripDetail);
