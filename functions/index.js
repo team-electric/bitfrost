@@ -6,18 +6,20 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 
 exports.updateRide = functions.firestore
   .document('rides/{rideId}')
-  .onUpdate((change, context) => {
-    const completedRide = change.after.data();
+  // .onUpdate((change, context) => {
+  .onCreate((change, context) => {
+    const newRide = change.after.data();
 
     const {
       driver, riders, seats,
       depart, arrive,
-      origin, destination
-    } = completedRide;
+      origin, destination, address
+    } = newRide;
+
     const ride = {
       driver, riders, seats,
       depart, arrive,
-      origin, destination
+      origin, destination, address
     };
 
     createRide(ride);
@@ -33,7 +35,12 @@ const newRide = ride => JSON.stringify({
         seats: ${ride.seats}
         comments: "${ride.comments}"
         origin: "${ride.origin}"
-        destination: { zip: "${ride.zip}" }
+        destination: {
+          street: "${ride.address.street}"
+          city: "${ride.address.city}"
+          state: "${ride.address.state}"
+          zip: "${ride.address.zip}"
+        }
         depart: "${ride.depart}"
         arrive: "${ride.arrive}"
       )
@@ -44,7 +51,12 @@ const newRide = ride => JSON.stringify({
         seats
         comments
         origin
-        destination { zip }
+        destination {
+          street
+          city
+          state
+          zip
+        }
         depart
         arrive
       }
