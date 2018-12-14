@@ -3,10 +3,15 @@ import styled from 'styled-components';
 
 const StyledDiv = styled.div`
   position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 20px;
+  width: 100vw;
+  height: 2em;
+  input {
+    height: 2em;
+    width: 100vw;
+  }
 `;
 
 class AutoComplete extends Component {
@@ -48,13 +53,10 @@ class AutoComplete extends Component {
   }
 
   render() {
-    const StyledInput = styled.input`
-      width: 400px;
-    `;
 
     return (
       <StyledDiv>
-        <StyledInput
+        <input
           ref={ref => (this.searchInput = ref)}
           type='text'
           onFocus={this.clearSearchBox}

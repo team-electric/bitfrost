@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { fetchCar } from '../../store/resources/cars/actions';
-import { getUserCar, getCarLoading } from '../../store/resources/cars/selectors';
+import {
+  getUserCar,
+  getCarLoading
+} from '../../store/resources/cars/selectors';
 import Nav from './Nav.jsx';
 import { getUser, getAuth } from '../../store/resources/users/selectors';
 import NewRideMap from './maps/NewRideMap.jsx';
@@ -14,9 +17,34 @@ import { ROUTES } from '../../routes/index.js';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
-  h1 {
-    font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const InputDiv = styled.div`
+  width: 90vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  label {
+    color: ${({ theme }) => theme.accentcolor};
   }
+  input {
+    width: 45vw;
+  }
+`;
+
+const Button = styled.button`
+  position: relative;
+  font-size: 1em;
+  background: none;
+  color: ${({ theme }) => theme.accentcolor};
+  text-align: center;
+  border: 1px solid ${({ theme }) => theme.accentcolor};
+  cursor: pointer;
+  width: 40vw;
+  height: 2em;
+  top: 10px;
 `;
 
 const MapWrapper = styled.div`
@@ -52,7 +80,6 @@ class CreateTrip extends PureComponent {
     const arrive = convertDate(arriveDTL);
     const seats = this.props.car.seats;
     const driver = this.props.user._id;
-    
 
     this.props.firestore.add(
       { collection: 'rides' },
@@ -75,7 +102,8 @@ class CreateTrip extends PureComponent {
       origin: '',
       destination: '',
       departDTL: '',
-      arriveDTL: ''
+      arriveDTL: '',
+      redirect: true
     });
   };
 
@@ -91,6 +119,7 @@ class CreateTrip extends PureComponent {
   }
 
   render() {
+    if(this.state.redirect) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
     const { departDTL, arriveDTL } = this.state;
     // if(!this.props.loading && !this.props.car)
     //   return <Redirect to={ROUTES.ADDCAR.linkTo()} />;
@@ -102,22 +131,25 @@ class CreateTrip extends PureComponent {
         </MapWrapper>
 
         <StyledForm onSubmit={this.createRide}>
-          <label htmlFor="departDTL">Estimated Depart Time</label>
-          <input
-            type="datetime-local"
-            name="departDTL"
-            value={departDTL}
-            onChange={this.onChange}
-          />
-          <label htmlFor="arriveDTL">Estimated Arrival Time</label>
-          <input
-            type="datetime-local"
-            name="arriveDTL"
-            value={arriveDTL}
-            onChange={this.onChange}
-          />
-
-          <button type="submit">Create new trip</button>
+          <InputDiv>
+            <label htmlFor="departDTL">Estimated Depart Time: </label>
+            <input
+              type="datetime-local"
+              name="departDTL"
+              value={departDTL}
+              onChange={this.onChange}
+            />
+          </InputDiv>
+          <InputDiv>
+            <label htmlFor="arriveDTL">Estimated Arrival Time: </label>
+            <input
+              type="datetime-local"
+              name="arriveDTL"
+              value={arriveDTL}
+              onChange={this.onChange}
+            />
+          </InputDiv>
+          <Button type="submit">Create new trip</Button>
         </StyledForm>
       </Fragment>
     );
