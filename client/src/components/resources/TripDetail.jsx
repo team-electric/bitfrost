@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -14,6 +14,7 @@ import { fetchCar } from '../../store/resources/cars/actions';
 import { fetchUser } from '../../store/resources/users/actions';
 import { getUserCar } from '../../store/resources/cars/selectors';
 import { getSelectedRide } from '../../store/resources/rides/selectors.js';
+import { getRide } from '../../store/resources/rides/actions';
 
 const StyledDiv = styled.div`
   h2 {
@@ -70,7 +71,7 @@ const UserInfoContainer = styled.div`
   text-align: center;
 `;
 
-class TripDetail extends Component {
+class TripDetail extends PureComponent {
   static propTypes = {
     selectedRide: PropTypes.object.isRequired
   };
@@ -81,20 +82,23 @@ class TripDetail extends Component {
     phone: ''
   };
 
-  componentDidMount() {
-    const { name, email, phone } = this.props.user;
-    this.props.fetchCar(this.props.user._id);
-    if(this.props.user) {
-      this.setState({
-        ...this.state,
-        email,
-        name,
-        phone
-      });
-    }
-  }
+  // componentDidMount() {
+  //   const { name, email, phone } = this.props.user;
+  //   this.props.fetchCar(this.props.user._id);
+  //   this.props.getSelectedRide();
+  //   if(this.props.user) {
+  //     this.setState({
+  //       ...this.state,
+  //       email,
+  //       name,
+  //       phone
+  //     });
+  //   }
+  // }
 
   render() {
+    console.log(this.props.ride);
+
     const { photoURL } = this.props.auth;
     const { street, city, state, zip } = this.props.selectedRide.address;
 
@@ -144,8 +148,8 @@ class TripDetail extends Component {
 
 const mapStateToProps = state => ({
   uid: state.firebase.auth.uid,
-  ride: state.firestore.ordered.ride || [],
-  selectedRide: state.rides.selectedRide,
+  ride: state.firestore.ordered.rides || [],
+  selectedRide: getSelectedRide(state),
   user: getUser(state),
   auth: getAuth(state),
   car: getUserCar(state)
@@ -154,6 +158,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchUser: email => dispatch(fetchUser(email)),
   fetchCar: userId => dispatch(fetchCar(userId)),
+  getRide: ride => dispatch(getRide(ride)),
   selectRide: ({ target }) => {
     dispatch({ type: 'selectRide', ride: target.value });
   }
