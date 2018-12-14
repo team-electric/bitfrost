@@ -9,7 +9,7 @@ import {
   getAuth,
   updateUser,
   getRideUser,
-  getRideUserPhone
+  getRideData
 } from '../../../store/resources/users/selectors';
 import { ROUTES } from '../../../routes/index.js';
 import { Link, Redirect } from 'react-router-dom';
@@ -157,7 +157,7 @@ class TripDetail extends Component {
         <UserImgWrapper>
           <UserImg>
             <Link to={ROUTES.USER_EDIT.linkTo()}>
-              <img src={this.props.rideUser.avatarUrl} />
+              <img src={photoURL} />
             </Link>
           </UserImg>
         </UserImgWrapper>
@@ -171,6 +171,13 @@ class TripDetail extends Component {
           </RideInfoContainer>
           <BoxContainer>
             <UserInfoContainer>
+              <UserImgWrapper>
+                <UserImg>
+                  <Link to={ROUTES.USER_EDIT.linkTo()}>
+                    <img src={this.props.rideUser.avatarUrl} />
+                  </Link>
+                </UserImg>
+              </UserImgWrapper>
               <h3>Driver Info</h3>
               <div>Name: {this.props.rideUser.displayName}</div>
               <div>Phone: {this.props.rideUserProviderData.phoneNumber}</div>
@@ -206,7 +213,7 @@ const mapStateToProps = (state, props) => ({
   auth: getAuth(state),
   car: getUserCar(state),
   rideUser: getRideUser(state),
-  rideUserProviderData: getRideUserPhone(state)
+  rideUserProviderData: getRideData(state)
 });
 
 const mapDispatchToProps = dispatch => ({
