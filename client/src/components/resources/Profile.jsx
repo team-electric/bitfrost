@@ -8,7 +8,7 @@ import {
   getAuth,
   updateUser
 } from '../../store/resources/users/selectors';
-import { fetchUser, putUser } from '../../store/resources/users/actions';
+import { fetchUser, putUser, logoutUser } from '../../store/resources/users/actions';
 import { getUserCar } from '../../store/resources/cars/selectors';
 import { fetchCar } from '../../store/resources/cars/actions';
 import { Redirect } from 'react-router-dom';
@@ -112,6 +112,12 @@ class Profile extends PureComponent {
     model: '',
     plate: '',
     seats: ''
+  };
+
+  logout = () => {
+    this.props.firebase.logout().then(() => {
+      this.props.logout();
+    });
   };
 
   onSubmit = event => {
@@ -278,6 +284,7 @@ class Profile extends PureComponent {
             <Link to={ROUTES.ADDCAR.linkTo()}>
               <Button>Edit Car</Button>
             </Link>
+            <Button onClick={this.logout}>Log Out</Button>
           </ButtonBox>
         </StyledForm>
       </Fragment>
@@ -293,6 +300,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logoutUser()),
   fetchUser: email => dispatch(fetchUser(email)),
   fetchCar: userId => dispatch(fetchCar(userId)),
   putUser: user => dispatch(putUser(user))
