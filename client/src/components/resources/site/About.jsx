@@ -60,8 +60,7 @@ const About = () => {
               </a>
             </h3>
             <p>
-              The stylist, the perfectionist, the one, the only, Ryan the
-              maveric lionesta!
+              With a background in Art and Design, Ryan enjoys developing his skills in the App developemnt world.
             </p>
           </InfoDiv>
         </Profile>

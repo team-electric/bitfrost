@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import Nav from '../../lib/Nav.jsx';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../routes/index.js';
@@ -8,11 +8,21 @@ import {
   getAuth,
   updateUser
 } from '../../../store/resources/users/selectors';
-import { fetchUser, putUser, logoutUser } from '../../../store/resources/users/actions';
+import {
+  fetchUser,
+  putUser,
+  logoutUser
+} from '../../../store/resources/users/actions';
 import { getUserCar } from '../../../store/resources/cars/selectors';
 import { fetchCar } from '../../../store/resources/cars/actions';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+const PageDiv = styled.div`
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+`;
 
 const UserImgWrapper = styled.div`
   position: relative;
@@ -35,7 +45,10 @@ const UserImg = styled.div`
 `;
 
 const StyledForm = styled.form`
+  position: relative;
+  top: -5px;
   width: 100vw;
+  height: 90vh;
   overflow: hidden;
   background: none;
   color: inherit;
@@ -46,12 +59,16 @@ const StyledForm = styled.form`
   outline: none;
   cursor: pointer;
   h3 {
+    position: relative;
+    top: -20px;
     font-weight: bolder;
     text-align: center;
   }
   div {
-    left: 25vw;
     position: relative;
+    top: -30px;
+    left: 25vw;
+    margin-bottom: -5px;
   }
   input {
     font-size: 1em;
@@ -67,15 +84,16 @@ const StyledForm = styled.form`
   label {
     color: ${({ theme }) => theme.accentcolor};
     input {
-      color: ${({ theme }) => theme.secondary}
+      color: ${({ theme }) => theme.secondary};
     }
   }
 `;
 
 const ButtonBox = styled.section`
+  position: relative;
+  top: -30px;
   margin: auto;
   width: 100vw;
-  margin-top: 15px;
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
@@ -162,12 +180,13 @@ class Profile extends PureComponent {
   }
 
   render() {
-    if(this.state.redirect) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
+    if(this.state.redirect)
+      return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
     const { photoURL } = this.props.auth;
 
     return (
-      <Fragment>
-        <Nav pageTitle='Your Profile' />
+      <PageDiv>
+        <Nav pageTitle="Your Profile" />
         <UserImgWrapper>
           <UserImg>
             <img src={photoURL} />
@@ -180,9 +199,9 @@ class Profile extends PureComponent {
           <div>
             <label>Name:&nbsp;&nbsp;&nbsp;</label>
             <input
-              id='name'
-              name='name'
-              type='text'
+              id="name"
+              name="name"
+              type="text"
               onChange={this.handleChange}
               placeholder={this.props.user.name}
               value={this.state.name}
@@ -191,9 +210,9 @@ class Profile extends PureComponent {
           <div>
             <label>Email:&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input
-              id='email'
-              name='email'
-              type='text'
+              id="email"
+              name="email"
+              type="text"
               onChange={this.handleChange}
               placeholder={this.props.user.email}
               value={this.state.email}
@@ -203,9 +222,9 @@ class Profile extends PureComponent {
             <label>
               Phone:&nbsp;&nbsp;&nbsp;
               <input
-                id='phone'
-                name='phone'
-                type='tel'
+                id="phone"
+                name="phone"
+                type="tel"
                 onChange={this.handleChange}
                 placeholder={this.props.user.phone}
                 value={this.state.phone}
@@ -216,9 +235,9 @@ class Profile extends PureComponent {
             <label>
               Street:&nbsp;&nbsp;&nbsp;
               <input
-                id='street'
-                name='street'
-                type='text'
+                id="street"
+                name="street"
+                type="text"
                 onChange={this.handleChange}
                 placeholder={this.props.user.address.street}
                 value={this.state.street}
@@ -229,9 +248,9 @@ class Profile extends PureComponent {
             <label>
               City:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input
-                id='city'
-                name='city'
-                type='text'
+                id="city"
+                name="city"
+                type="text"
                 onChange={this.handleChange}
                 placeholder={this.props.user.address.city}
                 value={this.state.city}
@@ -242,9 +261,9 @@ class Profile extends PureComponent {
             <label>
               State:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input
-                id='state'
-                name='state'
-                type='text'
+                id="state"
+                name="state"
+                type="text"
                 onChange={this.handleChange}
                 placeholder={this.props.user.address.state}
                 value={this.state.state}
@@ -255,9 +274,9 @@ class Profile extends PureComponent {
             <label>
               Zip:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input
-                id='zip'
-                name='zip'
-                type='text'
+                id="zip"
+                name="zip"
+                type="text"
                 onChange={this.handleChange}
                 placeholder={this.props.user.address.zip}
                 value={this.state.zip}
@@ -265,29 +284,37 @@ class Profile extends PureComponent {
             </label>
           </div>
 
-          <h3>{this.props.car && <span>Current Car</span> }</h3>
+          <h3>{this.props.car && <span>Current Car</span>}</h3>
           <div>
-            {this.props.car && <label>Make: &nbsp;&nbsp;{this.props.car.make} </label>}
+            {this.props.car && (
+              <label>Make: &nbsp;&nbsp;{this.props.car.make} </label>
+            )}
           </div>
           <div>
-            {this.props.car && <label>Model: &nbsp;&nbsp;{this.props.car.model} </label>}
+            {this.props.car && (
+              <label>Model: &nbsp;&nbsp;{this.props.car.model} </label>
+            )}
           </div>
           <div>
-            {this.props.car && <label>Plate: &nbsp;&nbsp;{this.props.car.plate} </label>}
+            {this.props.car && (
+              <label>Plate: &nbsp;&nbsp;{this.props.car.plate} </label>
+            )}
           </div>
           <div>
-            {this.props.car && <label>Seats: &nbsp;&nbsp;{this.props.car.seats}</label>}
+            {this.props.car && (
+              <label>Seats: &nbsp;&nbsp;{this.props.car.seats}</label>
+            )}
           </div>
 
           <ButtonBox>
-            <Button type='submit'>Update</Button>
+            <Button type="submit">Update</Button>
             <Link to={ROUTES.CAR_ADD.linkTo()}>
               <Button>Edit Car</Button>
             </Link>
             <Button onClick={this.logout}>Log Out</Button>
           </ButtonBox>
         </StyledForm>
-      </Fragment>
+      </PageDiv>
     );
   }
 }
