@@ -11,7 +11,6 @@ import NewRideMap from './maps/NewRideMap.jsx';
 import { v4 as uuid } from 'uuid';
 import { ROUTES } from '../../routes/index.js';
 
-
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
@@ -31,12 +30,12 @@ const MapWrapper = styled.div`
 `;
 
 class CreateTrip extends PureComponent {
-
   state = {
     origin: [],
     destination: [],
     departDTL: '',
-    arriveDTL: ''
+    arriveDTL: '',
+    address: {}
   };
 
   onChange = e => {
@@ -46,7 +45,7 @@ class CreateTrip extends PureComponent {
   createRide = e => {
     e.preventDefault();
     const { uid } = this.props;
-    const { departDTL, arriveDTL, origin, destination } = this.state;
+    const { departDTL, arriveDTL, origin, destination, address } = this.state;
     const convertDate = date => new Date(date).valueOf();
     const depart = convertDate(departDTL);
     const arrive = convertDate(arriveDTL);
@@ -66,7 +65,8 @@ class CreateTrip extends PureComponent {
         departed: false,
         origin,
         destination,
-        currentLocation: origin
+        currentLocation: origin,
+        address
       }
     );
     this.setState({
@@ -78,9 +78,10 @@ class CreateTrip extends PureComponent {
   };
 
   handlePositions = positions => {
-    const { origin, destination } = positions;
+    const { origin, destination, address } = positions;
     this.setState({ origin });
     this.setState({ destination });
+    this.setState({ address });
   };
 
   componentDidMount() {
@@ -89,32 +90,32 @@ class CreateTrip extends PureComponent {
 
   render() {
     const { departDTL, arriveDTL } = this.state;
-    if(this.props.loading)
-    if(!this.props.loading && !this.props.car) return <Redirect to={ROUTES.ADDCAR.linkTo()} />;
+    if(!this.props.loading && !this.props.car)
+      return <Redirect to={ROUTES.ADDCAR.linkTo()} />;
     return (
       <Fragment>
-        <Nav pageTitle='Create A Trip' />
+        <Nav pageTitle="Create A Trip" />
         <MapWrapper>
           <NewRideMap handlePositions={this.handlePositions} />
         </MapWrapper>
 
         <StyledForm onSubmit={this.createRide}>
-          <label htmlFor='departDTL'>Estimated Depart Time</label>
+          <label htmlFor="departDTL">Estimated Depart Time</label>
           <input
-            type='datetime-local'
-            name='departDTL'
+            type="datetime-local"
+            name="departDTL"
             value={departDTL}
             onChange={this.onChange}
           />
-          <label htmlFor='arriveDTL'>Estimated Arrival Time</label>
+          <label htmlFor="arriveDTL">Estimated Arrival Time</label>
           <input
-            type='datetime-local'
-            name='arriveDTL'
+            type="datetime-local"
+            name="arriveDTL"
             value={arriveDTL}
             onChange={this.onChange}
           />
 
-          <button type='submit'>Create new trip</button>
+          <button type="submit">Create new trip</button>
         </StyledForm>
       </Fragment>
     );
@@ -129,7 +130,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  // fetchUser: email => dispatch(fetchUser(email)),
   fetchCar: userId => dispatch(fetchCar(userId))
 });
 

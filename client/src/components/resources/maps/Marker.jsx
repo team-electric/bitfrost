@@ -30,7 +30,6 @@ const Marker = props => {
   return (
     <StyledDiv
       alt={props.seats ? `seats: ${props.seats}` : props.text }
-      // {...props.onClick ? { onClick: props.onClick.bind(null, props.ride) } : {}}
       {...props.onClick ? { onClick: selectRide } : {}}
     />
   );
