@@ -122,9 +122,37 @@ class TripDetail extends Component {
   };
 
   redirect = () => {
+    const { user, selectedRide, auth } = this.props;
+
+    const otherRiders = selectedRide.riders.filter(rider => rider.uid !== auth.uid);
+    this.props.firestore.update(
+      { collection: 'rides', doc: selectedRide.id },
+      { riders: [...otherRiders] }
+    );
+
     this.setState({ redirect: true });
   };
+
   switch = () => {
+    const { user, selectedRide, auth } = this.props;
+    console.log(selectedRide);
+
+
+    if(selectedRide.riders.length >= selectedRide.seats) return;
+
+    if(selectedRide.riders.some(rider => rider.uid === auth.uid)) {
+      const otherRiders = selectedRide.riders.filter(rider => rider.uid !== auth.uid);
+      this.props.firestore.update(
+        { collection: 'rides', doc: selectedRide.id },
+        { riders: [...otherRiders] }
+      );
+      return;
+    }
+
+    this.props.firestore.update(
+      { collection: 'rides', doc: selectedRide.id },
+      { riders: [...selectedRide.riders, { ...user, uid: auth.uid }] }
+    );
     this.setState({ reserved: true });
   };
 
@@ -135,15 +163,35 @@ class TripDetail extends Component {
     ) {
       this.props.fetchCar(this.props.selectedRide.driver);
     }
+    // const { user, selectedRide } = this.props;
+    // if(selectedRide.riders.filter(rider => rider._id === user._id)) {
+    //   this.setState({ reserved: true });
+    // }
   }
 
   render() {
     if(!this.props.selectedRide) return null;
-    if(this.state.redirect)
-      return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
-    const { photoURL } = this.props.auth;
-    const { street, city, state, zip } = this.props.selectedRide.address;
-    const { origin, destination } = this.props.selectedRide;
+
+    if(this.state.redirect) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
+    const { auth, selectedRide, user } = this.props;
+    const { photoURL } = auth;
+    const { origin, destination, address } = selectedRide;
+    const { street, city, state, zip } = address;
+
+    let button;
+
+    if(user){
+      if(selectedRide.driver === user._id) {
+        button = null;
+      }
+      else if(selectedRide.riders.some(rider => rider.uid === auth.uid)) {
+        button = <Button onClick={this.redirect}>Cancel</Button>;
+      }
+      else {
+        button = <Button onClick={this.switch}>Reserve</Button>;
+      }
+    }
+
     return (
       <Fragment>
         <Nav pageTitle='Trip Details' />
@@ -169,15 +217,13 @@ class TripDetail extends Component {
             <UserInfoContainer>
               <UserImgWrapper>
                 <UserImg>
-                  <Link to={ROUTES.USER_EDIT.linkTo()}>
-                    <img src={this.props.rideUser.avatarUrl} />
-                  </Link>
+                  <img src={this.props.rideUser && this.props.rideUser.avatarUrl} />
                 </UserImg>
               </UserImgWrapper>
               <h3>Driver Info</h3>
-              <div>Name: {this.props.rideUser.displayName}</div>
-              <div>Phone: {this.props.rideUserProviderData.phoneNumber}</div>
-              <div>Email: {this.props.rideUser.email}</div>
+              <div>Name: {this.props.rideUser && this.props.rideUser.displayName}</div>
+              <div>Phone: {this.props.rideUserProviderData && this.props.rideUserProviderData.phoneNumber}</div>
+              <div>Email: {this.props.rideUser && this.props.rideUser.email}</div>
             </UserInfoContainer>
             <CarInfoContainer>
               <h3>Car Details</h3>
@@ -203,14 +249,11 @@ class TripDetail extends Component {
               </div>
             </CarInfoContainer>
           </BoxContainer>
-          <ButtonWrapper>
-            {!this.state.reserved && (
-              <Button onClick={this.switch}>Reserve</Button>
-            )}
-            {this.state.reserved && (
-              <Button onClick={this.redirect}>Cancel</Button>
-            )}
-          </ButtonWrapper>
+          {!(this.props.selectedRide.driver === this.props.user._id) &&
+            <ButtonWrapper>
+                {button}
+            </ButtonWrapper>
+          }
         </StyledDiv>
       </Fragment>
     );
@@ -245,8 +288,7 @@ export default compose(
     if(!props.uid) return [];
     return [
       {
-        collection: 'rides'
-        // where: [['uid', '==', props.uid]]
+        collection: 'rides', doc: props.match.params.id
       },
       {
         collection: 'users',
