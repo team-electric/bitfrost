@@ -47,7 +47,7 @@ const UserImg = styled.div`
 
 const ButtonBox = styled.div`
   position: relative;
-  top: -10vh;
+  top: -7.5vh;
   width: 100vw;
   display: flex;
   justify-content: space-evenly;
@@ -85,7 +85,7 @@ class Dashboard extends Component {
     const { photoURL } = this.props.auth;
     return (
       <Fragment>
-        <Nav pageTitle="Your Dashboard" />
+        <Nav pageTitle='Your Dashboard' />
         <MapWrapper>
           <AllRidesMap
             rides={this.props.rides}
@@ -133,7 +133,7 @@ export default compose(
     if(!props.uid) return [];
     return [
       {
-        collection: 'rides',
+        collection: 'rides'
       }
     ];
   })
