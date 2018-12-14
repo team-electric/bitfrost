@@ -157,10 +157,17 @@ class TripDetail extends Component {
   };
 
   componentDidUpdate(prevProps) {
+    console.log(prevProps.selectedRide);
+    console.log(this.props.selectedRide);
     if(
-      this.props.selectedRide &&
-      prevProps.selectedRide !== this.props.selectedRide
+      this.props.selectedRide && prevProps.selectedRide &&
+      (prevProps.selectedRide.id
+        !==
+      this.props.selectedRide.id)
     ) {
+      this.props.fetchCar(this.props.selectedRide.driver);
+    }
+    else if(!prevProps.selectedRide && this.props.selectedRide) {
       this.props.fetchCar(this.props.selectedRide.driver);
     }
     // const { user, selectedRide } = this.props;
