@@ -11,7 +11,6 @@ import {
 import Nav from '../../lib/Nav.jsx';
 import { getUser, getAuth } from '../../../store/resources/users/selectors';
 import NewRideMap from '../maps/NewRideMap.jsx';
-import { v4 as uuid } from 'uuid';
 import { ROUTES } from '../../../routes/index.js';
 
 import styled from 'styled-components';
@@ -88,7 +87,6 @@ class CreateTrip extends PureComponent {
     this.props.firestore.add(
       { collection: 'rides' },
       {
-        id: uuid(),
         uid,
         driver,
         seats,
