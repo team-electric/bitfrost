@@ -8,17 +8,19 @@ import {
   getAuth,
   getUserLoading
 } from '../../store/resources/users/selectors';
-import { fetchUser } from '../../store/resources/users/actions';
+import { fetchUser, postUser } from '../../store/resources/users/actions';
 import { ROUTES } from '../../routes';
 import { Redirect } from 'react-router-dom';
-
 
 const StyledForm = styled.form`
   overflow: hidden;
   width: 100vw;
   position: absolute;
-  top: 100px;
+  top: 25px;
   background: none;
+  h3 {
+    text-align: center;
+  }
   h1 {
     text-align: center;
     font-weight: bolder;
@@ -26,7 +28,6 @@ const StyledForm = styled.form`
 `;
 
 const LabelInputContainer = styled.div`
-
   input {
     background: none;
     color: inherit;
@@ -55,13 +56,14 @@ const ButtonWrapper = styled.div`
   width: 100vw;
   display: flex;
   justify-content: center;
+  margin-top: 125px;
 `;
 
 const Button = styled.button`
   display: flex;
   justify-content: center;
   background: none;
-  color: inherit;
+  color: ${({ theme }) => theme.accentcolor};
   border: 1px solid ${({ theme }) => theme.accentcolor};
   padding: 3px;
   font: inherit;
@@ -79,15 +81,14 @@ const BackgroundWrapper = styled.div`
 `;
 
 class SignUp extends PureComponent {
-
-  // static propTypes = {
-  //   import from o-auth
-  // }
-
   state = {
     name: '',
-    address: '',
-    phone: ''
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
+    phone: '',
+    redirect: false
   };
 
   componentDidMount() {
@@ -96,12 +97,18 @@ class SignUp extends PureComponent {
 
   onSubmit = event => {
     event.preventDefault();
-    const { name, address, phone } = this.state;
-
-    // I added the below function so we can pass it to props
-    // const { registerUser } = this.props;
-    event.preventDefault();
-    // registerUser(firstName, lastName address, phone);
+    const { email } = this.props.auth;
+    const { name, street, city, state, zip, phone } = this.state;
+    this.props.postUser({
+      name,
+      email,
+      street,
+      city,
+      state: state.toUpperCase(),
+      zip,
+      phone
+    });
+    this.setState({ redirect: true });
   };
 
   handleChange = ({ target }) => {
@@ -109,50 +116,84 @@ class SignUp extends PureComponent {
   };
 
   render() {
-    if(!this.props.loading && this.props.user) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
+    if(this.state.redirect) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
 
     return (
       <Fragment>
         <BackgroundWrapper />
         <StyledForm onSubmit={this.onSubmit}>
-          <h1>We need some more info</h1>
+          <h1>... just a little more info</h1>
 
           <LabelInputContainer>
             <label>
-              Full Name{' '}
+              Name:&nbsp;&nbsp;
               <input
-                id="name"
-                name="name"
-                type="text"
+                id='name'
+                name='name'
+                type='text'
                 onChange={this.handleChange}
               />
             </label>
           </LabelInputContainer>
           <LabelInputContainer>
             <label>
-              Phone Number
+              Phone:&nbsp;&nbsp;
               <input
-                id="phone"
-                name="phone"
-                type="tel"
+                id='phone'
+                name='phone'
+                type='text'
+                onChange={this.handleChange}
+              />
+            </label>
+          </LabelInputContainer>
+          <h3>Current Pickup Address:</h3>
+          <LabelInputContainer>
+            <label>
+              Street:&nbsp;&nbsp;
+              <input
+                id='street'
+                name='street'
+                type='text'
                 onChange={this.handleChange}
               />
             </label>
           </LabelInputContainer>
           <LabelInputContainer>
             <label>
-              Address{' '}
+              City:&nbsp;&nbsp;
               <input
-                id="address"
-                name="address"
-                type="text"
+                id='city'
+                name='city'
+                type='text'
+                onChange={this.handleChange}
+              />
+            </label>
+          </LabelInputContainer>
+          <LabelInputContainer>
+            <label>
+              State:&nbsp;&nbsp;
+              <input
+                id='state'
+                name='state'
+                type='text'
+                onChange={this.handleChange}
+              />
+            </label>
+          </LabelInputContainer>
+          <LabelInputContainer>
+            <label>
+              Zip:&nbsp;&nbsp;
+              <input
+                id='zip'
+                name='zip'
+                type='text'
                 onChange={this.handleChange}
               />
             </label>
           </LabelInputContainer>
           <ButtonWrapper>
-            <Button>Register</Button>
+            <Button type='submit'>Register</Button>
           </ButtonWrapper>
         </StyledForm>
       </Fragment>
@@ -167,7 +208,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchUser: email => dispatch(fetchUser(email))
+  fetchUser: email => dispatch(fetchUser(email)),
+  postUser: user => dispatch(postUser(user))
 });
 
 export default connect(

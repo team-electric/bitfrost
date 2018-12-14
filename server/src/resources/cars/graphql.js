@@ -28,7 +28,7 @@ export const carQueries = {
   car: {
     description: 'retrieves a car',
     type: CarType,
-    args: { userId: { type: GraphQLID } },
+    args: { userId: { type: ObjectId } },
     resolve: (_, { userId }) => Car.findOne({ userId }).then(prepare)
   },
   cars: {
@@ -61,6 +61,18 @@ export const carMutations = {
       plate,
       make,
       model,
+    }).then(prepare)
+  },
+  deleteCar: {
+    description: 'Delete a Car',
+    type: CarType,
+    args: {
+      userId: { type: new GraphQLNonNull(ObjectId) }
+    },
+    resolve: (_, {
+      userId
+    }) => Car.findOneAndDelete({
+      userId
     }).then(prepare)
   }
 }

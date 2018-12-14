@@ -1,8 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import styled from 'styled-components';
+
+import Nav from '../Nav.jsx';
+import NewRideMap from '../maps/NewRideMap.jsx';
+
+const StyledForm = styled.form`
+  h1 {
+    font-weight: bolder;
+  }
+`;
 
 class AddRide extends Component {
   static propTypes = {
@@ -13,8 +23,10 @@ class AddRide extends Component {
   };
 
   state = {
-    driver: '',
-    seats: '',
+    origin: '',
+    destination: '',
+    depart: null,
+    arrive: null,
   };
 
   addRide = e => {
@@ -33,22 +45,32 @@ class AddRide extends Component {
   render() {
     if(!this.props.uid) return null;
 
+    const { depart, arrive } = this.state;
+
     return (
-      <form onSubmit={this.addRide}>
-        <input
-          type="text"
-          name="driver"
-          value={this.state.driver}
-          onChange={this.onChange}
-        />
-        <input
-          type="text"
-          name="seats"
-          value={this.state.seats}
-          onChange={this.onChange}
-        />
-        <button type="submit">Add Ride</button>
-      </form>
+      <Fragment>
+        <Nav pageTitle="Create A Trip" />
+
+        <NewRideMap />
+
+        <StyledForm>
+
+          <label htmlFor="depart">Estimated Depart Time</label>
+          <input
+            type="datetime-local"
+            name="depart" value={depart}
+            onChange={this.onChange}
+          ></input>
+          <label htmlFor="arrive">Estimated Arrival Time</label>
+          <input
+            type="datetime-local"
+            name="arrive" value={arrive}
+            onChange={this.onChange}
+          ></input>
+
+          <button type="submit">Create new trip</button>
+        </StyledForm>
+      </Fragment>
     );
   }
 }

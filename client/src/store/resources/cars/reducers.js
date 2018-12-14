@@ -1,10 +1,14 @@
 import {
-  FETCH_CAR, FETCH_CAR_START, FETCH_CAR_DONE, POST_CAR
+  FETCH_CAR,
+  FETCH_CAR_START,
+  FETCH_CAR_DONE,
+  POST_CAR,
+  DELETE_CAR
 } from './actions';
 
 export const initialState = {
   current: null,
-  loadingCurrent: false,
+  loadingCurrent: false
 };
 
 export function reducer(state = initialState, { type, payload }) {
@@ -17,6 +21,8 @@ export function reducer(state = initialState, { type, payload }) {
       return { ...state, loadingCurrent: false };
     case POST_CAR:
       return { ...state, current: payload.createCar };
+    case DELETE_CAR:
+      return { ...state, current: payload.findAndDeleteCar };
     default:
       return state;
   }

@@ -23,6 +23,9 @@ const userByEmail = email => JSON.stringify({
         phone
         address {
           zip
+          state
+          city
+          street
         }
       }
     }`
@@ -37,10 +40,10 @@ const newUser = user => JSON.stringify({
         email: "${user.email}"
         phone: "${user.phone}"
         address: {
-          zip: "${user.address.zip}"
-          city: "${user.address.city}"
-          state: "${user.address.state}"
-          street: "${user.address.street}"
+          zip: "${user.zip}"
+          city: "${user.city}"
+          state: "${user.state}"
+          street: "${user.street}"
         }
       )
       {
@@ -58,6 +61,38 @@ const newUser = user => JSON.stringify({
     }`
 });
 export const createUser = user => request(newUser(user));
+
+const modifiedUser = user => JSON.stringify({
+  query:
+    `mutation {
+      updateUser(
+        _id: "${user._id}"
+        name: "${user.name}"
+        email: "${user.email}"
+        phone: "${user.phone}"
+        address: {
+          zip: "${user.zip}"
+          city: "${user.city}"
+          state: "${user.state}"
+          street: "${user.street}"
+        }
+      )
+      {
+        _id
+        name
+        email
+        phone
+        address {
+          street
+          city
+          state
+          zip
+        }
+      }
+    }`
+});
+export const updateUser = user => request(modifiedUser(user));
+
 
 
 // import changeUser from './changeUser';

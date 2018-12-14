@@ -9,12 +9,13 @@ import {
 } from 'graphql';
 import { prepare } from '../../lib/graphql';
 import { User } from './mongoose';
+import ObjectId from '../../lib/graphql/resolvers/objectId';
 
 const AddressType = new GraphQLObjectType({
   name: 'Address',
   description: 'An address',
   fields: () => ({
-    _id: { type: new GraphQLNonNull(GraphQLID) },
+    _id: { type: new GraphQLNonNull(ObjectId) },
     street: { type: GraphQLString },
     city: { type: GraphQLString },
     state: { type: GraphQLString },
@@ -25,7 +26,7 @@ const AddressType = new GraphQLObjectType({
         return `
           ${obj.street}
           ${obj.city}, ${obj.state} ${obj.zip}
-        `
+        `;
       }
     }
   })
@@ -46,7 +47,7 @@ const UserType = new GraphQLObjectType({
   name: 'User',
   description: 'A user',
   fields: () => ({
-    _id: { type: new GraphQLNonNull(GraphQLID) },
+    _id: { type: new GraphQLNonNull(ObjectId) },
     name: { type: new GraphQLNonNull(GraphQLString) },
     email: { type: new GraphQLNonNull(GraphQLString) },
     phone: { type: new GraphQLNonNull(GraphQLString) },
@@ -59,7 +60,7 @@ export const userQueries = {
     description: 'retrieves a user',
     type: UserType,
     args: {
-      id: { type: GraphQLID },
+      id: { type: GraphQLID }
     },
     resolve: (_, { id }) => User.findById(id).then(prepare)
   },
@@ -67,16 +68,16 @@ export const userQueries = {
     description: 'retrieves a user',
     type: UserType,
     args: {
-      email: { type: GraphQLString },
+      email: { type: GraphQLString }
     },
     resolve: (_, { email }) => User.findOne({ email }).then(prepare)
   },
   users: {
     description: 'retrieves a list of users',
     type: new GraphQLList(UserType),
-    resolve: () => User.find().then(prepare),
+    resolve: () => User.find().then(prepare)
   }
-}
+};
 
 export const userMutations = {
   createUser: {
@@ -86,42 +87,40 @@ export const userMutations = {
       name: { type: new GraphQLNonNull(GraphQLString) },
       email: { type: GraphQLString },
       phone: { type: GraphQLString },
-      address: { type: AddressInputType },
+      address: { type: AddressInputType }
     },
-    resolve: (_, {
-      name,
-      email,
-      phone,
-      address
-    }) => User.create({
-      name,
-      email,
-      phone,
-      address
-    }).then(prepare)
+    resolve: (_, { name, email, phone, address }) =>
+      User.create({
+        name,
+        email,
+        phone,
+        address
+      }).then(prepare)
   },
-  // updateUser: {
-  //   description: 'Update a new user',
-  //   type: UserType,
-  //   args: {
-  //     _id: { type: GraphQLString },
-  //     name: { type: new GraphQLNonNull(GraphQLString) },
-  //     email: { type: GraphQLString },
-  //     phone: { type: GraphQLString },
-  //     address: { type: AddressInputType },
-  //   },
-  //   resolve: (_, {
-  //     _id,
-  //     name,
-  //     email,
-  //     phone,
-  //     address
-  //   }) => User.update({
-  //     _id,
-  //     name,
-  //     email,
-  //     phone,
-  //     address
-  //   }).then(prepare)
-  // }
-}
+  updateUser: {
+    description: 'Update a new user',
+    type: UserType,
+    args: {
+      _id: { type: ObjectId },
+      name: { type: new GraphQLNonNull(GraphQLString) },
+      email: { type: GraphQLString },
+      phone: { type: GraphQLString },
+      address: { type: AddressInputType }
+    },
+    resolve: (_, { _id, name, email, phone, address }) =>
+      User.findOneAndUpdate(
+        {
+          _id
+        },
+        {
+          name,
+          email,
+          phone,
+          address
+        },
+        {
+          new: true
+        }
+      ).then(prepare)
+  }
+};

@@ -12,7 +12,11 @@ import TripDetail from '../components/resources/TripDetail.jsx';
 import AddCar from '../components/resources/AddCar.jsx';
 import CreateTrip from '../components/resources/CreateTrip.jsx';
 import Test from '../components/resources/Test.jsx';
-import EditProfile from '../components/resources/EditProfile.jsx';
+
+import { WithUser } from '../components/lib/WithUser.jsx';
+
+import MarkerMap from '../components/resources/maps/MarkerMap.jsx';
+import SearchMap from '../components/resources/maps/SearchMap.jsx';
 
 
 export const ROUTES = {
@@ -33,53 +37,58 @@ export const ROUTES = {
   },
   RIDE_LIST: {
     path: '/rides',
-    Component: RideList,
+    Component: WithUser(RideList),
     linkTo: () => '/rides',
   },
   DASHBOARD: {
     path: '/dashboard',
-    Component: Dashboard,
+    Component: WithUser(Dashboard),
     linkTo: () => '/dashboard'
   },
   PROFILE: {
     path: '/profile',
-    Component: Profile,
+    Component: WithUser(Profile),
     linkTo: () => '/profile'
-  },
-  EDITPROFILE: {
-    path: '/EditProfile',
-    Component: EditProfile,
-    linkTo: () => '/EditProfile'
   },
   PASTTRIPS: {
     path: '/pasttrips',
-    Component: PastTrips,
+    Component: WithUser(PastTrips),
     linkTo: () => '/pasttrips'
   },
   UPCOMINGTRIPS: {
     path: '/upcomingtrips',
-    Component: UpcomingTrips,
+    Component: WithUser(UpcomingTrips),
     linkTo: () => '/upcomingtrips'
   },
   TRIPDETAIL: {
-    path: '/tripdetail',
-    Component: TripDetail,
-    linkTo: () => '/tripdetail'
+    path: '/trip/:id',
+    Component: WithUser(TripDetail),
+    linkTo: id => `/trip/${id}`
   },
   ADDCAR: {
     path: '/addcar',
-    Component: AddCar,
+    Component: WithUser(AddCar),
     linkTo: () => '/addcar'
   },
   CREATETRIP: {
     path: '/createtrip',
-    Component: CreateTrip,
+    Component: WithUser(CreateTrip),
     linkTo: () => '/createtrip'
   },
   TEST: {
     path: '/test',
     Component: Test,
     linkTo: () => '/test'
+  },
+  MARKER_MAP: {
+    path: '/map',
+    Component: MarkerMap,
+    linkTo: () => '/map'
+  },
+  SEARCH_MAP: {
+    path: '/mapsearch',
+    Component: SearchMap,
+    linkTo: () => '/mapsearch'
   },
 };
 
