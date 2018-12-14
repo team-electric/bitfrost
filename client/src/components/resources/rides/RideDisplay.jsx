@@ -68,6 +68,11 @@ const ButtonBox = styled.div`
 `;
 
 const Button = styled.button`
+  :hover {
+    background-image: linear-gradient(to bottom right, rgb(58, 64, 125), rgb(9, 12, 15));
+    color: ${({ theme }) => theme.secondary};
+    box-shadow: 5px 5px 2px rgb(40, 45, 60);
+  }
   background: none;
   color: ${({ theme }) => theme.accentcolor};
   text-align: center;
