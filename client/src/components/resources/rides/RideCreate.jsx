@@ -60,6 +60,7 @@ const Button = styled.button`
     color: ${({ theme }) => theme.secondary};
     box-shadow: 5px 5px 2px rgb(40, 45, 60);
   }
+
   font-size: 1em;
   background: none;
   color: ${({ theme }) => theme.accentcolor};
