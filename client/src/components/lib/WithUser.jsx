@@ -23,7 +23,6 @@ export const WithUser = Component => {
       }
       if(this.props.error) return <Redirect to={ROUTES.HOME.linkTo()} />;
       if(this.props.loading) return null;
-
       return <Component {...this.props} />;
     }
   }

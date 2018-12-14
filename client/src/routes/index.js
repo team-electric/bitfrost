@@ -78,7 +78,7 @@ export const ROUTES = {
     path: '/createride',
     Component: WithUser(RideCreate),
     linkTo: () => '/createride'
-  },
+  }
 };
 
 export const LINKS = [
