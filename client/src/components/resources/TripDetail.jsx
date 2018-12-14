@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Nav from './Nav.jsx';
 import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
 import {
   getUser,
   getAuth,
@@ -14,6 +13,8 @@ import { fetchCar } from '../../store/resources/cars/actions';
 import { fetchUser } from '../../store/resources/users/actions';
 import { getUserCar } from '../../store/resources/cars/selectors';
 import { getSelectedRide } from '../../store/resources/rides/selectors.js';
+
+import { compose } from 'redux';
 
 const StyledDiv = styled.div`
   h2 {
@@ -72,7 +73,7 @@ const UserInfoContainer = styled.div`
 
 class TripDetail extends Component {
   static propTypes = {
-    selectedRide: PropTypes.object.isRequired
+    selectedRide: PropTypes.object
   };
 
   state = {
@@ -142,10 +143,10 @@ class TripDetail extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   uid: state.firebase.auth.uid,
   ride: state.firestore.ordered.ride || [],
-  selectedRide: state.rides.selectedRide,
+  selectedRide: getSelectedRide(state, props.match.params.id),
   user: getUser(state),
   auth: getAuth(state),
   car: getUserCar(state)
@@ -160,18 +161,14 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect(props => {
-    if(!props.id) return [];
-    return [
-      {
-        collection: 'rides',
-        where: [['id', '==', props.id]]
-      }
-    ];
+    console.log(props);
+    if(!props.uid) return [];
+    return [{
+      collection: 'rides',
+      where: [['uid', '==', props.uid]]
+    }];
   })
 )(TripDetail);
 
