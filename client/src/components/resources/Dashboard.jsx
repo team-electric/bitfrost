@@ -68,8 +68,8 @@ const Button = styled.button`
   text-align: center;
   border: 1px solid ${({ theme }) => theme.accentcolor};
   cursor: pointer;
-  width: 20vw;
-  height: 12.5vh;
+  width: 30vw;
+  height: 12vh;
 `;
 
 class Dashboard extends Component {
@@ -111,9 +111,6 @@ class Dashboard extends Component {
           <Link to={ROUTES.UPCOMINGTRIPS.linkTo()}>
             <Button>Upcoming Trips</Button>
           </Link>
-          <Link to={ROUTES.PASTTRIPS.linkTo()}>
-            <Button>Past Trips</Button>
-          </Link>
           <Link to={ROUTES.CREATETRIP.linkTo()}>
             <Button>Create Trip</Button>
           </Link>
@@ -147,7 +144,6 @@ export default compose(
     return [
       {
         collection: 'rides',
-        where: [['uid', '==', props.uid]]
       }
     ];
   })
