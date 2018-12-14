@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
+import { getUserRides } from '../../../store/resources/rides/selectors';
+
 const StyledDiv = styled.div`
   overflow: hidden;
 `;
@@ -36,8 +38,11 @@ const UserImg = styled.div`
 `;
 
 const TripsContainer = styled.div`
-
-background-image: linear-gradient(to bottom right, rgb(50, 55, 68), rgb(18, 25, 30));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(50, 55, 68),
+    rgb(18, 25, 30)
+  );
   position: relative;
   width: 100vw;
   height: 100%;
@@ -60,6 +65,7 @@ const Button = styled.button`
   display: flex;
   flex-direction: column;
   background: none;
+  overflow: hidden;
   color: inherit;
   text-align: center;
   border: 1px solid ${({ theme }) => theme.accentcolor};
@@ -67,10 +73,10 @@ const Button = styled.button`
   font: inherit;
   cursor: pointer;
   width: 100%;
-  height: 10vh;
+  height: 15vh;
   margin: 10px;
   div {
-    display: flex;
+    display: inline-block;
     align-content: center;
     align-items: center;
   }
@@ -93,12 +99,12 @@ class UpcomingTrips extends PureComponent {
             <Button>
               <div>
                 <span>
-
-                  {street}, {city}, {state}
+                  {street}, {city}
                 </span>
               </div>
               <div>
-                <span>Departing at:&nbsp;</span> {time} on {date}
+                <span>On:&nbsp;</span>
+                {time} on {date}
               </div>
             </Button>
           </Link>
@@ -130,7 +136,7 @@ class UpcomingTrips extends PureComponent {
 
 const mapStateToProps = state => ({
   uid: state.firebase.auth.uid,
-  rides: state.firestore.ordered.rides || [],
+  rides: getUserRides(state, state.firebase.auth.uid, state.users.current._id),
   selectedRide: state.rides.selectedRide
 });
 

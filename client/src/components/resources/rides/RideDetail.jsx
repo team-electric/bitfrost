@@ -7,7 +7,8 @@ import { firestoreConnect } from 'react-redux-firebase';
 import {
   getUser,
   getAuth,
-  updateUser
+  getRideUser,
+  getRideData
 } from '../../../store/resources/users/selectors';
 import { ROUTES } from '../../../routes/index.js';
 import { Link, Redirect } from 'react-router-dom';
@@ -16,7 +17,6 @@ import { fetchUser } from '../../../store/resources/users/actions';
 import { getUserCar } from '../../../store/resources/cars/selectors';
 import { getSelectedRide } from '../../../store/resources/rides/selectors.js';
 import { compose } from 'redux';
-
 import TripMap from '../maps/TripMap.jsx';
 
 const StyledDiv = styled.div`
@@ -121,34 +121,86 @@ class TripDetail extends Component {
   };
 
   redirect = () => {
+    const { user, selectedRide, auth } = this.props;
+
+    const otherRiders = selectedRide.riders.filter(rider => rider.uid !== auth.uid);
+    this.props.firestore.update(
+      { collection: 'rides', doc: selectedRide.id },
+      { riders: [...otherRiders] }
+    );
+
     this.setState({ redirect: true });
-  }
+  };
+
   switch = () => {
+    const { user, selectedRide, auth } = this.props;
+    console.log(selectedRide);
+
+
+    if(selectedRide.riders.length >= selectedRide.seats) return;
+
+    if(selectedRide.riders.some(rider => rider.uid === auth.uid)) {
+      const otherRiders = selectedRide.riders.filter(rider => rider.uid !== auth.uid);
+      this.props.firestore.update(
+        { collection: 'rides', doc: selectedRide.id },
+        { riders: [...otherRiders] }
+      );
+      return;
+    }
+
+    this.props.firestore.update(
+      { collection: 'rides', doc: selectedRide.id },
+      { riders: [...selectedRide.riders, { ...user, uid: auth.uid }] }
+    );
     this.setState({ reserved: true });
   };
 
-  componentDidMount() {
-    const { name, email, phone } = this.props.user;
-    this.props.fetchCar(this.props.user._id);
-    if(this.props.user) {
-      this.setState({
-        ...this.state,
-        email,
-        name,
-        phone
-      });
+  componentDidUpdate(prevProps) {
+    console.log(prevProps.selectedRide);
+    console.log(this.props.selectedRide);
+    if(
+      this.props.selectedRide && prevProps.selectedRide &&
+      (prevProps.selectedRide.id
+        !==
+      this.props.selectedRide.id)
+    ) {
+      this.props.fetchCar(this.props.selectedRide.driver);
     }
+    else if(!prevProps.selectedRide && this.props.selectedRide) {
+      this.props.fetchCar(this.props.selectedRide.driver);
+    }
+    // const { user, selectedRide } = this.props;
+    // if(selectedRide.riders.filter(rider => rider._id === user._id)) {
+    //   this.setState({ reserved: true });
+    // }
   }
 
   render() {
     if(!this.props.selectedRide) return null;
+
     if(this.state.redirect) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
-    const { photoURL } = this.props.auth;
-    const { street, city, state, zip } = this.props.selectedRide.address;
-    const { origin, destination } = this.props.selectedRide;
+    const { auth, selectedRide, user } = this.props;
+    const { photoURL } = auth;
+    const { origin, destination, address } = selectedRide;
+    const { street, city, state, zip } = address;
+
+    let button;
+
+    if(user){
+      if(selectedRide.driver === user._id) {
+        button = null;
+      }
+      else if(selectedRide.riders.some(rider => rider.uid === auth.uid)) {
+        button = <Button onClick={this.redirect}>Cancel</Button>;
+      }
+      else {
+        button = <Button onClick={this.switch}>Reserve</Button>;
+      }
+    }
+
     return (
       <Fragment>
-        <Nav pageTitle="Trip Details" />
+        <Nav pageTitle='Trip Details' />
         <MapWrapper>
           <TripMap rides={[origin, destination]} />
         </MapWrapper>
@@ -169,23 +221,45 @@ class TripDetail extends Component {
           </RideInfoContainer>
           <BoxContainer>
             <UserInfoContainer>
+              <UserImgWrapper>
+                <UserImg>
+                  <img src={this.props.rideUser && this.props.rideUser.avatarUrl} />
+                </UserImg>
+              </UserImgWrapper>
               <h3>Driver Info</h3>
-              <div>Name: {this.state.name}</div>
-              <div>Phone: {this.state.phone}</div>
-              <div>Email: {this.state.email}</div>
+              <div>Name: {this.props.rideUser && this.props.rideUser.displayName}</div>
+              <div>Phone: {this.props.rideUserProviderData && this.props.rideUserProviderData.phoneNumber}</div>
+              <div>Email: {this.props.rideUser && this.props.rideUser.email}</div>
             </UserInfoContainer>
             <CarInfoContainer>
               <h3>Car Details</h3>
-              <div>Make: Lexus</div>
-              <div>Model: IS-350</div>
-              <div>Plate: 832-JXY</div>
-              <div>Seats available: 2</div>
+              <div>
+                {this.props.car && (
+                  <label>Make: &nbsp;&nbsp;{this.props.car.make} </label>
+                )}
+              </div>
+              <div>
+                {this.props.car && (
+                  <label>Model: &nbsp;&nbsp;{this.props.car.model} </label>
+                )}
+              </div>
+              <div>
+                {this.props.car && (
+                  <label>Plate: &nbsp;&nbsp;{this.props.car.plate} </label>
+                )}
+              </div>
+              <div>
+                {this.props.car && (
+                  <label>Seats: &nbsp;&nbsp;{this.props.car.seats}</label>
+                )}
+              </div>
             </CarInfoContainer>
           </BoxContainer>
-          <ButtonWrapper>
-            {!this.state.reserved && <Button onClick={this.switch}>Reserve</Button>}
-            {this.state.reserved && <Button onClick={this.redirect}>Cancel</Button>}
-          </ButtonWrapper>
+          {!(this.props.selectedRide.driver === this.props.user._id) &&
+            <ButtonWrapper>
+                {button}
+            </ButtonWrapper>
+          }
         </StyledDiv>
       </Fragment>
     );
@@ -198,7 +272,9 @@ const mapStateToProps = (state, props) => ({
   selectedRide: getSelectedRide(state, props.match.params.id),
   user: getUser(state),
   auth: getAuth(state),
-  car: getUserCar(state)
+  car: getUserCar(state),
+  rideUser: getRideUser(state),
+  rideUserProviderData: getRideData(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -215,12 +291,14 @@ export default compose(
     mapDispatchToProps
   ),
   firestoreConnect(props => {
-    console.log(props);
     if(!props.uid) return [];
     return [
       {
-        collection: 'rides',
-        where: [['uid', '==', props.uid]]
+        collection: 'rides', doc: props.match.params.id
+      },
+      {
+        collection: 'users',
+        doc: (props.selectedRide || { uid: props.uid }).uid
       }
     ];
   })

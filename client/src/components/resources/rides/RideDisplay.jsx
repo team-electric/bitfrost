@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Nav from '../../lib/Nav.jsx';
 import { Link, Redirect } from 'react-router-dom';
@@ -12,6 +12,14 @@ import {
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import AllRidesMap from '../../resources/maps/AllRidesMap.jsx';
+
+import { getRides } from '../../../store/resources/rides/selectors';
+
+const PageDiv = styled.div`
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+`;
 
 const MapWrapper = styled.div`
   width: 100vw;
@@ -47,7 +55,7 @@ const UserImg = styled.div`
 
 const ButtonBox = styled.div`
   position: relative;
-  top: -10vh;
+  top: -70px;
   width: 100vw;
   display: flex;
   justify-content: space-evenly;
@@ -67,7 +75,7 @@ const Button = styled.button`
   cursor: pointer;
   font-size: 1.2em;
   width: 45vw;
-  height: 12vh;
+  height: 10vh;
 `;
 
 class Dashboard extends Component {
@@ -82,9 +90,11 @@ class Dashboard extends Component {
     if(!this.props.loading && !this.props.auth.email)
       return <Redirect to={ROUTES.HOME.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
+
     const { photoURL } = this.props.auth;
+
     return (
-      <Fragment>
+      <PageDiv>
         <Nav pageTitle="Your Dashboard" />
         <MapWrapper>
           <AllRidesMap
@@ -107,14 +117,14 @@ class Dashboard extends Component {
             <Button>Create Trip</Button>
           </Link>
         </ButtonBox>
-      </Fragment>
+      </PageDiv>
     );
   }
 }
 
 const mapStateToProps = state => ({
   uid: state.firebase.auth.uid,
-  rides: state.firestore.ordered.rides || [],
+  rides: getRides(state),
   selectedRide: state.rides.selectedRide,
   auth: getAuth(state),
   loading: getUserLoading(state)
@@ -133,7 +143,7 @@ export default compose(
     if(!props.uid) return [];
     return [
       {
-        collection: 'rides',
+        collection: 'rides'
       }
     ];
   })

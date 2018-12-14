@@ -46,52 +46,53 @@ const InfoDiv = styled.div`
 const About = () => {
   return (
     <AboutBox>
-      <Nav pageTitle="About" />
+      <Nav pageTitle='About' />
       <h2>About our Team</h2>
       <ProfileBox>
         <Profile>
           <ImgDiv>
-            <img src="https://avatars3.githubusercontent.com/u/33019742?s=460&v=4" />
+            <img src='https://avatars3.githubusercontent.com/u/33019742?s=460&v=4' />
           </ImgDiv>
           <InfoDiv>
             <h3>
-              <a href="https://github.com/RyLuras">Ryan Luras &nbsp;: :&nbsp; GitHub</a>
+              <a href='https://github.com/RyLuras'>
+                Ryan Luras &nbsp;: :&nbsp; GitHub
+              </a>
             </h3>
             <p>
-              some info some info some info some info some info some info some
-              info some info some info
+              With a background in Art and Design, Ryan enjoys developing his skills in the App developemnt world.
             </p>
           </InfoDiv>
         </Profile>
         <Profile>
           <ImgDiv>
-            <img src="https://avatars0.githubusercontent.com/u/11794494?s=400&v=4" />
+            <img src='https://avatars0.githubusercontent.com/u/11794494?s=400&v=4' />
           </ImgDiv>
           <InfoDiv>
             <h3>
-              <a href="https://github.com/miloofcroton">
+              <a href='https://github.com/miloofcroton'>
                 Jack Toumey &nbsp;: :&nbsp; GitHub
               </a>
             </h3>
             <p>
-              some info some info some info some info some info some info some
-              info some info some info
+              Jack is energetic member of the Bitfrost team. He brings good country music tunes and knowledge of the entire software stack. When not programming, he likes lifting weights and playing board games.
             </p>
           </InfoDiv>
         </Profile>
         <Profile>
           <ImgDiv>
-            <img src="https://avatars2.githubusercontent.com/u/34200452?s=460&v=4" />
+            <img src='https://avatars2.githubusercontent.com/u/34200452?s=460&v=4' />
           </ImgDiv>
           <InfoDiv>
             <h3>
-              <a href="https://github.com/DavidChhing">
+              <a href='https://github.com/DavidChhing'>
                 David Chhing &nbsp;: :&nbsp; GitHub
               </a>
             </h3>
             <p>
-              some info some info some info some info some info some info some
-              info some info some info
+              Oregon born native that loves the ourdoor and is highly
+              competitive in any sports or activites. He holds a combined total
+              of four trophies in ping pong with two being 1st place.
             </p>
           </InfoDiv>
         </Profile>
