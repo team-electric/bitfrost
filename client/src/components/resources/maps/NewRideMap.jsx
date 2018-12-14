@@ -19,7 +19,8 @@ class SearchMap extends Component {
     mapApi: null,
     places: [],
     defaultCenter: [34.0522, -118.2437],
-    position: []
+    position: [],
+    placesApi: null
   };
 
   apiHasLoaded = (map, maps) => {
@@ -67,7 +68,7 @@ class SearchMap extends Component {
     const { places, mapApiLoaded, mapInstance, mapApi, defaultCenter, position } = this.state;
     return (
       <Fragment>
-        {!!mapApiLoaded && (
+        {mapApiLoaded && (
           <AutoComplete map={mapInstance} mapApi={mapApi} addplace={this.addPlace} />
         )}
         <BasicMap
@@ -81,7 +82,7 @@ class SearchMap extends Component {
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
         >
-          {(!!places) &&
+          {(places) &&
             places.map(place => (
               <Marker
                 key={place.id}

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { fetchCar } from '../../store/resources/cars/actions';
-import { getUserCar } from '../../store/resources/cars/selectors';
+import { getUserCar, getCarLoading } from '../../store/resources/cars/selectors';
 import Nav from './Nav.jsx';
 import { getUser, getAuth } from '../../store/resources/users/selectors';
 import NewRideMap from './maps/NewRideMap.jsx';
@@ -35,7 +35,8 @@ class CreateTrip extends PureComponent {
     destination: [],
     departDTL: '',
     arriveDTL: '',
-    address: {}
+    address: {},
+    redirect: false
   };
 
   onChange = e => {
@@ -51,6 +52,7 @@ class CreateTrip extends PureComponent {
     const arrive = convertDate(arriveDTL);
     const seats = this.props.car.seats;
     const driver = this.props.user._id;
+    
 
     this.props.firestore.add(
       { collection: 'rides' },
@@ -90,8 +92,8 @@ class CreateTrip extends PureComponent {
 
   render() {
     const { departDTL, arriveDTL } = this.state;
-    if(!this.props.loading && !this.props.car)
-      return <Redirect to={ROUTES.ADDCAR.linkTo()} />;
+    // if(!this.props.loading && !this.props.car)
+    //   return <Redirect to={ROUTES.ADDCAR.linkTo()} />;
     return (
       <Fragment>
         <Nav pageTitle="Create A Trip" />
@@ -126,7 +128,8 @@ const mapStateToProps = state => ({
   uid: state.firebase.auth.uid,
   user: getUser(state),
   auth: getAuth(state),
-  car: getUserCar(state)
+  car: getUserCar(state),
+  loading: getCarLoading(state)
 });
 
 const mapDispatchToProps = dispatch => ({

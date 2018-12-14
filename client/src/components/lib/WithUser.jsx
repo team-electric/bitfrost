@@ -9,18 +9,21 @@ import { fetchUser } from '../../store/resources/users/actions';
 
 export const WithUser = Component => {
   class WithUserComponent extends PureComponent {
+    state = {
+      attempted: false
+    };
 
     render() {
       if(!isLoaded(this.props.auth)) return null;
       if(isEmpty(this.props.auth)) return <Redirect to={ROUTES.HOME.linkTo()} />;
-      if(!this.props.user && !this.props.loading){
+      if(!this.props.user && !this.props.loading && !this.state.attempted){
+        this.setState({ attempted: true });
         this.props.fetchUser(this.props.auth.email);
-
-
         return null;
       }
       if(this.props.error) return <Redirect to={ROUTES.HOME.linkTo()} />;
       if(this.props.loading) return null;
+
       return <Component {...this.props} />;
     }
   }

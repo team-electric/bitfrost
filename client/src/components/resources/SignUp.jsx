@@ -88,12 +88,7 @@ class SignUp extends PureComponent {
     state: '',
     zip: '',
     phone: '',
-    redirect: false
   };
-
-  componentDidMount() {
-    this.props.fetchUser(this.props.auth.email);
-  }
 
   onSubmit = event => {
     event.preventDefault();
@@ -108,7 +103,6 @@ class SignUp extends PureComponent {
       zip,
       phone
     });
-    this.setState({ redirect: true });
   };
 
   handleChange = ({ target }) => {
@@ -116,7 +110,8 @@ class SignUp extends PureComponent {
   };
 
   render() {
-    if(this.state.redirect) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
+    console.log(this.props.user);
+    if(this.props.user) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
 
     return (

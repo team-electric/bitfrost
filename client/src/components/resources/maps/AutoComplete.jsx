@@ -66,3 +66,29 @@ class AutoComplete extends Component {
 }
 
 export default AutoComplete;
+
+
+
+// emergency code:
+// state = {
+//   placesLoaded: false
+// };
+
+// loadPlaces = () => {
+//   this.autoComplete = new this.props.mapApi.places.Autocomplete(this.searchInput, {
+//     country: ['gb', 'us']
+//   });
+//   this.autoComplete.addListener('place_changed', this.onPlaceChanged);
+//   this.autoComplete.bindTo('bounds', this.props.map);
+//   this.setState({ placesLoaded: true });
+// };
+// componentDidMount({ map, mapApi } = this.props) {
+//   if(mapApi.places && !this.state.placesLoaded) this.loadPlaces();
+// }
+// componentDidUpdate(previousProps) {
+//   if(previousProps !== this.props) {
+//     if(!this.state.placesLoaded && this.props.mapApi.places) {
+//       this.loadPlaces();
+//     }
+//   }
+// }

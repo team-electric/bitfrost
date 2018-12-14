@@ -81,8 +81,10 @@ class Dashboard extends Component {
   };
 
   logout = () => {
-    this.props.logout();
-    this.props.firebase.logout();
+    this.props.firebase.logout()
+      .then(() => {
+        this.props.logout();
+      });
   };
 
   componentDidMount() {
