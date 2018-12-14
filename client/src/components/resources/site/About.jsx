@@ -58,8 +58,7 @@ const About = () => {
               <a href="https://github.com/RyLuras">Ryan Luras &nbsp;: :&nbsp; GitHub</a>
             </h3>
             <p>
-              some info some info some info some info some info some info some
-              info some info some info
+              With a background in Art and Design, Ryan enjoys developing his skills in the App developemnt world.
             </p>
           </InfoDiv>
         </Profile>
