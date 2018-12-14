@@ -13,8 +13,9 @@ import { fetchCar } from '../../store/resources/cars/actions';
 import { fetchUser } from '../../store/resources/users/actions';
 import { getUserCar } from '../../store/resources/cars/selectors';
 import { getSelectedRide } from '../../store/resources/rides/selectors.js';
-
 import { compose } from 'redux';
+
+import TripMap from '../resources/maps/TripMap.jsx';
 
 const StyledDiv = styled.div`
   h2 {
@@ -101,12 +102,15 @@ class TripDetail extends Component {
 
     const { photoURL } = this.props.auth;
     const { street, city, state, zip } = this.props.selectedRide.address;
-
+    const { origin, destination } = this.props.selectedRide;
     return (
       <Fragment>
         <Nav pageTitle='Trip Details' />
         <MapWrapper>
-          <img src='https://staticmapmaker.com/img/google.png' />
+          <TripMap
+            rides={[origin, destination]}
+          >
+          </TripMap>
         </MapWrapper>
         <UserImgWrapper>
           <UserImg>
