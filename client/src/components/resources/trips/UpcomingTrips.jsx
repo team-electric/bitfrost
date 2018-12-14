@@ -9,14 +9,12 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 const StyledDiv = styled.div`
-  h1 {
-    font-weight: bolder;
-  }
+  overflow: hidden;
 `;
 
 const UserImgWrapper = styled.div`
-  position: fixed;
-  bottom: 10vh;
+  position: relative;
+  top: 10px;
   margin: auto;
   align-self: center;
   width: 100vw;
@@ -25,6 +23,7 @@ const UserImgWrapper = styled.div`
   justify-content: center;
   z-index: 3;
 `;
+
 const UserImg = styled.div`
   width: 80px;
   border: 2px solid ${({ theme }) => theme.accentcolor};
@@ -37,6 +36,8 @@ const UserImg = styled.div`
 `;
 
 const TripsContainer = styled.div`
+  position: relative;
+  width: 90vw;
   text-align: center;
   li {
     list-style: none;
@@ -45,10 +46,15 @@ const TripsContainer = styled.div`
     text-decoration: none;
     color: ${({ theme }) => theme.secondary};
   }
-  width: 90vw;
+  h2 {
+    width: 100vw;
+    text-align: center;
+  }
 `;
 
 const Button = styled.button`
+  display: flex;
+  flex-direction: column;
   background: none;
   color: inherit;
   text-align: center;
@@ -57,16 +63,19 @@ const Button = styled.button`
   font: inherit;
   cursor: pointer;
   width: 100%;
-  height: 75px;
-  margin-top: 8px;
-  padding: 15px;
+  height: 10vh;
+  margin: 10px;
+  div {
+    display: flex;
+    align-content: center;
+    align-items: center;
+  }
+  span {
+    color: ${({ theme }) => theme.accentcolor};
+  }
 `;
 
 class UpcomingTrips extends PureComponent {
-  // static propTypes = {
-  //   lots o props
-  // }
-
   render() {
     const { photoURL } = this.props.auth;
 
@@ -78,12 +87,14 @@ class UpcomingTrips extends PureComponent {
         <li key={ride.id}>
           <Link to={ROUTES.TRIPDETAIL.linkTo(ride.id)}>
             <Button>
-              <span>
-                {street}, {city}, {state} {zip}
-              </span>
-              <span>
-                Departing at {time} on {date}
-              </span>
+              <div>
+                <span>
+                  {street}, {city}, {state} {zip}
+                </span>
+              </div>
+              <div>
+                <span>Departing at:&nbsp;</span> {time} on {date}
+              </div>
             </Button>
           </Link>
         </li>
@@ -96,13 +107,15 @@ class UpcomingTrips extends PureComponent {
         <StyledDiv>
           <UserImgWrapper>
             <UserImg>
-              <img src={photoURL} />
+              <Link to={ROUTES.PROFILE.linkTo()}>
+                <img src={photoURL} />
+              </Link>
             </UserImg>
           </UserImgWrapper>
 
           <TripsContainer>
             <h2>UPCOMING TRIPS</h2>
-            <ol>{rides}</ol>
+            <ul>{rides}</ul>
           </TripsContainer>
         </StyledDiv>
       </Fragment>

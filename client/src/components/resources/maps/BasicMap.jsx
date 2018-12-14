@@ -6,6 +6,7 @@ import GoogleMapReact from 'google-map-react';
 const StyledDiv = styled.main`
   width: 100%;
   height: 100%;
+  z-index: 4;
 `;
 
 const mapStyles = [
@@ -108,12 +109,12 @@ const BasicMap = ({ children, ...props }) => (
 BasicMap.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]),
+    PropTypes.arrayOf(PropTypes.node)
+  ])
 };
 
 BasicMap.defaultProps = {
-  children: null,
+  children: null
 };
 
 export default BasicMap;

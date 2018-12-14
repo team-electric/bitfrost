@@ -68,8 +68,8 @@ const Button = styled.button`
   text-align: center;
   border: 1px solid ${({ theme }) => theme.accentcolor};
   cursor: pointer;
-  width: 20vw;
-  height: 12.5vh;
+  width: 30vw;
+  height: 12vh;
 `;
 
 class Dashboard extends Component {
@@ -77,19 +77,14 @@ class Dashboard extends Component {
     uid: PropTypes.string,
     rides: PropTypes.arrayOf(PropTypes.object),
     selectedRide: PropTypes.object,
-    selectRide: PropTypes.func.isRequired,
+    selectRide: PropTypes.func.isRequired
   };
 
   logout = () => {
-    this.props.firebase.logout()
-      .then(() => {
-        this.props.logout();
-      });
+    this.props.firebase.logout().then(() => {
+      this.props.logout();
+    });
   };
-
-  componentDidMount() {
-    console.log('RIDES!!!!', this.props.rides);
-  }
 
   render() {
     if(!this.props.loading && !this.props.auth.email)
@@ -98,7 +93,7 @@ class Dashboard extends Component {
     const { photoURL } = this.props.auth;
     return (
       <Fragment>
-        <Nav pageTitle='Your Dashboard' />
+        <Nav pageTitle="Your Dashboard" />
         <MapWrapper>
           <AllRidesMap
             rides={this.props.rides}
@@ -107,15 +102,14 @@ class Dashboard extends Component {
         </MapWrapper>
         <UserImgWrapper>
           <UserImg>
-            <img src={photoURL} />
+            <Link to={ROUTES.PROFILE.linkTo()}>
+              <img src={photoURL} />
+            </Link>
           </UserImg>
         </UserImgWrapper>
         <ButtonBox>
           <Link to={ROUTES.UPCOMINGTRIPS.linkTo()}>
             <Button>Upcoming Trips</Button>
-          </Link>
-          <Link to={ROUTES.PASTTRIPS.linkTo()}>
-            <Button>Past Trips</Button>
           </Link>
           <Link to={ROUTES.CREATETRIP.linkTo()}>
             <Button>Create Trip</Button>
@@ -150,7 +144,6 @@ export default compose(
     return [
       {
         collection: 'rides',
-        where: [['uid', '==', props.uid]]
       }
     ];
   })

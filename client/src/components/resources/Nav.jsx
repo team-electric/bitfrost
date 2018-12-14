@@ -12,35 +12,43 @@ const StyledHeader = styled.header`
   justify-content: space-between;
 `;
 const StyledLogo = styled.div`
+  position: relative;
+  left: 10px;
   a {
+    font-size: 1.2em;
     text-decoration: none;
     color: ${({ theme }) => theme.secondary};
   }
 `;
 
 const StyledIcons = styled.nav`
-  display: flex;
+  position: relative;
+  right: 10px;
   a {
+    font-size: 1.2em;
     text-decoration: none;
     color: ${({ theme }) => theme.secondary};
   }
 `;
 const StyledTitle = styled.span`
+  display: flex;
+  align-self: center;
+  justify-self: center;
   font-size: 1em;
-  flex-direction: row;
-  justify-content: space-between;
+  font-weight: bold;
 `;
 
 const Nav = ({ pageTitle }) => {
   return (
     <StyledHeader>
       <StyledLogo>
-        <Link to={ROUTES.ABOUT.linkTo()}>LOGO</Link>
+        <Link to={ROUTES.ABOUT.linkTo()}>
+          <i className="fas fa-road" />
+        </Link>
       </StyledLogo>
       <StyledTitle>{pageTitle}</StyledTitle>
       <StyledIcons>
-        <Link to={ROUTES.PROFILE.linkTo()}>PROF</Link>&nbsp;
-        <Link to={ROUTES.DASHBOARD.linkTo()}>DASH</Link>
+        <Link to={ROUTES.DASHBOARD.linkTo()}><i className="fas fa-map-marked-alt"></i></Link>
       </StyledIcons>
     </StyledHeader>
   );

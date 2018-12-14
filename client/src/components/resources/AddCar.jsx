@@ -12,12 +12,13 @@ import {
   deleteCar
 } from '../../store/resources/cars/actions';
 import { ROUTES } from '../../routes';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getUser } from '../../store/resources/users/selectors.js';
 
 const StyledForm = styled.form`
   overflow: hidden;
   width: 100vw;
+  height: 90vh;
   position: relative;
   top: 25px;
   background: none;
@@ -51,6 +52,7 @@ const UserImg = styled.div`
 
 const LabelInputContainer = styled.div`
   input {
+    font-size: 1em;
     background: none;
     color: inherit;
     outline: none;
@@ -121,17 +123,22 @@ class AddCar extends Component {
     this.setState({ [target.name]: target.value.toUpperCase() });
   };
   setCarState = () => {
-    this.setState({ plate: this.props.car.plate, make: this.props.car.make, model: this.props.car.model, seats: this.props.car.seats });
+    this.setState({
+      plate: this.props.car.plate,
+      make: this.props.car.make,
+      model: this.props.car.model,
+      seats: this.props.car.seats
+    });
   };
   componentDidMount() {
     if(!this.props.car) return this.props.fetchCar(this.props.user._id);
     this.setCarState();
-  };
+  }
   componentDidUpdate(previousProps) {
     if(previousProps.car !== this.props.car) {
       this.setCarState();
     }
-  };
+  }
   render() {
     if(this.props.loading) return <h1> LOADING </h1>;
     if(this.state.redirect) return <Redirect to={ROUTES.PROFILE.linkTo()} />;
@@ -142,7 +149,9 @@ class AddCar extends Component {
         <Nav pageTitle="Add A Car" />
         <UserImgWrapper>
           <UserImg>
-            <img src={photoURL} />
+            <Link to={ROUTES.PROFILE.linkTo()}>
+              <img src={photoURL} />
+            </Link>
           </UserImg>
         </UserImgWrapper>
         <StyledForm onSubmit={this.saveCar}>

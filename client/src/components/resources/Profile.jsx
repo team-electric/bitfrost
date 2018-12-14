@@ -54,6 +54,7 @@ const StyledForm = styled.form`
     position: relative;
   }
   input {
+    font-size: 1em;
     width: 175px;
     background: none;
     color: inherit;
