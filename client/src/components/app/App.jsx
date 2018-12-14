@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
  @import url('https://fonts.googleapis.com/css?family=Poiret+One|Source+Sans+Pro');
 
   #root {
-    height: 100vh;
+    height: 100%;
     margin: 0;
   }
 
@@ -39,6 +39,7 @@ const App = () => {
           <Helmet>
             <title>Bitfrost</title>
             <link rel="icon" href="/src/assets/favicon.ico" />
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous" />
             <link rel="manifest" href="/src/assets/manifest.json" />
           </Helmet>
           <GlobalStyle />

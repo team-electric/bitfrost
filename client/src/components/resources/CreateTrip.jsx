@@ -20,6 +20,8 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-top: 2px solid ${({ theme }) => theme.accentcolor};
+  height: 20vh;
 `;
 const InputDiv = styled.div`
   width: 90vw;
@@ -43,11 +45,13 @@ const Button = styled.button`
   border: 1px solid ${({ theme }) => theme.accentcolor};
   cursor: pointer;
   width: 40vw;
-  height: 2em;
-  top: 10px;
+  height: 1.5em;
+  top: 5px;
 `;
 
 const MapWrapper = styled.div`
+  position: relative;
+  top: -1px;
   width: 100vw;
   height: 80vh;
   overflow: hidden;
