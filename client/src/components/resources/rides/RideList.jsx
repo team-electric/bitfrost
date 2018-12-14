@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-import AddRide from './AddRide.jsx';
+import RideAdd from './RideAdd.jsx';
 
 class RideList extends Component {
   static propTypes = {
@@ -27,7 +27,7 @@ class RideList extends Component {
     });
     return (
       <div>
-        <AddRide />
+        <RideAdd />
         <div>
           {rideItems}
         </div>

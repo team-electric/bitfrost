@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Nav from './Nav.jsx';
+import Nav from '../../lib/Nav.jsx';
 import {
   getUserCar,
   getCarLoading
-} from '../../store/resources/cars/selectors';
+} from '../../../store/resources/cars/selectors';
 import {
   fetchCar,
   postCar,
   deleteCar
-} from '../../store/resources/cars/actions';
-import { ROUTES } from '../../routes';
+} from '../../../store/resources/cars/actions';
+import { ROUTES } from '../../../routes';
 import { Link, Redirect } from 'react-router-dom';
-import { getUser } from '../../store/resources/users/selectors.js';
+import { getUser } from '../../../store/resources/users/selectors.js';
 
 const StyledForm = styled.form`
   overflow: hidden;
@@ -142,7 +142,7 @@ class AddCar extends Component {
   }
   render() {
     if(this.props.loading) return <h1> LOADING </h1>;
-    if(this.state.redirect) return <Redirect to={ROUTES.PROFILE.linkTo()} />;
+    if(this.state.redirect) return <Redirect to={ROUTES.USER_EDIT.linkTo()} />;
     const { photoURL } = this.props.auth;
 
     return (
@@ -150,7 +150,7 @@ class AddCar extends Component {
         <Nav pageTitle="Add A Car" />
         <UserImgWrapper>
           <UserImg>
-            <Link to={ROUTES.PROFILE.linkTo()}>
+            <Link to={ROUTES.USER_EDIT.linkTo()}>
               <img src={photoURL} />
             </Link>
           </UserImg>

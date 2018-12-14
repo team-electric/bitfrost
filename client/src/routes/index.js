@@ -1,22 +1,26 @@
+// react and react-router
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import About from '../components/resources/About.jsx';
-import Home from '../components/resources/Home.jsx';
-import SignUp from '../components/resources/SignUp.jsx';
-import RideList from '../components/resources/rides/RideList.jsx';
-import Dashboard from '../components/resources/Dashboard.jsx';
-import Profile from '../components/resources/Profile.jsx';
-import PastTrips from '../components/resources/trips/PastTrips.jsx';
-import UpcomingTrips from '../components/resources/trips/UpcomingTrips.jsx';
-import TripDetail from '../components/resources/TripDetail.jsx';
-import AddCar from '../components/resources/AddCar.jsx';
-import CreateTrip from '../components/resources/CreateTrip.jsx';
-import Test from '../components/resources/Test.jsx';
 
+// site
+import About from '../components/resources/site/About.jsx';
+import Home from '../components/resources/site/Home.jsx';
+
+// users
+import UserCreate from '../components/resources/users/UserCreate.jsx';
+import UserEdit from '../components/resources/users/UserEdit.jsx';
 import { WithUser } from '../components/lib/WithUser.jsx';
 
-import MarkerMap from '../components/resources/maps/MarkerMap.jsx';
-import SearchMap from '../components/resources/maps/SearchMap.jsx';
+// cars
+import CarAdd from '../components/resources/cars/CarAdd.jsx';
+
+// rides
+import RideList from '../components/resources/rides/RideList.jsx';
+import RideDisplay from '../components/resources/rides/RideDisplay.jsx';
+import RidesPast from '../components/resources/rides/RidesPast.jsx';
+import RidesUpcoming from '../components/resources/rides/RidesUpcoming.jsx';
+import RideDetail from '../components/resources/rides/RideDetail.jsx';
+import RideCreate from '../components/resources/rides/RideCreate.jsx';
 
 
 export const ROUTES = {
@@ -30,65 +34,50 @@ export const ROUTES = {
     Component: Home,
     linkTo: () => '/home',
   },
-  SIGNUP: {
+  USER_CREATE: {
     path: '/signup',
-    Component: WithUser(SignUp),
+    Component: WithUser(UserCreate),
     linkTo: () => '/signup'
+  },
+  USER_EDIT: {
+    path: '/profile',
+    Component: WithUser(UserEdit),
+    linkTo: () => '/profile'
+  },
+  CAR_ADD: {
+    path: '/carAdd',
+    Component: WithUser(CarAdd),
+    linkTo: () => '/carAdd'
+  },
+  RIDE_DISPLAY: {
+    path: '/dashboard',
+    Component: WithUser(RideDisplay),
+    linkTo: () => '/dashboard'
   },
   RIDE_LIST: {
     path: '/rides',
     Component: WithUser(RideList),
     linkTo: () => '/rides',
   },
-  DASHBOARD: {
-    path: '/dashboard',
-    Component: WithUser(Dashboard),
-    linkTo: () => '/dashboard'
+  RIDES_PAST: {
+    path: '/ridespast',
+    Component: WithUser(RidesPast),
+    linkTo: () => '/ridespast'
   },
-  PROFILE: {
-    path: '/profile',
-    Component: WithUser(Profile),
-    linkTo: () => '/profile'
+  RIDES_UPCOMING: {
+    path: '/ridesUpcoming',
+    Component: WithUser(RidesUpcoming),
+    linkTo: () => '/ridesUpcoming'
   },
-  PASTTRIPS: {
-    path: '/pasttrips',
-    Component: WithUser(PastTrips),
-    linkTo: () => '/pasttrips'
+  RIDE_DETAIL: {
+    path: '/ride/:id',
+    Component: WithUser(RideDetail),
+    linkTo: id => `/ride/${id}`
   },
-  UPCOMINGTRIPS: {
-    path: '/upcomingtrips',
-    Component: WithUser(UpcomingTrips),
-    linkTo: () => '/upcomingtrips'
-  },
-  TRIPDETAIL: {
-    path: '/trip/:id',
-    Component: WithUser(TripDetail),
-    linkTo: id => `/trip/${id}`
-  },
-  ADDCAR: {
-    path: '/addcar',
-    Component: WithUser(AddCar),
-    linkTo: () => '/addcar'
-  },
-  CREATETRIP: {
-    path: '/createtrip',
-    Component: WithUser(CreateTrip),
-    linkTo: () => '/createtrip'
-  },
-  TEST: {
-    path: '/test',
-    Component: Test,
-    linkTo: () => '/test'
-  },
-  MARKER_MAP: {
-    path: '/map',
-    Component: MarkerMap,
-    linkTo: () => '/map'
-  },
-  SEARCH_MAP: {
-    path: '/mapsearch',
-    Component: SearchMap,
-    linkTo: () => '/mapsearch'
+  RIDE_CREATE: {
+    path: '/createride',
+    Component: WithUser(RideCreate),
+    linkTo: () => '/createride'
   },
 };
 

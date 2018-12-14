@@ -3,16 +3,16 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { fetchCar } from '../../store/resources/cars/actions';
+import { fetchCar } from '../../../store/resources/cars/actions';
 import {
   getUserCar,
   getCarLoading
-} from '../../store/resources/cars/selectors';
-import Nav from './Nav.jsx';
-import { getUser, getAuth } from '../../store/resources/users/selectors';
-import NewRideMap from './maps/NewRideMap.jsx';
+} from '../../../store/resources/cars/selectors';
+import Nav from '../../lib/Nav.jsx';
+import { getUser, getAuth } from '../../../store/resources/users/selectors';
+import NewRideMap from '../maps/NewRideMap.jsx';
 import { v4 as uuid } from 'uuid';
-import { ROUTES } from '../../routes/index.js';
+import { ROUTES } from '../../../routes/index.js';
 
 import styled from 'styled-components';
 
@@ -123,10 +123,10 @@ class CreateTrip extends PureComponent {
   }
 
   render() {
-    if(this.state.redirect) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
+    if(this.state.redirect) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
     const { departDTL, arriveDTL } = this.state;
     // if(!this.props.loading && !this.props.car)
-    //   return <Redirect to={ROUTES.ADDCAR.linkTo()} />;
+    //   return <Redirect to={ROUTES.CAR_ADD.linkTo()} />;
     return (
       <Fragment>
         <Nav pageTitle="Create A Trip" />

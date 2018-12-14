@@ -48,7 +48,7 @@ const Nav = ({ pageTitle }) => {
       </StyledLogo>
       <StyledTitle>{pageTitle}</StyledTitle>
       <StyledIcons>
-        <Link to={ROUTES.DASHBOARD.linkTo()}><i className="fas fa-map-marked-alt"></i></Link>
+        <Link to={ROUTES.RIDE_DISPLAY.linkTo()}><i className="fas fa-map-marked-alt"></i></Link>
       </StyledIcons>
     </StyledHeader>
   );

@@ -2,22 +2,22 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Nav from './Nav.jsx';
+import Nav from '../../lib/Nav.jsx';
 import { firestoreConnect } from 'react-redux-firebase';
 import {
   getUser,
   getAuth,
   updateUser
-} from '../../store/resources/users/selectors';
-import { ROUTES } from '../../routes/index.js';
+} from '../../../store/resources/users/selectors';
+import { ROUTES } from '../../../routes/index.js';
 import { Link, Redirect } from 'react-router-dom';
-import { fetchCar } from '../../store/resources/cars/actions';
-import { fetchUser } from '../../store/resources/users/actions';
-import { getUserCar } from '../../store/resources/cars/selectors';
-import { getSelectedRide } from '../../store/resources/rides/selectors.js';
+import { fetchCar } from '../../../store/resources/cars/actions';
+import { fetchUser } from '../../../store/resources/users/actions';
+import { getUserCar } from '../../../store/resources/cars/selectors';
+import { getSelectedRide } from '../../../store/resources/rides/selectors.js';
 import { compose } from 'redux';
 
-import TripMap from '../resources/maps/TripMap.jsx';
+import TripMap from '../maps/TripMap.jsx';
 
 const StyledDiv = styled.div`
   position: relative;
@@ -142,7 +142,7 @@ class TripDetail extends Component {
 
   render() {
     if(!this.props.selectedRide) return null;
-    if(this.state.redirect) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
+    if(this.state.redirect) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
     const { photoURL } = this.props.auth;
     const { street, city, state, zip } = this.props.selectedRide.address;
     const { origin, destination } = this.props.selectedRide;
@@ -154,7 +154,7 @@ class TripDetail extends Component {
         </MapWrapper>
         <UserImgWrapper>
           <UserImg>
-            <Link to={ROUTES.PROFILE.linkTo()}>
+            <Link to={ROUTES.USER_EDIT.linkTo()}>
               <img src={photoURL} />
             </Link>
           </UserImg>

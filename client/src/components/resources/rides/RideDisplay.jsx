@@ -1,17 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Nav from './Nav.jsx';
+import Nav from '../../lib/Nav.jsx';
 import { Link, Redirect } from 'react-router-dom';
-import { ROUTES } from '../../routes/index.js';
+import { ROUTES } from '../../../routes/index.js';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
   getAuth,
   getUserLoading
-} from '../../store/resources/users/selectors.js';
+} from '../../../store/resources/users/selectors.js';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import AllRidesMap from '../resources/maps/AllRidesMap.jsx';
+import AllRidesMap from '../../resources/maps/AllRidesMap.jsx';
 
 const MapWrapper = styled.div`
   width: 100vw;
@@ -94,16 +94,16 @@ class Dashboard extends Component {
         </MapWrapper>
         <UserImgWrapper>
           <UserImg>
-            <Link to={ROUTES.PROFILE.linkTo()}>
+            <Link to={ROUTES.USER_EDIT.linkTo()}>
               <img src={photoURL} />
             </Link>
           </UserImg>
         </UserImgWrapper>
         <ButtonBox>
-          <Link to={ROUTES.UPCOMINGTRIPS.linkTo()}>
+          <Link to={ROUTES.RIDES_UPCOMING.linkTo()}>
             <Button>Upcoming Trips</Button>
           </Link>
-          <Link to={ROUTES.CREATETRIP.linkTo()}>
+          <Link to={ROUTES.RIDE_CREATE.linkTo()}>
             <Button>Create Trip</Button>
           </Link>
         </ButtonBox>

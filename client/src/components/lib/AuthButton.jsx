@@ -52,7 +52,7 @@ class AuthButton extends Component {
         </ButtonWrapper>
       );
     }
-    return <Redirect to={ROUTES.SIGNUP.linkTo()} />;
+    return <Redirect to={ROUTES.USER_CREATE.linkTo()} />;
 
   }
 }

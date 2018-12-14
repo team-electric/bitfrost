@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from './Nav.jsx';
+import Nav from '../../lib/Nav.jsx';
 import styled from 'styled-components';
 
 const AboutBox = styled.div`
