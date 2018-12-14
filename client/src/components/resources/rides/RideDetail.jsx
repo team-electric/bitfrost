@@ -196,9 +196,7 @@ class TripDetail extends Component {
             <UserInfoContainer>
               <UserImgWrapper>
                 <UserImg>
-                  <Link to={ROUTES.USER_EDIT.linkTo()}>
-                    <img src={this.props.rideUser.avatarUrl} />
-                  </Link>
+                  <img src={this.props.rideUser && this.props.rideUser.avatarUrl} />
                 </UserImg>
               </UserImgWrapper>
               <h3>Driver Info</h3>
