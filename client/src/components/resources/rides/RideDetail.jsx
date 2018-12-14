@@ -122,7 +122,7 @@ class TripDetail extends Component {
 
   redirect = () => {
     this.setState({ redirect: true });
-  }
+  };
   switch = () => {
     this.setState({ reserved: true });
   };
@@ -215,12 +215,11 @@ export default compose(
     mapDispatchToProps
   ),
   firestoreConnect(props => {
-    console.log(props);
     if(!props.uid) return [];
     return [
       {
         collection: 'rides',
-        where: [['uid', '==', props.uid]]
+        // where: [['uid', '==', props.uid]]
       }
     ];
   })
