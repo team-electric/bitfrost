@@ -7,7 +7,9 @@ import { firestoreConnect } from 'react-redux-firebase';
 import {
   getUser,
   getAuth,
-  updateUser
+  updateUser,
+  getRideUser,
+  getRideUserPhone
 } from '../../../store/resources/users/selectors';
 import { ROUTES } from '../../../routes/index.js';
 import { Link, Redirect } from 'react-router-dom';
@@ -16,7 +18,6 @@ import { fetchUser } from '../../../store/resources/users/actions';
 import { getUserCar } from '../../../store/resources/cars/selectors';
 import { getSelectedRide } from '../../../store/resources/rides/selectors.js';
 import { compose } from 'redux';
-
 import TripMap from '../maps/TripMap.jsx';
 
 const StyledDiv = styled.div`
@@ -142,20 +143,21 @@ class TripDetail extends Component {
 
   render() {
     if(!this.props.selectedRide) return null;
-    if(this.state.redirect) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
+    if(this.state.redirect)
+      return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
     const { photoURL } = this.props.auth;
     const { street, city, state, zip } = this.props.selectedRide.address;
     const { origin, destination } = this.props.selectedRide;
     return (
       <Fragment>
-        <Nav pageTitle="Trip Details" />
+        <Nav pageTitle='Trip Details' />
         <MapWrapper>
           <TripMap rides={[origin, destination]} />
         </MapWrapper>
         <UserImgWrapper>
           <UserImg>
             <Link to={ROUTES.USER_EDIT.linkTo()}>
-              <img src={photoURL} />
+              <img src={this.props.rideUser.avatarUrl} />
             </Link>
           </UserImg>
         </UserImgWrapper>
@@ -170,21 +172,25 @@ class TripDetail extends Component {
           <BoxContainer>
             <UserInfoContainer>
               <h3>Driver Info</h3>
-              <div>Name: {this.state.name}</div>
-              <div>Phone: {this.state.phone}</div>
-              <div>Email: {this.state.email}</div>
+              <div>Name: {this.props.rideUser.displayName}</div>
+              <div>Phone: {this.props.rideUserProviderData.phoneNumber}</div>
+              <div>Email: {this.props.rideUser.email}</div>
             </UserInfoContainer>
             <CarInfoContainer>
               <h3>Car Details</h3>
-              <div>Make: Lexus</div>
-              <div>Model: IS-350</div>
-              <div>Plate: 832-JXY</div>
-              <div>Seats available: 2</div>
+              <div>Make: </div>
+              <div>Model: </div>
+              <div>Plate: </div>
+              <div>Seats available: </div>
             </CarInfoContainer>
           </BoxContainer>
           <ButtonWrapper>
-            {!this.state.reserved && <Button onClick={this.switch}>Reserve</Button>}
-            {this.state.reserved && <Button onClick={this.redirect}>Cancel</Button>}
+            {!this.state.reserved && (
+              <Button onClick={this.switch}>Reserve</Button>
+            )}
+            {this.state.reserved && (
+              <Button onClick={this.redirect}>Cancel</Button>
+            )}
           </ButtonWrapper>
         </StyledDiv>
       </Fragment>
@@ -198,7 +204,9 @@ const mapStateToProps = (state, props) => ({
   selectedRide: getSelectedRide(state, props.match.params.id),
   user: getUser(state),
   auth: getAuth(state),
-  car: getUserCar(state)
+  car: getUserCar(state),
+  rideUser: getRideUser(state),
+  rideUserProviderData: getRideUserPhone(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -218,8 +226,12 @@ export default compose(
     if(!props.uid) return [];
     return [
       {
-        collection: 'rides',
+        collection: 'rides'
         // where: [['uid', '==', props.uid]]
+      },
+      {
+        collection: 'users',
+        doc: (props.selectedRide || { uid: props.uid }).uid
       }
     ];
   })
