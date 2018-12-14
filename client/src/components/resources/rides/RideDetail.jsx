@@ -128,16 +128,12 @@ class TripDetail extends Component {
     this.setState({ reserved: true });
   };
 
-  componentDidMount() {
-    const { name, email, phone } = this.props.user;
-    this.props.fetchCar(this.props.user._id);
-    if(this.props.user) {
-      this.setState({
-        ...this.state,
-        email,
-        name,
-        phone
-      });
+  componentDidUpdate(prevProps) {
+    if(
+      this.props.selectedRide &&
+      prevProps.selectedRide !== this.props.selectedRide
+    ) {
+      this.props.fetchCar(this.props.selectedRide.driver);
     }
   }
 
@@ -185,10 +181,26 @@ class TripDetail extends Component {
             </UserInfoContainer>
             <CarInfoContainer>
               <h3>Car Details</h3>
-              <div>Make: </div>
-              <div>Model: </div>
-              <div>Plate: </div>
-              <div>Seats available: </div>
+              <div>
+                {this.props.car && (
+                  <label>Make: &nbsp;&nbsp;{this.props.car.make} </label>
+                )}
+              </div>
+              <div>
+                {this.props.car && (
+                  <label>Model: &nbsp;&nbsp;{this.props.car.model} </label>
+                )}
+              </div>
+              <div>
+                {this.props.car && (
+                  <label>Plate: &nbsp;&nbsp;{this.props.car.plate} </label>
+                )}
+              </div>
+              <div>
+                {this.props.car && (
+                  <label>Seats: &nbsp;&nbsp;{this.props.car.seats}</label>
+                )}
+              </div>
             </CarInfoContainer>
           </BoxContainer>
           <ButtonWrapper>
