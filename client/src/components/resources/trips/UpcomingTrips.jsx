@@ -36,10 +36,14 @@ const UserImg = styled.div`
 `;
 
 const TripsContainer = styled.div`
+
+background-image: linear-gradient(to bottom right, rgb(50, 55, 68), rgb(18, 25, 30));
   position: relative;
-  width: 90vw;
+  width: 100vw;
+  height: 100%;
   text-align: center;
   li {
+    width: 80vw;
     list-style: none;
   }
   a {
@@ -80,7 +84,7 @@ class UpcomingTrips extends PureComponent {
     const { photoURL } = this.props.auth;
 
     const rides = this.props.rides.map(ride => {
-      const { street, city, state, zip } = ride.address;
+      const { street, city, state } = ride.address;
       const time = new Date(ride.depart).toTimeString().split(' ')[0];
       const date = new Date(ride.depart).toDateString();
       return (
@@ -89,7 +93,8 @@ class UpcomingTrips extends PureComponent {
             <Button>
               <div>
                 <span>
-                  {street}, {city}, {state} {zip}
+
+                  {street}, {city}, {state}
                 </span>
               </div>
               <div>

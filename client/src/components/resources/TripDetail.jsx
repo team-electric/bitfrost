@@ -9,6 +9,8 @@ import {
   getAuth,
   updateUser
 } from '../../store/resources/users/selectors';
+import { ROUTES } from '../../routes/index.js';
+import { Link, Redirect } from 'react-router-dom';
 import { fetchCar } from '../../store/resources/cars/actions';
 import { fetchUser } from '../../store/resources/users/actions';
 import { getUserCar } from '../../store/resources/cars/selectors';
@@ -18,20 +20,20 @@ import { compose } from 'redux';
 import TripMap from '../resources/maps/TripMap.jsx';
 
 const StyledDiv = styled.div`
-  h2 {
-    font-weight: bolder;
-  }
+  position: relative;
+  top: -80px;
+  border-top: 2px solid ${({ theme }) => theme.accentcolor};
 `;
 
 const UserImgWrapper = styled.div`
   position: relative;
   margin: auto;
-  margin-bottom: 10px;
-  top: 10px;
+  top: -30px;
   width: 80px;
   height: 80px;
   display: flex;
   justify-content: center;
+  z-index: 4;
 `;
 const UserImg = styled.div`
   width: 80px;
@@ -52,24 +54,57 @@ const MapWrapper = styled.div`
     height: auto;
   }
 `;
-
+const BoxContainer = styled.div`
+  position: relative;
+  top: -15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
 const CarInfoContainer = styled.div`
   text-align: center;
-  margin: 30px;
+  width: 40vw;
+  div {
+    position: relative;
+    top: -15px;
+  }
 `;
-
+const UserInfoContainer = styled.div`
+  text-align: center;
+  width: 40vw;
+  div {
+    position: relative;
+    top: -15px;
+  }
+`;
+const RideInfoContainer = styled.div`
+  position: relative;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  span {
+    position: relative;
+    top: -15px;
+  }
+`;
+const ButtonWrapper = styled.div`
+  position: relative;
+  top: -15px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+`;
 const Button = styled.button`
   background: none;
   color: inherit;
   text-align: center;
   border: 1px solid ${({ theme }) => theme.accentcolor};
-  padding: 15px;
+  height: 8vh;
+  width: 30vw;
   font: inherit;
   cursor: pointer;
-`;
-
-const UserInfoContainer = styled.div`
-  text-align: center;
 `;
 
 class TripDetail extends Component {
@@ -80,7 +115,16 @@ class TripDetail extends Component {
   state = {
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    reserved: false,
+    redirect: false
+  };
+
+  redirect = () => {
+    this.setState({ redirect: true });
+  }
+  switch = () => {
+    this.setState({ reserved: true });
   };
 
   componentDidMount() {
@@ -97,53 +141,51 @@ class TripDetail extends Component {
   }
 
   render() {
-
     if(!this.props.selectedRide) return null;
-
+    if(this.state.redirect) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
     const { photoURL } = this.props.auth;
     const { street, city, state, zip } = this.props.selectedRide.address;
     const { origin, destination } = this.props.selectedRide;
     return (
       <Fragment>
-        <Nav pageTitle='Trip Details' />
+        <Nav pageTitle="Trip Details" />
         <MapWrapper>
-          <TripMap
-            rides={[origin, destination]}
-          >
-          </TripMap>
+          <TripMap rides={[origin, destination]} />
         </MapWrapper>
         <UserImgWrapper>
           <UserImg>
-            <img src={photoURL} />
+            <Link to={ROUTES.PROFILE.linkTo()}>
+              <img src={photoURL} />
+            </Link>
           </UserImg>
         </UserImgWrapper>
-
         <StyledDiv>
-          <div>
-            <h3>Address:</h3>
-            <p>{street}</p>
-            <p>
+          <RideInfoContainer>
+            <h3>Destination:</h3>
+            <span>{street}</span>
+            <span>
               {city}, {state} {zip}
-            </p>
-          </div>
-          <UserInfoContainer>
-            <h3>User Info</h3>
-            <div>Name: {this.state.name}</div>
-            <div>Phone: {this.state.phone}</div>
-            <div>Email: {this.state.email}</div>
-          </UserInfoContainer>
-          <CarInfoContainer>
-            <h3>Car Details</h3>
-            <div>Make: Lexus</div>
-            <div>Model: IS-350</div>
-            <div>Plate: 832-JXY</div>
-            <div>Seats available: 2</div>
-          </CarInfoContainer>
-          <div>
-            <a href='www.paypal.com'> Pay with Paypal</a>
-            <a href='www.venmo.com'> Pay with Venmo</a>
-          </div>
-          <Button>Reserve</Button>
+            </span>
+          </RideInfoContainer>
+          <BoxContainer>
+            <UserInfoContainer>
+              <h3>Driver Info</h3>
+              <div>Name: {this.state.name}</div>
+              <div>Phone: {this.state.phone}</div>
+              <div>Email: {this.state.email}</div>
+            </UserInfoContainer>
+            <CarInfoContainer>
+              <h3>Car Details</h3>
+              <div>Make: Lexus</div>
+              <div>Model: IS-350</div>
+              <div>Plate: 832-JXY</div>
+              <div>Seats available: 2</div>
+            </CarInfoContainer>
+          </BoxContainer>
+          <ButtonWrapper>
+            {!this.state.reserved && <Button onClick={this.switch}>Reserve</Button>}
+            {this.state.reserved && <Button onClick={this.redirect}>Cancel</Button>}
+          </ButtonWrapper>
         </StyledDiv>
       </Fragment>
     );
@@ -168,15 +210,18 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   firestoreConnect(props => {
     console.log(props);
     if(!props.uid) return [];
-    return [{
-      collection: 'rides',
-      where: [['uid', '==', props.uid]]
-    }];
+    return [
+      {
+        collection: 'rides',
+        where: [['uid', '==', props.uid]]
+      }
+    ];
   })
 )(TripDetail);
-
-// props.match.id

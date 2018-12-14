@@ -75,7 +75,7 @@ const StyledForm = styled.form`
 const ButtonBox = styled.section`
   margin: auto;
   width: 100vw;
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
@@ -94,7 +94,7 @@ const Button = styled.button`
   border: 1px solid ${({ theme }) => theme.accentcolor};
   font: inherit;
   cursor: pointer;
-  width: 40vw;
+  width: 30vw;
   height: 10vh;
   margin-bottom: 15px;
 `;

@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
  @import url('https://fonts.googleapis.com/css?family=Poiret+One|Source+Sans+Pro');
 
   #root {
-    height: 100%;
+    max-height: 100vh;
     margin: 0;
   }
 
@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.secondary};
     padding: 0;
     margin: 0;
+    max-height: 100vh;
     font-size: 1rem;
     line-height: 2;
     font-family: 'Source Sans Pro', sans-serif;
