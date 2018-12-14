@@ -81,14 +81,14 @@ const BackgroundWrapper = styled.div`
 `;
 
 class SignUp extends PureComponent {
-
   state = {
     name: '',
     street: '',
     city: '',
     state: '',
     zip: '',
-    phone: ''
+    phone: '',
+    redirect: false
   };
 
   componentDidMount() {
@@ -99,7 +99,16 @@ class SignUp extends PureComponent {
     event.preventDefault();
     const { email } = this.props.auth;
     const { name, street, city, state, zip, phone } = this.state;
-    this.props.postUser({ name, email, street, city, state, zip, phone });
+    this.props.postUser({
+      name,
+      email,
+      street,
+      city,
+      state: state.toUpperCase(),
+      zip,
+      phone
+    });
+    this.setState({ redirect: true });
   };
 
   handleChange = ({ target }) => {
@@ -107,7 +116,7 @@ class SignUp extends PureComponent {
   };
 
   render() {
-    if(!this.props.loading && this.props.user) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
+    if(this.state.redirect) return <Redirect to={ROUTES.DASHBOARD.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
 
     return (
@@ -120,9 +129,9 @@ class SignUp extends PureComponent {
             <label>
               Name:&nbsp;&nbsp;
               <input
-                id="name"
-                name="name"
-                type="text"
+                id='name'
+                name='name'
+                type='text'
                 onChange={this.handleChange}
               />
             </label>
@@ -131,9 +140,9 @@ class SignUp extends PureComponent {
             <label>
               Phone:&nbsp;&nbsp;
               <input
-                id="phone"
-                name="phone"
-                type="text"
+                id='phone'
+                name='phone'
+                type='text'
                 onChange={this.handleChange}
               />
             </label>
@@ -143,9 +152,9 @@ class SignUp extends PureComponent {
             <label>
               Street:&nbsp;&nbsp;
               <input
-                id="street"
-                name="street"
-                type="text"
+                id='street'
+                name='street'
+                type='text'
                 onChange={this.handleChange}
               />
             </label>
@@ -154,9 +163,9 @@ class SignUp extends PureComponent {
             <label>
               City:&nbsp;&nbsp;
               <input
-                id="city"
-                name="city"
-                type="text"
+                id='city'
+                name='city'
+                type='text'
                 onChange={this.handleChange}
               />
             </label>
@@ -165,9 +174,9 @@ class SignUp extends PureComponent {
             <label>
               State:&nbsp;&nbsp;
               <input
-                id="state"
-                name="state"
-                type="text"
+                id='state'
+                name='state'
+                type='text'
                 onChange={this.handleChange}
               />
             </label>
@@ -176,15 +185,15 @@ class SignUp extends PureComponent {
             <label>
               Zip:&nbsp;&nbsp;
               <input
-                id="zip"
-                name="zip"
-                type="text"
+                id='zip'
+                name='zip'
+                type='text'
                 onChange={this.handleChange}
               />
             </label>
           </LabelInputContainer>
           <ButtonWrapper>
-            <Button>Register</Button>
+            <Button type='submit'>Register</Button>
           </ButtonWrapper>
         </StyledForm>
       </Fragment>
@@ -200,8 +209,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: email => dispatch(fetchUser(email)),
-  postUser: user => dispatch(postUser(user)),
-  
+  postUser: user => dispatch(postUser(user))
 });
 
 export default connect(
