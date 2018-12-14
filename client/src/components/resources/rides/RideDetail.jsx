@@ -123,7 +123,26 @@ class TripDetail extends Component {
   redirect = () => {
     this.setState({ redirect: true });
   };
+
   switch = () => {
+
+    const { user, selectedRide } = this.props;
+
+    if(selectedRide.riders.length >= selectedRide.seats) return;
+
+    if(selectedRide.riders.some(rider => rider._id === user._id)) {
+      const otherRiders = selectedRide.riders.filter(rider => rider._id !== user._id);
+      this.props.firestore.update(
+        { collection: 'rides', doc: selectedRide.id },
+        { riders: [...otherRiders] }
+      );
+      return;
+    }
+
+    this.props.firestore.update(
+      { collection: 'rides', doc: selectedRide.id },
+      { riders: [...selectedRide.riders, user] }
+    );
     this.setState({ reserved: true });
   };
 
@@ -138,14 +157,20 @@ class TripDetail extends Component {
         phone
       });
     }
+    // const { user, selectedRide } = this.props;
+    // if(selectedRide.riders.filter(rider => rider._id === user._id)) {
+    //   this.setState({ reserved: true });
+    // }
   }
 
   render() {
     if(!this.props.selectedRide) return null;
     if(this.state.redirect) return <Redirect to={ROUTES.RIDE_DISPLAY.linkTo()} />;
+
     const { photoURL } = this.props.auth;
-    const { street, city, state, zip } = this.props.selectedRide.address;
-    const { origin, destination } = this.props.selectedRide;
+    const { origin, destination, address } = this.props.selectedRide;
+    const { street, city, state, zip } = address;
+
     return (
       <Fragment>
         <Nav pageTitle="Trip Details" />
@@ -216,11 +241,6 @@ export default compose(
   ),
   firestoreConnect(props => {
     if(!props.uid) return [];
-    return [
-      {
-        collection: 'rides',
-        // where: [['uid', '==', props.uid]]
-      }
-    ];
+    return [{ collection: 'rides', doc: props.match.params.id }];
   })
 )(TripDetail);

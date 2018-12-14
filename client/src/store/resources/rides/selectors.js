@@ -1,3 +1,8 @@
-export const getRides = state => state.firestore.ordered.rides || [];
+export const getRides = state => {
+  return Object.keys(state.firestore.data.rides || {}).map(id => ({
+    ...state.firestore.data.rides[id],
+    id
+  }));
+};
 
-export const getSelectedRide = (state, id) => getRides(state).find(ride => ride.id === id);
+export const getSelectedRide = (state, id) => state.firestore.data.rides && { ...state.firestore.data.rides[id], id };
