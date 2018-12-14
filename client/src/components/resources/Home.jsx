@@ -5,22 +5,23 @@ import AuthButton from '../lib/AuthButton.jsx';
 var background = require('../../assets/landingwallpaper.jpg');
 
 const Section = styled.section`
+  position: relative;
+  top: 125px;
   display: flex;
   align-items: center;
+  justify-items: space-between;
   flex-direction: column;
   text-align: center;
   z-index: -1;
 `;
 const Title = styled.div`
   position: relative;
-  top: 100px;
   width: 100vw;
   font-size: 4em;
   font-family: "Poiret One", cursive;
 `;
 const SubTitle = styled.div`
   position: relative;
-  top: 80px;
 `;
 
 const BackgroundWrapper = styled.div`
@@ -38,10 +39,10 @@ const Home = () => {
   return (
     <Fragment>
       <BackgroundWrapper />
-      <AuthButton />
       <Section>
         <Title>Bitfrost</Title>
         <SubTitle>A RideSharing App</SubTitle>
+        <AuthButton />
       </Section>
     </Fragment>
   );
