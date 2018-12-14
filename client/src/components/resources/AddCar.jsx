@@ -18,7 +18,7 @@ import { getUser } from '../../store/resources/users/selectors.js';
 const StyledForm = styled.form`
   overflow: hidden;
   width: 100vw;
-  height: 90vh;
+  height: 85vh;
   position: relative;
   top: 25px;
   background: none;
@@ -88,10 +88,11 @@ const Button = styled.button`
   background: none;
   color: ${({ theme }) => theme.accentcolor};
   text-align: center;
+  font-size: 1.2em;
   border: 1px solid ${({ theme }) => theme.accentcolor};
   cursor: pointer;
   width: 40vw;
-  height: 15vh;
+  height: 10vh;
   margin-top: 50px;
 `;
 
@@ -193,7 +194,7 @@ class AddCar extends Component {
             />
           </LabelInputContainer>
           <ButtonWrapper>
-            <Button type="submit">Register</Button>
+            <Button type="submit">Update</Button>
           </ButtonWrapper>
         </StyledForm>
       </>

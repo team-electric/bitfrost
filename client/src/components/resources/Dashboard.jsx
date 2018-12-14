@@ -9,10 +9,8 @@ import {
   getAuth,
   getUserLoading
 } from '../../store/resources/users/selectors.js';
-// import { firebaseConnect } from 'react-redux-firebase';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { logoutUser } from '../../store/resources/users/actions.js';
 import AllRidesMap from '../resources/maps/AllRidesMap.jsx';
 
 const MapWrapper = styled.div`
@@ -26,8 +24,8 @@ const MapWrapper = styled.div`
 `;
 
 const UserImgWrapper = styled.div`
-  position: fixed;
-  bottom: 10vh;
+  position: relative;
+  top: -40px;
   margin: auto;
   align-self: center;
   width: 100vw;
@@ -48,10 +46,9 @@ const UserImg = styled.div`
 `;
 
 const ButtonBox = styled.div`
-  position: fixed;
-  bottom: 10px;
+  position: relative;
+  top: -10vh;
   width: 100vw;
-  margin-top: 20px;
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
@@ -68,7 +65,8 @@ const Button = styled.button`
   text-align: center;
   border: 1px solid ${({ theme }) => theme.accentcolor};
   cursor: pointer;
-  width: 30vw;
+  font-size: 1.2em;
+  width: 45vw;
   height: 12vh;
 `;
 
@@ -78,12 +76,6 @@ class Dashboard extends Component {
     rides: PropTypes.arrayOf(PropTypes.object),
     selectedRide: PropTypes.object,
     selectRide: PropTypes.func.isRequired
-  };
-
-  logout = () => {
-    this.props.firebase.logout().then(() => {
-      this.props.logout();
-    });
   };
 
   render() {
@@ -114,7 +106,6 @@ class Dashboard extends Component {
           <Link to={ROUTES.CREATETRIP.linkTo()}>
             <Button>Create Trip</Button>
           </Link>
-          <Button onClick={this.logout}>Log Out</Button>
         </ButtonBox>
       </Fragment>
     );
@@ -130,7 +121,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logoutUser()),
   selectRide: ride => dispatch({ type: 'selectRide', ride })
 });
 
