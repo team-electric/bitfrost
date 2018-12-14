@@ -131,7 +131,6 @@ class SignUp extends PureComponent {
               />
             </label>
           </LabelInputContainer>
-          <h3>Current Pickup Address:</h3>
           <LabelInputContainer>
             <label>
               Phone:&nbsp;&nbsp;
