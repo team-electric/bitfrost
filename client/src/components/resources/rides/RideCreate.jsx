@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -51,6 +51,15 @@ const ButtonDiv = styled.div`
 `;
 
 const Button = styled.button`
+  :hover {
+    background-image: linear-gradient(
+      to bottom right,
+      rgb(58, 64, 125),
+      rgb(9, 12, 15)
+    );
+    color: ${({ theme }) => theme.secondary};
+    box-shadow: 5px 5px 2px rgb(40, 45, 60);
+  }
   font-size: 1em;
   background: none;
   color: ${({ theme }) => theme.accentcolor};
