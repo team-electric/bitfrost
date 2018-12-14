@@ -32,7 +32,7 @@ export const ROUTES = {
   },
   SIGNUP: {
     path: '/signup',
-    Component: SignUp,
+    Component: WithUser(SignUp),
     linkTo: () => '/signup'
   },
   RIDE_LIST: {

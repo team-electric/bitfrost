@@ -31,9 +31,6 @@ const theme = {
   accentcolor: 'rgb(116, 128, 250)'
 };
 
-// Add redirect to routes?
-// <Redirect to={ROUTES.HOME.path} />
-
 const App = () => {
   return (
     <ThemeProvider theme={theme}>

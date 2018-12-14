@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Nav from './Nav.jsx';
 import {
   getUserCar,
-  getUserLoading
+  getCarLoading
 } from '../../store/resources/cars/selectors';
 import {
   fetchCar,
@@ -195,7 +195,7 @@ class AddCar extends Component {
 const mapStateToProps = state => ({
   user: getUser(state),
   car: getUserCar(state),
-  loading: getUserLoading(state)
+  loading: getCarLoading(state)
 });
 
 const mapDispatchToProps = dispatch => ({
