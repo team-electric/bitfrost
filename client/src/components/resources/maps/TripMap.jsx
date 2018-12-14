@@ -73,7 +73,7 @@ class TripMap extends Component {
           {!!rides && rides.map((ride, index) => (
             <Marker
               key={index}
-              text={index}
+              text={index.toString()}
               lat={ride[0]}
               lng={ride[1]}
             />

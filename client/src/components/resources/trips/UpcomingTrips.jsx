@@ -36,6 +36,7 @@ const UserImg = styled.div`
 `;
 
 const TripsContainer = styled.div`
+
 background-image: linear-gradient(to bottom right, rgb(50, 55, 68), rgb(18, 25, 30));
   position: relative;
   width: 100vw;
@@ -92,6 +93,7 @@ class UpcomingTrips extends PureComponent {
             <Button>
               <div>
                 <span>
+
                   {street}, {city}, {state}
                 </span>
               </div>
