@@ -96,6 +96,9 @@ class TripDetail extends Component {
   }
 
   render() {
+
+    if(!this.props.selectedRide) return null;
+
     const { photoURL } = this.props.auth;
     const { street, city, state, zip } = this.props.selectedRide.address;
 
@@ -145,7 +148,7 @@ class TripDetail extends Component {
 
 const mapStateToProps = (state, props) => ({
   uid: state.firebase.auth.uid,
-  ride: state.firestore.ordered.ride || [],
+  rides: state.firestore.ordered.rides || [],
   selectedRide: getSelectedRide(state, props.match.params.id),
   user: getUser(state),
   auth: getAuth(state),
