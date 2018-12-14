@@ -13,6 +13,8 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import AllRidesMap from '../../resources/maps/AllRidesMap.jsx';
 
+import { getRides } from '../../../store/resources/rides/selectors';
+
 const MapWrapper = styled.div`
   width: 100vw;
   height: 80vh;
@@ -78,11 +80,16 @@ class Dashboard extends Component {
     selectRide: PropTypes.func.isRequired
   };
 
+
   render() {
     if(!this.props.loading && !this.props.auth.email)
       return <Redirect to={ROUTES.HOME.linkTo()} />;
     if(this.props.loading) return <h1> LOADING </h1>;
+
     const { photoURL } = this.props.auth;
+
+    console.log(this.props.rides);
+
     return (
       <Fragment>
         <Nav pageTitle='Your Dashboard' />
@@ -114,7 +121,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   uid: state.firebase.auth.uid,
-  rides: state.firestore.ordered.rides || [],
+  rides: getRides(state),
   selectedRide: state.rides.selectedRide,
   auth: getAuth(state),
   loading: getUserLoading(state)
