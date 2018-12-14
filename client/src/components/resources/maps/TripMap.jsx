@@ -47,7 +47,7 @@ class TripMap extends Component {
   };
 
   componentDidMount() {
-    if (navigator.geolocation) {
+    if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         const { latitude, longitude } = pos.coords;
         this.setState({ position: [latitude, longitude] });
@@ -59,7 +59,6 @@ class TripMap extends Component {
   render() {
     const { defaultCenter, position } = this.state;
     const { rides } = this.props;
-    console.log(rides);
     return (
       <Fragment>
 
