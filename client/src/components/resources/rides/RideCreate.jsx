@@ -83,7 +83,7 @@ const MapWrapper = styled.div`
   }
 `;
 
-class CreateTrip extends PureComponent {
+export class RideCreate extends PureComponent {
   state = {
     origin: [],
     destination: [],
@@ -202,4 +202,4 @@ export default compose(
     mapDispatchToProps
   ),
   firestoreConnect()
-)(CreateTrip);
+)(RideCreate);

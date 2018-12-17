@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RideCreate /> renders 1`] = `
+<styled.div>
+  <Nav
+    pageTitle="Create A Trip"
+  />
+  <styled.div>
+    <SearchMap
+      handlePositions={[Function]}
+    />
+  </styled.div>
+  <styled.form
+    onSubmit={[Function]}
+  >
+    <styled.div>
+      <label
+        htmlFor="departDTL"
+      >
+        Estimated Depart Time: 
+      </label>
+      <input
+        name="departDTL"
+        onChange={[Function]}
+        type="datetime-local"
+        value=""
+      />
+    </styled.div>
+    <styled.div>
+      <label
+        htmlFor="arriveDTL"
+      >
+        Estimated Arrival Time: 
+      </label>
+      <input
+        name="arriveDTL"
+        onChange={[Function]}
+        type="datetime-local"
+        value=""
+      />
+    </styled.div>
+    <styled.div>
+      <styled.button
+        type="submit"
+      >
+        Create new trip
+      </styled.button>
+    </styled.div>
+  </styled.form>
+</styled.div>
+`;

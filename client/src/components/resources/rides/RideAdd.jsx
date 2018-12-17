@@ -21,7 +21,7 @@ const Button = styled.button`
   }
 `;
 
-class AddRide extends Component {
+export class RideAdd extends Component {
   static propTypes = {
     uid: PropTypes.string,
     firestore: PropTypes.shape({
@@ -91,4 +91,4 @@ const mapDispatchToProps = {};
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect(),
-)(AddRide);
+)(RideAdd);
