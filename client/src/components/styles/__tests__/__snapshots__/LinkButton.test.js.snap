@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<LinkButton /> renders 1`] = `
-<Styled(Link)
-  to="/nowhere"
->
-  Go here
-</Styled(Link)>
-`;

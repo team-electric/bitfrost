@@ -43,14 +43,4 @@ const rideSchema = Schema({
   },
 });
 
-// Note on riders:
-
-// Ride
-//   .find()
-//   .populate('riders')
-
-// ridesSchema.methods.graphql = function() {
-//   // do some graphql manipulation
-// }
-
 export const Ride = model('Ride', rideSchema);

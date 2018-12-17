@@ -27,8 +27,4 @@ const userSchema = Schema({
   }
 });
 
-// userSchema.methods.graphql = function() {
-//   // do some graphql manipulation
-// }
-
 export const User = model('User', userSchema);
