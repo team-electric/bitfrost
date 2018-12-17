@@ -27,8 +27,4 @@ const ratingSchema = Schema({
   }
 });
 
-// ratingSchema.methods.graphql = function() {
-//   // do some graphql manipulation
-// }
-
 export const Rating = model('Rating', ratingSchema);

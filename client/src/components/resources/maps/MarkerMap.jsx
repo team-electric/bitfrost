@@ -5,10 +5,6 @@ import BasicMap from './BasicMap.jsx';
 
 import placesJSON from './places.json';
 
-
-
-
-
 class MarkerMap extends Component {
 
   state = {
