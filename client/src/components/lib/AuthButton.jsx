@@ -27,7 +27,8 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-
+// This should probably turn into a HOC or at least
+// part of its functionality should be added to WithUser.
 class AuthButton extends Component {
   static propTypes = {
     auth: PropTypes.object,
