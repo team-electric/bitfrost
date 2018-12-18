@@ -14,7 +14,8 @@ export const graphqlReq = apiUrl => async(body) => {
 
 
 
-
+// What is this token used for? It doesn't seem to
+// fit your authentication strategy.
 let token = window.localStorage.getItem('token');
 
 const setToken = newToken => {
