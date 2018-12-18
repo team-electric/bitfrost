@@ -4,6 +4,7 @@ const app = express();
 
 // logging
 import morgan from 'morgan';
+// why skip logging in dev?
 app.use(morgan('dev', { skip: () => process.env.NODE_ENV === 'development' }));
 
 // basic express stuff

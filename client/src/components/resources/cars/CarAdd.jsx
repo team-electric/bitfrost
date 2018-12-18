@@ -12,7 +12,7 @@ import {
   deleteCar
 } from '../../../store/resources/cars/actions';
 import { ROUTES } from '../../../routes';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { getUser } from '../../../store/resources/users/selectors.js';
 
 const StyledForm = styled.form`
@@ -102,6 +102,7 @@ const Button = styled.button`
 `;
 
 class AddCar extends Component {
+  // Use PropTypes for safety
   state = {
     plate: '',
     make: '',
@@ -120,9 +121,12 @@ class AddCar extends Component {
         make,
         model,
         seats
-      });
+      })
+        .then(() => {
+          // Use history to redirect after this promise chain
+          this.props.history.push(ROUTES.USER_EDIT.linkTo())
+        })
     });
-    this.setState({ redirect: true });
   };
 
   handleChange = ({ target }) => {
@@ -137,17 +141,16 @@ class AddCar extends Component {
     });
   };
   componentDidMount() {
-    if(!this.props.car) return this.props.fetchCar(this.props.user._id);
+    if (!this.props.car) return this.props.fetchCar(this.props.user._id);
     this.setCarState();
   }
   componentDidUpdate(previousProps) {
-    if(previousProps.car !== this.props.car) {
+    if (previousProps.car !== this.props.car) {
       this.setCarState();
     }
   }
   render() {
-    if(this.props.loading) return <h1> LOADING </h1>;
-    if(this.state.redirect) return <Redirect to={ROUTES.USER_EDIT.linkTo()} />;
+    if (this.props.loading) return <h1> LOADING </h1>;
     const { photoURL } = this.props.auth;
 
     return (
@@ -219,7 +222,7 @@ const mapDispatchToProps = dispatch => ({
   deleteCar: userId => dispatch(deleteCar(userId))
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddCar);
+)(AddCar));

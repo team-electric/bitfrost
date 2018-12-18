@@ -107,6 +107,7 @@ export class RideCreate extends PureComponent {
     const seats = this.props.car.seats;
     const driver = this.props.user._id;
 
+    // this should be an action
     this.props.firestore.add(
       { collection: 'rides' },
       {

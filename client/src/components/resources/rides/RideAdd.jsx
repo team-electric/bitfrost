@@ -39,6 +39,8 @@ export class RideAdd extends Component {
     e.preventDefault();
     const { uid } = this.props;
     const { driver, seats } = this.state;
+
+    // This should be an action
     this.props.firestore.add(
       { collection: 'rides' },
       { uid, driver, seats }

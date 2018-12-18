@@ -129,6 +129,8 @@ class TripDetail extends Component {
     const { user, selectedRide, auth } = this.props;
 
     const otherRiders = selectedRide.riders.filter(rider => rider.uid !== auth.uid);
+
+    // this should be an action
     this.props.firestore.update(
       { collection: 'rides', doc: selectedRide.id },
       { riders: [...otherRiders] }

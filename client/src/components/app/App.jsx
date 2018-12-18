@@ -37,12 +37,13 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <>
-          <Helmet>
+          {/* This all could be added in your index.html file instead. That would allow you to remove a dependency */}
+          {/* <Helmet>
             <title>Bitfrost</title>
             <link rel="icon" href="/src/assets/favicon.ico" />
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous" />
             <link rel="manifest" href="/src/assets/manifest.json" />
-          </Helmet>
+          </Helmet> */}
           <GlobalStyle />
           <Switch>
             {routerRoutes()}
