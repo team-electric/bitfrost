@@ -1,7 +1,6 @@
 import { Car } from '../mongoose';
 import { getErrors } from '../../../testing/lib/errors';
 import { Types } from 'mongoose';
-const chance = require('chance').Chance();
 
 describe('car model', () => {
 
